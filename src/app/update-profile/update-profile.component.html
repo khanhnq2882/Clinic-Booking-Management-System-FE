@@ -1,0 +1,60 @@
+
+<h3>Update Profile</h3>
+<form name="updateProfileForm" #updateProfileForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="!isSuccessful">
+    <div>
+        <label>First name</label>
+        <input type="text" placeholder="Frist name" id="firstName" name="firstName" ngModel>
+    
+        <label>Last name</label>
+        <input type="text" placeholder="Last name" id="lastName" name="lastName" ngModel>
+    </div>
+    <br>
+    
+    <div>
+        <label>Date Of Birth</label>
+        <input type="text" placeholder="Date Of Birth" id="dateOfBirth" name="dateOfBirth" ngModel>
+    
+        <label>Gender</label>
+        <input type="radio" placeholder="Gender" id="gender" name="gender" ngModel>Male 
+        <input type="radio" placeholder="Gender" id="gender" name="gender" ngModel>Female
+    </div>
+    <br>
+    
+    <div>
+        <label>Phone number</label>
+        <input type="text" placeholder="Phone number" id="phoneNumber" name="phoneNumber" ngModel>
+    
+        <label>Specific Address</label>
+        <input type="text" placeholder="Specific address" id="specificAddress" name="specificAddress" ngModel>
+    </div>
+    <br>
+    
+    <div class="address">
+      <label>Cities</label>
+      <select name="cities" id="cities" (change)="changeCity($event)" ngModel>
+        <option *ngFor="let city of cities" [value]="city.cityId">
+          {{ city.cityName }}
+        </option>
+      </select>
+    
+      <label>Districts</label>
+      <select
+        name="districts"
+        id="districts"
+        (change)="changeDistrict($event)"
+        ngModel
+      >
+        <option *ngFor="let district of districts" [value]="district.districtId">
+          {{ district.districtName }}
+        </option>
+      </select>
+    
+      <label>Wards</label>
+      <select name="wards" id="wards" (change)="changeWard($event)" ngModel>
+        <option *ngFor="let ward of wards" [value]="ward.wardId">
+          {{ ward.wardName }}
+        </option>
+      </select>
+    </div>
+    <button type="submit">Save</button>
+</form>
