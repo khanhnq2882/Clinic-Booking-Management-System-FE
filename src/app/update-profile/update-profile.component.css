@@ -1,3 +1,6 @@
 div.address{
     display: flex;
 }
+.preview {
+    max-width: 200px;
+  }
