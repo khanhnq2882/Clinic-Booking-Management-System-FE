@@ -3,6 +3,8 @@ import { AuthService } from '../service/auth.service';
 import { NgForm } from '@angular/forms';
 import { StorageService } from '../service/storage.service';
 
+export const JWT = "JWT";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -36,6 +38,7 @@ export class LoginComponent implements OnInit, AfterViewInit{
     }
     this.authService.login(loginRequest).subscribe({
       next: data => {
+        window.localStorage.setItem(JWT, data.jwtResponse);
         this.storageService.saveUser(data);
         this.isSuccessful = true;
         this.roles = this.storageService.getUser().roles;

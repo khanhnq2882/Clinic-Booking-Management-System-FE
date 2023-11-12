@@ -7,6 +7,8 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { JWT } from '../login/login.component';
+import { USER_KEY } from '../service/storage.service';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -16,6 +18,9 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     req = req.clone({
       withCredentials: true,
+      setHeaders: {
+        "Authorization": `Bearer ${window.localStorage.getItem(JWT)}`,
+    }
     });
     return next.handle(req);
   }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-const USER_KEY = 'auth-user';
+export const USER_KEY = 'auth-user';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,8 @@ export class StorageService {
   }
 
   public saveUser(user: any) {
-    window.sessionStorage.removeItem(USER_KEY);
-    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+    window.localStorage.removeItem(USER_KEY);
+    window.localStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
   public getUser() : any{
