@@ -1,0 +1,126 @@
+<h3>Request To Become Doctor</h3>
+<label>Medical Degree</label>
+<div class="row">
+  <div class="col-8">
+    <label class="btn btn-default p-0">
+      <input type="file" (change)="selectFile($event)" />
+    </label>
+    <button class="btn btn-success btn-sm float-left" (click)="upload()" >Upload</button>
+  </div>
+</div>
+<br>
+
+<label>Medical License</label>
+<div class="row">
+  <div class="col-8">
+    <label class="btn btn-default p-0">
+      <input type="file" (change)="selectFile($event)"  />
+    </label>
+    <button class="btn btn-success btn-sm float-left" (click)="upload()">Upload</button>
+  </div>
+</div>
+<br>
+
+<form
+  name="requestBecomeDoctorForm"
+  #requestBecomeDoctorForm="ngForm"
+  *ngIf="!isSuccessful"
+  (ngSubmit)="onSubmit()"
+>
+  <label>University Name</label>
+  <input
+    type="text"
+    placeholder="Frist name"
+    id="universityName"
+    name="universityName"
+    ngModel
+  />
+  <br />
+  <br />
+  <div>
+    <label>Clinic Name</label>
+    <input
+      type="text"
+      placeholder="Clinic name"
+      id="clinicName"
+      name="clinicName"
+      ngModel
+    />
+
+    <label>Position</label>
+    <input
+      type="text"
+      placeholder="Position"
+      id="position"
+      name="position"
+      ngModel
+    />
+  </div>
+  <br />
+
+  <div>
+    <label>Start Work</label>
+    <input
+      type="date"
+      placeholder="Start Work"
+      id="startWork"
+      name="startWork"
+      ngModel
+    />
+
+    <label>End Work</label>
+    <input
+      type="date"
+      placeholder="End Work"
+      id="endWork"
+      name="endWork"
+      ngModel
+    />
+  </div>
+  <br />
+
+  <div>
+    <label>Specialization</label>
+    <input
+      type="text"
+      placeholder="Specialization"
+      id="specialization"
+      name="specialization"
+      ngModel
+    />
+
+    <!-- <label>Skills</label>
+    <select name="skills" id="skills" ngModel>
+      <option *ngFor="let skill of skills" [value]="skill.skillId">
+        {{ skill.skillName }}
+      </option>
+    </select> -->
+  </div>
+  <br />
+
+  <label>Job Description</label>
+  <input
+    type="text"
+    placeholder="Job Description"
+    id="jobDescription"
+    name="jobDescription"
+    ngModel
+  />
+  <br/>
+  <br>
+
+  <div class="wrapper">
+    <button class="form-control toggle-next ellipsis">Skills</button>
+    <div class="checkboxes" id="skills" name="skills">    
+      <div class="inner-wrap">        
+        <label *ngFor="let skill of skills" >
+          <input type="checkbox" class="ckkBox val"[value]="skill.skillId" (change)="onChange(skill.skillId)"/>
+          <span>{{skill.skillName}}</span>
+        </label>
+        <br>
+      </div>
+    </div>
+  </div>
+  <br>
+  <button type="submit">Save</button>
+</form>

@@ -141,7 +141,6 @@ export class UpdateProfileComponent implements OnInit {
         this.userService.uploadAvatar(this.currentFile).subscribe({
           next: (event: any) => {
             this.reloadPage();
-            // this.successMessage = event.target.value;
           },
           error: (err: any) => {
             console.log(err);
