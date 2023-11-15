@@ -10,6 +10,8 @@ import { httpInterceptorProviders } from './helpers/auth.interceptor';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { RequestBecomeDoctorComponent } from './request-become-doctor/request-become-doctor.component';
+import { HomeComponent } from './home/home.component';
+import { ListUsersComponent } from './list-users/list-users.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { RequestBecomeDoctorComponent } from './request-become-doctor/request-be
     ChangePasswordComponent,
     UpdateProfileComponent,
     RequestBecomeDoctorComponent,
+    HomeComponent,
+    ListUsersComponent,
   ],
   imports: [
     BrowserModule,

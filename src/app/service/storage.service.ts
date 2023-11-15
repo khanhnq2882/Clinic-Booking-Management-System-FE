@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { JWT } from '../login/login.component';
+import { JWTResponse } from '../response/jwt-response.model';
 
 export const USER_KEY = 'auth-user';
 
@@ -10,25 +12,29 @@ export class StorageService {
   constructor() { }
 
   clean(): void {
-    window.sessionStorage.clear();
+    window.localStorage.clear();
   }
 
-  public saveUser(user: any) {
-    window.localStorage.removeItem(USER_KEY);
-    window.localStorage.setItem(USER_KEY, JSON.stringify(user));
+  public saveUser(jwtResponse: JWTResponse) {
+    window.localStorage.removeItem(JWT);
+    window.localStorage.setItem(JWT, jwtResponse.jwtTokenResponse);
   }
 
   public getUser() : any{
-    const user = window.sessionStorage.getItem(USER_KEY);
-    if (user) {
-      return JSON.parse(user);
+    const jwtToken = window.localStorage.getItem(JWT);
+    let payload;
+    if (jwtToken) {
+      payload = jwtToken.split('.')[1];
+      payload = window.atob(payload);
+      return JSON.parse(payload);
+    } else {
+      return null;
     }
-    return {};
   }
 
   public isLoggedIn(): boolean {
-    const user = window.sessionStorage.getItem(USER_KEY);
-    if (user) {
+    const jwtToken = window.localStorage.getItem(JWT);
+    if (jwtToken) {
       return true;
     }
     return false;

@@ -1,10 +1,8 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AdminService } from '../service/admin.service';
-import { HttpClient } from '@angular/common/http';
 import { Skill } from '../response/skill.model';
 import { Observable, map } from 'rxjs';
-import { Specialization } from '../response/specialization.model';
 import { UserService } from '../service/user.service';
 import { ExperienceRequest } from '../request/experience-request.model';
 
