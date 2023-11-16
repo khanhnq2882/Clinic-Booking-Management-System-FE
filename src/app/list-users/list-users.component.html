@@ -3,23 +3,29 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">User Code</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Date Of Birth</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Address</th>
+        <th scope="col">Roles</th>
+        <th scope="col">Status</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr *ngFor="let user of listUsers">
         <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
+        <td>{{user.userCode}}</td>
+        <td>{{user.firstName+' '+user.lastName}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.dateOfBirth}}</td>
+        <td>{{userGender}}</td>
+        <td>{{user.phoneNumber}}</td>
+        <td>{{userAddress}}</td>
+        <td>{{userRoles}}</td>
+        <td>{{user.status}}</td>
       </tr>
     </tbody>
-  </table>
+</table>

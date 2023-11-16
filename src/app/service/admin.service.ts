@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UserResponse } from '../response/user-response.model';
 
 const ADMIN_API = 'http://localhost:8080/admin/';
 
@@ -17,6 +18,10 @@ export class AdminService {
 
   public getAllSkills() : Observable<any>{
     return this.httpClient.get(ADMIN_API+'skills', httpOptions);
+  }
+
+  public getAllUsers() : Observable<UserResponse[]>{
+    return this.httpClient.get<UserResponse[]>(ADMIN_API+'get-all-users', httpOptions);
   }
 
 }
