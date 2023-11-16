@@ -16,7 +16,7 @@ export class AppComponent implements OnInit{
   isShowDoctorBoard = false;
   errorMessage = '';
   username = '';
-  private roles: string[] = [];
+  roles: string[] = [];
 
   constructor(private storageService: StorageService, private authService: AuthService) {}
 
