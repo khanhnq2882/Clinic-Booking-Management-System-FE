@@ -1,4 +1,5 @@
 export class UserResponse {
+    userId !: string;
     userCode !: string;
     email !: string;
     firstName !: string;

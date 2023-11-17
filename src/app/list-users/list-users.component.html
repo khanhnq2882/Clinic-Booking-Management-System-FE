@@ -18,13 +18,13 @@
       <tr *ngFor="let user of listUsers">
         <th scope="row">1</th>
         <td>{{user.userCode}}</td>
-        <td>{{user.firstName+' '+user.lastName}}</td>
+        <td>{{(user.firstName === null || user.lastName === null) ? ' ' : (user.firstName+' '+user.lastName)}}</td>
         <td>{{user.email}}</td>
         <td>{{user.dateOfBirth}}</td>
-        <td>{{userGender}}</td>
+        <td>{{(user.gender == 1) ? 'Male' : 'Female'}}</td>
         <td>{{user.phoneNumber}}</td>
-        <td>{{userAddress}}</td>
-        <td>{{userRoles}}</td>
+        <td>{{(user.specificAddress === null) ?' ' : user.specificAddress+', '+user.wardName+', '+user.districtName+', '+user.cityName}}</td>
+        <td>{{user.roles.join(', ')}}</td>
         <td>{{user.status}}</td>
       </tr>
     </tbody>
