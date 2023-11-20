@@ -16,17 +16,15 @@
       <td>{{ request.email }}</td>
       <td>{{ request.universityName }}</td>
       <td>
-        <div class="container">
-          <div class="height d-flex justify-content-center align-items-center">
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-toggle="modal"
-              data-target="#exampleModal"
-            >
-              Experiences Details
-            </button>
-          </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >
+            Experiences Details
+          </button>
         </div>
         <!-- Modal -->
         <div
@@ -36,7 +34,7 @@
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-lg" style="max-width: 500px;">
+          <div class="modal-dialog modal-xl">
             <div class="modal-content">
               <div class="modal-header">
                 <h5>User details</h5>
@@ -50,7 +48,7 @@
               </div>
               <div class="modal-body">
                 <div>
-                  <table class="table table-bordered" >
+                  <table class="table table-bordered">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
@@ -68,22 +66,16 @@
                     <tbody>
                       <tr>
                         <th scope="row">1</th>
-                        <td>{{request.clinicName}}</td>
-                        <td>{{request.position}}</td>
-                        <td>{{request.specialization}}</td>
-                        <td>{{request.startWork}}</td>
-                        <td>{{request.endWork}}</td>
-                        <td>{{request.jobDescription}}</td>
-                        <td>{{request.skillNames.join(', ')}}</td>
+                        <td>{{ request.clinicName }}</td>
+                        <td>{{ request.position }}</td>
+                        <td>{{ request.specialization }}</td>
+                        <td>{{ request.startWork }}</td>
+                        <td>{{ request.endWork }}</td>
+                        <td>{{ request.jobDescription }}</td>
+                        <td>{{ request.skillNames.join(", ") }}</td>
                         <td *ngFor="let file of request.fileResponses">
-                            <ng-container *ngIf="file.fileType === 'medical-degree'">
-                                {{file.fileName}}
-                            </ng-container>                     
-                        </td>
-                        <td *ngFor="let file of request.fileResponses">
-                            <ng-container *ngIf="file.fileType === 'medical-license'">
-                                {{file.fileName}}
-                            </ng-container>                       
+                          <a *ngIf="file.fileType === 'medical-degree'" href="{{file.fileUrl}}"></a>
+                          <a *ngIf="file.fileType === 'medical-degree'" href="{{file.fileUrl}}"></a>
                         </td>
                       </tr>
                     </tbody>
