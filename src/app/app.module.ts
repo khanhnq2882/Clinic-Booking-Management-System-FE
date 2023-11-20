@@ -12,6 +12,7 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
 import { RequestBecomeDoctorComponent } from './request-become-doctor/request-become-doctor.component';
 import { HomeComponent } from './home/home.component';
 import { ListUsersComponent } from './list-users/list-users.component';
+import { ListRequestBecomeDoctorComponent } from './list-request-become-doctor/list-request-become-doctor.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ListUsersComponent } from './list-users/list-users.component';
     RequestBecomeDoctorComponent,
     HomeComponent,
     ListUsersComponent,
+    ListRequestBecomeDoctorComponent,
   ],
   imports: [
     BrowserModule,

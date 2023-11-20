@@ -1,0 +1,111 @@
+<h2>List Request To Become Doctor</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">User Code</th>
+      <th scope="col">Email</th>
+      <th scope="col">University Name</th>
+      <th scope="col">Experiences</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let request of listRequestDoctors">
+      <th scope="row">1</th>
+      <td>{{ request.userCode }}</td>
+      <td>{{ request.email }}</td>
+      <td>{{ request.universityName }}</td>
+      <td>
+        <div class="container">
+          <div class="height d-flex justify-content-center align-items-center">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#exampleModal"
+            >
+              Experiences Details
+            </button>
+          </div>
+        </div>
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-lg" style="max-width: 500px;">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5>User details</h5>
+                <div class="text-right">
+                  <i
+                    data-dismiss="modal"
+                    aria-label="Close"
+                    class="fa fa-close"
+                  ></i>
+                </div>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <table class="table table-bordered" >
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Clinic Name</th>
+                        <th scope="col">Position</th>
+                        <th scope="col">Specialization</th>
+                        <th scope="col">Start Work</th>
+                        <th scope="col">End Work</th>
+                        <th scope="col">Job Description</th>
+                        <th scope="col">Skills</th>
+                        <th scope="col">Medical Degree</th>
+                        <th scope="col">Medical License</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>{{request.clinicName}}</td>
+                        <td>{{request.position}}</td>
+                        <td>{{request.specialization}}</td>
+                        <td>{{request.startWork}}</td>
+                        <td>{{request.endWork}}</td>
+                        <td>{{request.jobDescription}}</td>
+                        <td>{{request.skillNames.join(', ')}}</td>
+                        <td *ngFor="let file of request.fileResponses">
+                            <ng-container *ngIf="file.fileType === 'medical-degree'">
+                                {{file.fileName}}
+                            </ng-container>                     
+                        </td>
+                        <td *ngFor="let file of request.fileResponses">
+                            <ng-container *ngIf="file.fileType === 'medical-license'">
+                                {{file.fileName}}
+                            </ng-container>                       
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" class="btn btn-primary">
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

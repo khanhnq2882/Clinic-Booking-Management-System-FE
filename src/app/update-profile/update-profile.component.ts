@@ -143,7 +143,6 @@ export class UpdateProfileComponent implements OnInit {
             this.reloadPage();
           },
           error: (err: any) => {
-            console.log(err);
             if (err.error && err.error.message) {
               this.errorMessage = err.error.message;
             } else {

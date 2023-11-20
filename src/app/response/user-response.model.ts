@@ -11,6 +11,6 @@ export class UserResponse {
     wardName !: string;
     districtName !: string;
     cityName !: string;
-    roles : string[] = [];
+    roleNames : string[] = [];
     status !: string;
   }

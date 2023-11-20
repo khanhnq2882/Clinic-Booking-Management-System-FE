@@ -112,12 +112,36 @@ export class RequestBecomeDoctorComponent implements OnInit{
     }
   }
 
-  upload() {
+  uploadMedicalLicense() {
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
         this.currentFile = file;
-        this.userService.uploadAvatar(this.currentFile).subscribe({
+        this.userService.uploadMedicalLicense(this.currentFile).subscribe({
+          next: (event: any) => {
+            this.reloadPage();
+          },
+          error: (err: any) => {
+            console.log(err);
+            if (err.error && err.error.message) {
+              this.errorMessage = err.error.message;
+            } else {
+              this.errorMessage = 'Could not upload the image!';
+            }
+            this.currentFile = undefined;
+          },
+        });
+      }
+      this.selectedFiles = undefined;
+    }
+  }
+
+  uploadMedicalDegree() {
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+      if (file) {
+        this.currentFile = file;
+        this.userService.uploadMedicalDegree(this.currentFile).subscribe({
           next: (event: any) => {
             this.reloadPage();
           },

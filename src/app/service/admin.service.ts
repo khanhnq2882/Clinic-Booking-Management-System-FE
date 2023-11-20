@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserResponse } from '../response/user-response.model';
+import { RequestDoctorResponse } from '../response/request-doctor-response.model';
 
 const ADMIN_API = 'http://localhost:8080/admin/';
 
@@ -22,6 +23,10 @@ export class AdminService {
 
   public getAllUsers() : Observable<UserResponse[]>{
     return this.httpClient.get<UserResponse[]>(ADMIN_API+'get-all-users', httpOptions);
+  }
+
+  public getAllRequestDoctors() : Observable<RequestDoctorResponse[]>{
+    return this.httpClient.get<RequestDoctorResponse[]>(ADMIN_API+'get-all-request-doctors', httpOptions);
   }
 
 }
