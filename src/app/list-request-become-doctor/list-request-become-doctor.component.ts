@@ -31,6 +31,14 @@ export class ListRequestBecomeDoctorComponent {
       })
     );
   }
+
+  showExperiences() {
+    console.log (this.listRequestDoctors);
+  }
+
+
+
+
 }
 
 

@@ -2,19 +2,33 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">User Code</th>
       <th scope="col">Email</th>
+      <th scope="col">Full Name</th>
+      <th scope="col">Date Of Birth</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Phone Number</th>
       <th scope="col">University Name</th>
+      <th scope="col">Medical Degree</th>
+      <th scope="col">Medical License</th>
       <th scope="col">Experiences</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let request of listRequestDoctors">
-      <th scope="row">1</th>
       <td>{{ request.userCode }}</td>
+      <td>{{(request.firstName === null || request.lastName === null) ? ' ' : (request.firstName+' '+request.lastName)}}</td>
       <td>{{ request.email }}</td>
+      <td>{{request.dateOfBirth}}</td>
+      <td>{{(request.gender == 1) ? 'Male' : 'Female'}}</td>
+      <td>{{ request.phoneNumber}}</td>
       <td>{{ request.universityName }}</td>
+      <td>
+        <a href="{{request.medicalDegreeUrl}}">{{ request.medicalDegreeName}}</a>
+      </td>
+      <td>
+        <a href="{{request.medicalLicenseUrl}}">{{ request.medicalLicenseName}}</a>
+      </td>
       <td>
         <div class="d-flex justify-content-center align-items-center">
           <button
@@ -22,6 +36,7 @@
             class="btn btn-primary"
             data-toggle="modal"
             data-target="#exampleModal"
+            (click)="showExperiences()"
           >
             Experiences Details
           </button>
@@ -37,7 +52,7 @@
           <div class="modal-dialog modal-xl">
             <div class="modal-content">
               <div class="modal-header">
-                <h5>User details</h5>
+                <h5>Experiences</h5>
                 <div class="text-right">
                   <i
                     data-dismiss="modal"
@@ -51,7 +66,6 @@
                   <table class="table table-bordered">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Clinic Name</th>
                         <th scope="col">Position</th>
                         <th scope="col">Specialization</th>
@@ -59,40 +73,21 @@
                         <th scope="col">End Work</th>
                         <th scope="col">Job Description</th>
                         <th scope="col">Skills</th>
-                        <th scope="col">Medical Degree</th>
-                        <th scope="col">Medical License</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>{{ request.clinicName }}</td>
-                        <td>{{ request.position }}</td>
-                        <td>{{ request.specialization }}</td>
-                        <td>{{ request.startWork }}</td>
-                        <td>{{ request.endWork }}</td>
-                        <td>{{ request.jobDescription }}</td>
-                        <td>{{ request.skillNames.join(", ") }}</td>
-                        <td *ngFor="let file of request.fileResponses">
-                          <a *ngIf="file.fileType === 'medical-degree'" href="{{file.fileUrl}}"></a>
-                          <a *ngIf="file.fileType === 'medical-degree'" href="{{file.fileUrl}}"></a>
-                        </td>
+                      <tr *ngFor="let experience of request.experiences">
+                        <td>{{ experience.clinicName }}</td>
+                        <td>{{ experience.position }}</td>
+                        <td>{{ experience.specialization }}</td>
+                        <td>{{ experience.startWork }}</td>
+                        <td>{{ experience.endWork }}</td>
+                        <td>{{ experience.jobDescription }}</td>
+                        <td>{{ experience.skillNames.join(", ") }}</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" class="btn btn-primary">
-                  Save changes
-                </button>
               </div>
             </div>
           </div>
