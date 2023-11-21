@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { RequestDoctorResponse } from '../response/request-doctor-response.model';
 import { AdminService } from '../service/admin.service';
 import { Observable, map } from 'rxjs';
+
+declare var $: any;
 
 @Component({
   selector: 'app-list-request-become-doctor',
@@ -12,7 +14,8 @@ export class ListRequestBecomeDoctorComponent {
 
   listRequestDoctors: RequestDoctorResponse[] = [];
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService,
+    private el: ElementRef) {}
 
   ngOnInit(): void {
     this.getAllRequestDoctors().subscribe((result: RequestDoctorResponse[]) => {
@@ -32,13 +35,10 @@ export class ListRequestBecomeDoctorComponent {
     );
   }
 
-  showExperiences() {
-    console.log (this.listRequestDoctors);
+  showExperiences(idTarget: string) {
+    console.log(idTarget);
+    $(`#${idTarget}`).modal('show');
   }
-
-
-
-
 }
 
 

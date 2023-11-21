@@ -2,7 +2,6 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { NgForm } from '@angular/forms';
 import { StorageService } from '../service/storage.service';
-import { Router } from '@angular/router';
 
 export const JWT = "JWT";
 
@@ -16,7 +15,6 @@ export class LoginComponent implements OnInit, AfterViewInit{
 
   isSuccessful = false;
   isLoginFailed = false;
-  successMessage = '';
   errorMessage = '';
   roles: string[] = [];
 
@@ -27,10 +25,11 @@ export class LoginComponent implements OnInit, AfterViewInit{
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
       this.isSuccessful = true;
+      this.roles = this.storageService.getUser().roles;
     }
   }
 
-  constructor(private authService: AuthService, private storageService: StorageService, private router: Router) {}
+  constructor(private authService: AuthService, private storageService: StorageService) {}
 
   onSubmit() {
     const loginRequest = {
@@ -39,13 +38,11 @@ export class LoginComponent implements OnInit, AfterViewInit{
     }
     this.authService.login(loginRequest).subscribe({
       next: data => {
-        window.localStorage.setItem(JWT, data);
-        this.storageService.saveUser(data);
+        window.localStorage.setItem(JWT, data.jwtTokenResponse);
         this.isSuccessful = true;
-        this.router.navigate(['/home']).then(()=> window.location.reload());
+        this.roles = this.storageService.getUser().roles;
       },
       error: err => {
-        console.log(err.error);
         this.isLoginFailed = true;
         this.errorMessage = err.error.message;
       }
