@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component} from '@angular/core';
 import { RequestDoctorResponse } from '../response/request-doctor-response.model';
 import { AdminService } from '../service/admin.service';
 import { Observable, map } from 'rxjs';
@@ -13,9 +13,12 @@ declare var $: any;
 export class ListRequestBecomeDoctorComponent {
 
   listRequestDoctors: RequestDoctorResponse[] = [];
+  isApproveSuccess = false;
+  isApproveFail = false;
+  successMessage = '';
+  failMessage = '';
 
-  constructor(private adminService: AdminService,
-    private el: ElementRef) {}
+  constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {
     this.getAllRequestDoctors().subscribe((result: RequestDoctorResponse[]) => {
@@ -36,9 +39,23 @@ export class ListRequestBecomeDoctorComponent {
   }
 
   showExperiences(idTarget: string) {
-    console.log(idTarget);
     $(`#${idTarget}`).modal('show');
   }
+
+  approveRequest(userId : number) {
+    this.adminService.approveRequestDoctor(userId).subscribe({
+      next : data => {
+        this.isApproveSuccess = true;
+        this.successMessage = data.message;
+      }, 
+      error : err => {
+        this.isApproveFail = true;
+        this.failMessage = err.error.message;
+      }
+    })
+  }
+
+
 }
 
 

@@ -12,7 +12,7 @@ export class StorageService {
   constructor() { }
 
   clean(): void {
-    window.localStorage.clear();
+    window.localStorage.removeItem(JWT);
   }
 
   public saveUser(jwtResponse: JWTResponse) {

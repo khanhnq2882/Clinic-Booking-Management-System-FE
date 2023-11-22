@@ -2,7 +2,7 @@ import { ExperienceResponse } from "./experience-response.model";
 import { FileResponse } from "./file-response.model";
 
 export class RequestDoctorResponse {
-    userId !: string;
+    userId !: number;
     userCode !: string;
     email !: string;
     firstName !: string;
@@ -10,6 +10,7 @@ export class RequestDoctorResponse {
     dateOfBirth !: string;
     gender !: number;
     phoneNumber !: string;
+    roleNames: string[] = [];
     universityName !: string;
     status !: string;
     medicalDegreeType !: string;
@@ -18,5 +19,5 @@ export class RequestDoctorResponse {
     medicalLicenseType !: string;
     medicalLicenseName !: string;
     medicalLicenseUrl !: string;
-    experiences : ExperienceResponse[] = [];
+    doctorExperiences : ExperienceResponse[] = [];
   }

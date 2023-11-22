@@ -19,8 +19,8 @@ export class RequestBecomeDoctorComponent implements OnInit{
   experiences : ExperienceRequest[] = [];
   isSuccessful = false;
   isFailed = false;
-  errorMessage = '';
   successMessage = '';
+  errorMessage = '';
   selectedFiles?: FileList;
   currentFile?: File;
   message = '';
@@ -47,7 +47,6 @@ export class RequestBecomeDoctorComponent implements OnInit{
   }
 
   onSubmit() {
-    console.log(this.skillIds);
     const addRoleDoctorRequest = {
       universityName : this.requestBecomeDoctorForm.value.universityName,
       experiences : this.addExperienceRequest({
@@ -60,16 +59,14 @@ export class RequestBecomeDoctorComponent implements OnInit{
         jobDescription : this.requestBecomeDoctorForm.value.jobDescription
       })
     }
-    console.log(addRoleDoctorRequest);
     this.userService.requestBecomeDoctor(addRoleDoctorRequest).subscribe({
       next: (data) => {
-        console.log(data);
         this.isSuccessful = true;
-        this.reloadPage();
+        this.successMessage = data.message;
       },
       error: (err) => {
-        console.log(err);
         this.isFailed = true;
+        this.errorMessage = err.error.message;
       },
     })
   }

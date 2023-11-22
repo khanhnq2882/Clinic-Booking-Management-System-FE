@@ -1,25 +1,41 @@
 <h3>Request To Become Doctor</h3>
+<div class="alert alert-success" role="alert" *ngIf="isSuccessful">
+  {{ successMessage }}
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="isFailed">
+  {{ errorMessage }}
+</div>
 <label>Medical Degree</label>
 <div class="row">
   <div class="col-8">
     <label class="btn btn-default p-0">
       <input type="file" (change)="selectFile($event)" />
     </label>
-    <button class="btn btn-success btn-sm float-left" (click)="uploadMedicalDegree()">Upload</button>
+    <button
+      class="btn btn-success btn-sm float-left"
+      (click)="uploadMedicalDegree()"
+    >
+      Upload
+    </button>
   </div>
 </div>
-<br>
+<br />
 
 <label>Medical License</label>
 <div class="row">
   <div class="col-8">
     <label class="btn btn-default p-0">
-      <input type="file" (change)="selectFile($event)"  />
+      <input type="file" (change)="selectFile($event)" />
     </label>
-    <button class="btn btn-success btn-sm float-left" (click)="uploadMedicalLicense()">Upload</button>
+    <button
+      class="btn btn-success btn-sm float-left"
+      (click)="uploadMedicalLicense()"
+    >
+      Upload
+    </button>
   </div>
 </div>
-<br>
+<br />
 
 <form
   name="requestBecomeDoctorForm"
@@ -99,21 +115,26 @@
     name="jobDescription"
     ngModel
   />
-  <br/>
-  <br>
+  <br />
+  <br />
 
   <div class="wrapper">
     <button class="form-control toggle-next ellipsis">Skills</button>
-    <div class="checkboxes" id="skills" name="skills">    
-      <div class="inner-wrap">        
-        <label *ngFor="let skill of skills" >
-          <input type="checkbox" class="ckkBox val"[value]="skill.skillId" (change)="onChange(skill.skillId)"/>
-          <span>{{skill.skillName}}</span>
+    <div class="checkboxes" id="skills" name="skills">
+      <div class="inner-wrap">
+        <label *ngFor="let skill of skills">
+          <input
+            type="checkbox"
+            class="ckkBox val"
+            [value]="skill.skillId"
+            (change)="onChange(skill.skillId)"
+          />
+          <span>{{ skill.skillName }}</span>
         </label>
-        <br>
+        <br />
       </div>
     </div>
   </div>
-  <br>
+  <br />
   <button type="submit">Save</button>
 </form>

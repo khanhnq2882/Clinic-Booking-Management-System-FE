@@ -1,33 +1,45 @@
 <h2>List Request To Become Doctor</h2>
-<table class="table">
+<div class="alert alert-success" role="alert" *ngIf="isApproveSuccess">
+  {{ successMessage }}
+</div>
+<table class="table table-bordered table-lg">
   <thead>
     <tr>
       <th scope="col">User Code</th>
       <th scope="col">Email</th>
       <th scope="col">Full Name</th>
       <th scope="col">Date Of Birth</th>
-      <th scope="col">Gender</th>
       <th scope="col">Phone Number</th>
       <th scope="col">University Name</th>
       <th scope="col">Medical Degree</th>
       <th scope="col">Medical License</th>
       <th scope="col">Experiences</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let request of listRequestDoctors">
       <td>{{ request.userCode }}</td>
-      <td>{{(request.firstName === null || request.lastName === null) ? ' ' : (request.firstName+' '+request.lastName)}}</td>
+      <td>
+        {{
+          request.firstName === null || request.lastName === null
+            ? " "
+            : request.firstName + " " + request.lastName
+        }}
+      </td>
       <td>{{ request.email }}</td>
-      <td>{{request.dateOfBirth}}</td>
-      <td>{{(request.gender == 1) ? 'Male' : 'Female'}}</td>
-      <td>{{ request.phoneNumber}}</td>
+      <td>{{ request.dateOfBirth }}</td>
+      <td>{{ request.phoneNumber }}</td>
       <td>{{ request.universityName }}</td>
       <td>
-        <a href="{{request.medicalDegreeUrl}}">{{ request.medicalDegreeName}}</a>
+        <a href="{{ request.medicalDegreeUrl }}">{{
+          request.medicalDegreeName
+        }}</a>
       </td>
       <td>
-        <a href="{{request.medicalLicenseUrl}}">{{ request.medicalLicenseName}}</a>
+        <a href="{{ request.medicalLicenseUrl }}">{{
+          request.medicalLicenseName
+        }}</a>
       </td>
       <td>
         <div class="d-flex justify-content-center align-items-center">
@@ -38,13 +50,13 @@
             data-target="#exampleModal"
             (click)="showExperiences('exampleModal' + request.userId)"
           >
-            Experiences Details
+            Show
           </button>
         </div>
         <!-- Modal -->
         <div
           class="modal fade"
-          id="exampleModal{{request.userId}}"
+          id="exampleModal{{ request.userId }}"
           tabindex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
@@ -76,7 +88,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let experience of request.experiences">
+                      <tr *ngFor="let experience of request.doctorExperiences">
                         <td>{{ experience.clinicName }}</td>
                         <td>{{ experience.position }}</td>
                         <td>{{ experience.specialization }}</td>
@@ -92,6 +104,27 @@
             </div>
           </div>
         </div>
+      </td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="approveRequest(request.userId)"
+          [disabled]="
+            request.roleNames.includes('ROLE_DOCTOR') ? 'disabled' : null
+          "
+        >
+          Approve
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          [disabled]="
+            request.roleNames.includes('ROLE_DOCTOR') ? 'disabled' : null
+          "
+        >
+          Reject
+        </button>
       </td>
     </tr>
   </tbody>

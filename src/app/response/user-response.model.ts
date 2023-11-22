@@ -1,3 +1,5 @@
+import { AddressResponse } from "./address-response.model";
+
 export class UserResponse {
     userId !: string;
     userCode !: string;
@@ -7,10 +9,7 @@ export class UserResponse {
     dateOfBirth !: string;
     gender !: number;
     phoneNumber !: string;
-    specificAddress !: string;
-    wardName !: string;
-    districtName !: string;
-    cityName !: string;
+    userAddress !: AddressResponse;
     roleNames : string[] = [];
     status !: string;
   }

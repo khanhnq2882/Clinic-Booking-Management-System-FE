@@ -29,4 +29,8 @@ export class AdminService {
     return this.httpClient.get<RequestDoctorResponse[]>(ADMIN_API+'get-all-request-doctors', httpOptions);
   }
 
+  public approveRequestDoctor(userId: number) : Observable<any> {
+    return this.httpClient.post(ADMIN_API+'approve-request-doctor/'+userId, httpOptions);
+  }
+
 }
