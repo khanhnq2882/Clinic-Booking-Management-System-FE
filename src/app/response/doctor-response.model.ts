@@ -1,15 +1,15 @@
 import { AddressResponse } from "./address-response.model";
+import { WorkScheduleResponse } from "./work-schedule-response.model";
 
-export class UserResponse {
+export class DoctorResponse {
     userId !: number;
     userCode !: string;
     email !: string;
     firstName !: string;
     lastName !: string;
-    dateOfBirth !: string;
-    gender !: number;
     phoneNumber !: string;
-    userAddress !: AddressResponse;
-    roleNames : string[] = [];
+    doctorAddress !: AddressResponse;
+    specializationName !: string;
+    workSchedules : WorkScheduleResponse[] = [];
     status !: string;
   }

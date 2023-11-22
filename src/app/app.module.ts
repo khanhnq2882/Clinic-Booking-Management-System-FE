@@ -13,6 +13,7 @@ import { RequestBecomeDoctorComponent } from './request-become-doctor/request-be
 import { HomeComponent } from './home/home.component';
 import { ListUsersComponent } from './list-users/list-users.component';
 import { ListRequestBecomeDoctorComponent } from './list-request-become-doctor/list-request-become-doctor.component';
+import { ListDoctorsComponent } from './list-doctors/list-doctors.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ListRequestBecomeDoctorComponent } from './list-request-become-doctor/l
     HomeComponent,
     ListUsersComponent,
     ListRequestBecomeDoctorComponent,
+    ListDoctorsComponent,
   ],
   imports: [
     BrowserModule,

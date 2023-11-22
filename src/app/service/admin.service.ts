@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserResponse } from '../response/user-response.model';
 import { RequestDoctorResponse } from '../response/request-doctor-response.model';
+import { DoctorResponse } from '../response/doctor-response.model';
 
 const ADMIN_API = 'http://localhost:8080/admin/';
 
@@ -31,6 +32,10 @@ export class AdminService {
 
   public approveRequestDoctor(userId: number) : Observable<any> {
     return this.httpClient.post(ADMIN_API+'approve-request-doctor/'+userId, httpOptions);
+  }
+
+  public getAllDoctors() : Observable<DoctorResponse[]>{
+    return this.httpClient.get<DoctorResponse[]>(ADMIN_API+'get-all-doctors', httpOptions);
   }
 
 }

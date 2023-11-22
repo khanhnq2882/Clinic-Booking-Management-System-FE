@@ -34,9 +34,9 @@ export class AuthService {
     return this.httpClient.get(AUTH_API+'get-user-info', httpOptions);
   }
 
-  public logout() : Observable<any>{
+  public logoutUser() : Observable<any>{
     return this.httpClient.post(AUTH_API+'logout', httpOptions);
   }
 
-  
+
 }

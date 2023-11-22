@@ -1,0 +1,37 @@
+<h2>List Doctors</h2>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">User Code</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Address</th>
+        <th scope="col">Specialization</th>
+        <th scope="col">Work Schedules</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doctor of listDoctors">
+        <td>{{doctor.userCode}}</td>
+        <td>{{(doctor.firstName === null || doctor.lastName === null) ? ' ' : (doctor.firstName+' '+doctor.lastName)}}</td>
+        <td>{{doctor.email}}</td>
+        <td>{{doctor.phoneNumber}}</td>
+        <td>{{(doctor.doctorAddress.specificAddress === null) ?
+        ' ' : doctor.doctorAddress.specificAddress+', '+doctor.doctorAddress.wardName+', '+doctor.doctorAddress.districtName+', '+doctor.doctorAddress.cityName}}</td>
+        <td>{{doctor.specializationName}}</td>
+        <td>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Work Schedules
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li *ngFor="let workSchedule of doctor.workSchedules"><a class="dropdown-item">{{workSchedule.startTime +' - '+workSchedule.endTime}}</a></li>
+                </ul>
+              </div>
+        </td>
+        <td>{{doctor.status}}</td>
+      </tr>
+    </tbody>
+</table>
