@@ -11,6 +11,7 @@ import { ListRequestBecomeDoctorComponent } from './admin/list-request-become-do
 import { ListDoctorsComponent } from './admin/list-doctors/list-doctors.component';
 import { AddServiceCategoryComponent } from './admin/add-service-category/add-service-category.component';
 import { AddServiceComponent } from './admin/add-service/add-service.component';
+import { ListServicesComponent } from './admin/list-services/list-services.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'list-doctors', component: ListDoctorsComponent },
   { path: 'add-service-category', component: AddServiceCategoryComponent },
   { path: 'add-service', component: AddServiceComponent },
+  { path: 'list-services', component: ListServicesComponent },
 ];
 
 @NgModule({

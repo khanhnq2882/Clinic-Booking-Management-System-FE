@@ -1,15 +1,17 @@
 <h2>Add Service</h2>
-<!-- <div class="alert alert-success" role="alert" *ngIf="isSuccessful">
+<div class="alert alert-success" role="alert" *ngIf="isSuccessful">
   {{ successMessage }}
 </div>
 <div class="alert alert-danger" role="alert" *ngIf="isFailed">
   {{ errorMessage }}
-</div> -->
+</div>
 <form
   class="row g-3 needs-validation"
   novalidate
   name="addServiceForm"
   #addServiceForm="ngForm"
+  (ngSubmit)="onSubmit()"
+  *ngIf="!isSuccessful"
 >
   <div class="col-md-6">
     <label for="specializations" class="form-label">Specialization</label>
@@ -17,6 +19,7 @@
       class="form-select"
       name="specializations"
       id="specializations"
+      (change)="changeSpecialization($event)" 
       required
       ngModel
     >
@@ -27,26 +30,25 @@
         {{ specialization.specializationName }}
       </option>
     </select>
-    <div class="invalid-feedback">Please select a valid state.</div>
   </div>
 
   <div class="col-md-6">
-    <label for="specializations" class="form-label">Service Category</label>
+    <label for="serviceCategories" class="form-label">Service Category</label>
     <select
       class="form-select"
-      name="specializations"
-      id="specializations"
+      name="serviceCategories"
+      id="serviceCategories"
+      (change)="changeServiceCategory($event)" 
       required
       ngModel
     >
       <option
-        *ngFor="let specialization of listSpecializations"
-        [value]="specialization.specializationId"
+        *ngFor="let serviceCategory of listServiceCategories"
+        [value]="serviceCategory.serviceCategoryId"
       >
-        {{ specialization.specializationName }}
+        {{ serviceCategory.serviceCategoryName }}
       </option>
     </select>
-    <div class="invalid-feedback">Please select a valid state.</div>
   </div>
 
   <div class="col-md-6">
@@ -83,7 +85,7 @@
     <label for="description" class="form-label">Description</label>
     <textarea
       class="form-control"
-      placeholder="Write service category description here..."
+      placeholder="Write category description here..."
       id="description"
       name="description"
       style="height: 100px"

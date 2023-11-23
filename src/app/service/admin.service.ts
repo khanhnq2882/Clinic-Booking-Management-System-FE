@@ -7,6 +7,8 @@ import { DoctorResponse } from '../response/doctor-response.model';
 import { SpecializationResponse } from '../response/specialization-response.model';
 import { ServiceCategoryRequest } from '../request/service-category-request.model';
 import { ServiceRequest } from '../request/service-request.model';
+import { ServiceCategoryResponse } from '../response/service-category-response.model';
+import { ServicesResponse } from '../response/service-response.model';
 
 const ADMIN_API = 'http://localhost:8080/admin/';
 
@@ -45,6 +47,10 @@ export class AdminService {
     return this.httpClient.get<SpecializationResponse[]>(ADMIN_API+'get-all-specializations', httpOptions);
   }
 
+  public getAllServiceCategories(specializationId : number) : Observable<ServiceCategoryResponse[]>{
+    return this.httpClient.get<ServiceCategoryResponse[]>(ADMIN_API+'get-all-service-categories/'+specializationId, httpOptions);
+  }
+
   public addServiceCategory(serviceCategoryRequest: ServiceCategoryRequest) : Observable<any>{
     return this.httpClient.post(ADMIN_API+'add-service-category', serviceCategoryRequest, httpOptions);
   }
@@ -53,6 +59,8 @@ export class AdminService {
     return this.httpClient.post(ADMIN_API+'add-service', serviceRequest, httpOptions);
   }
 
-
+  public getAllServices() : Observable<ServicesResponse[]>{
+    return this.httpClient.get<ServicesResponse[]>(ADMIN_API+'get-all-services', httpOptions);
+  } 
 
 }

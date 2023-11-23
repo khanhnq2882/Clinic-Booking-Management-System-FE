@@ -16,6 +16,7 @@ export class AddServiceComponent implements OnInit{
   listSpecializations: SpecializationResponse[] = [];
   listServiceCategories: ServiceCategoryResponse[] = [];
   specializationId !: number;
+  serviceCategoryId !: number;
   isSuccessful = false;
   isFailed = false;
   successMessage = '';
@@ -39,6 +40,46 @@ export class AddServiceComponent implements OnInit{
         return [];
       })
     );
+  }
+
+  changeSpecialization(e: any) {
+    this.adminService.getAllServiceCategories(e.target.value)
+      .pipe(
+        map((response) => {
+          if (response) {
+            return Object.values(response);
+          }
+          return [];
+        })
+      )
+      .subscribe((result: ServiceCategoryResponse[]) => {
+        this.listServiceCategories = result;
+      });
+  }
+
+  changeServiceCategory(e: any) {
+    this.serviceCategoryId = e.target.value;
+  }
+
+  onSubmit() {
+    const addServiceRequest = {
+      serviceCategoryId : this.serviceCategoryId,
+      serviceName : this.addServiceForm.value.serviceName,
+      price : this.addServiceForm.value.price,
+      description : this.addServiceForm.value.description
+    };
+    this.adminService.addService(addServiceRequest).subscribe({
+      next : data => {
+        this.isSuccessful = true;
+        this.successMessage = data.message;
+      },
+      error : err => {
+        this.isFailed = true;
+        this.errorMessage = err.error.message;
+      }
+    })
+    
+
   }
 
 
