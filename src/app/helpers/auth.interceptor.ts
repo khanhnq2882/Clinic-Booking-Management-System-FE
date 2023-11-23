@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { JWT } from '../login/login.component';
+import { JWT } from '../auth/login/login.component';
 import { USER_KEY } from '../service/storage.service';
 
 @Injectable()

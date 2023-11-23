@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../service/auth.service';
 import { NgForm } from '@angular/forms';
-import { StorageService } from '../service/storage.service';
+import { StorageService } from '../../service/storage.service';
 import { Router } from '@angular/router';
 
 export const JWT = "JWT";
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit, AfterViewInit{
         window.localStorage.setItem(JWT, data.jwtTokenResponse);
         this.isSuccessful = true;
         this.roles = this.storageService.getUser().roles;
-        // this.reloadPage();
+        this.reloadPage();
       },
       error: err => {
         this.isLoginFailed = true;

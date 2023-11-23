@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { UserResponse } from '../response/user-response.model';
 import { RequestDoctorResponse } from '../response/request-doctor-response.model';
 import { DoctorResponse } from '../response/doctor-response.model';
+import { SpecializationResponse } from '../response/specialization-response.model';
+import { ServiceCategoryRequest } from '../request/service-category-request.model';
+import { ServiceRequest } from '../request/service-request.model';
 
 const ADMIN_API = 'http://localhost:8080/admin/';
 
@@ -37,5 +40,19 @@ export class AdminService {
   public getAllDoctors() : Observable<DoctorResponse[]>{
     return this.httpClient.get<DoctorResponse[]>(ADMIN_API+'get-all-doctors', httpOptions);
   }
+
+  public getAllSpecializations() : Observable<SpecializationResponse[]>{
+    return this.httpClient.get<SpecializationResponse[]>(ADMIN_API+'get-all-specializations', httpOptions);
+  }
+
+  public addServiceCategory(serviceCategoryRequest: ServiceCategoryRequest) : Observable<any>{
+    return this.httpClient.post(ADMIN_API+'add-service-category', serviceCategoryRequest, httpOptions);
+  }
+
+  public addService(serviceRequest: ServiceRequest) : Observable<any>{
+    return this.httpClient.post(ADMIN_API+'add-service', serviceRequest, httpOptions);
+  }
+
+
 
 }

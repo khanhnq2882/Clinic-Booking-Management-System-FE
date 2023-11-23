@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { City } from '../request/city.model';
+import { City } from '../../request/city.model';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { District } from '../request/district.model';
-import { Ward } from '../request/ward.model';
-import { UserService } from '../service/user.service';
+import { District } from '../../request/district.model';
+import { Ward } from '../../request/ward.model';
+import { UserService } from '../../service/user.service';
 import { NgForm } from '@angular/forms';
 
 @Component({

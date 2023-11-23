@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { DoctorResponse } from '../response/doctor-response.model';
-import { AdminService } from '../service/admin.service';
+import { DoctorResponse } from '../../response/doctor-response.model';
+import { AdminService } from '../../service/admin.service';
 
 @Component({
   selector: 'app-list-doctors',

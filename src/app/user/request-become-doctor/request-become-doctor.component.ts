@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AdminService } from '../service/admin.service';
-import { Skill } from '../response/skill.model';
+import { AdminService } from '../../service/admin.service';
+import { Skill } from '../../response/skill.model';
 import { Observable, map } from 'rxjs';
-import { UserService } from '../service/user.service';
-import { ExperienceRequest } from '../request/experience-request.model';
+import { UserService } from '../../service/user.service';
+import { ExperienceRequest } from '../../request/experience-request.model';
 
 @Component({
   selector: 'app-request-become-doctor',

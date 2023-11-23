@@ -1,5 +1,4 @@
 import { ExperienceResponse } from "./experience-response.model";
-import { FileResponse } from "./file-response.model";
 
 export class RequestDoctorResponse {
     userId !: number;

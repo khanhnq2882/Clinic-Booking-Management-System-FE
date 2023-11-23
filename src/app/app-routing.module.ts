@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import { UpdateProfileComponent } from './update-profile/update-profile.component';
-import { RequestBecomeDoctorComponent } from './request-become-doctor/request-become-doctor.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
+import { ChangePasswordComponent } from './auth/change-password/change-password.component';
+import { UpdateProfileComponent } from './user/update-profile/update-profile.component';
+import { RequestBecomeDoctorComponent } from './user/request-become-doctor/request-become-doctor.component';
 import { HomeComponent } from './home/home.component';
-import { ListUsersComponent } from './list-users/list-users.component';
-import { ListRequestBecomeDoctorComponent } from './list-request-become-doctor/list-request-become-doctor.component';
-import { ListDoctorsComponent } from './list-doctors/list-doctors.component';
+import { ListUsersComponent } from './admin/list-users/list-users.component';
+import { ListRequestBecomeDoctorComponent } from './admin/list-request-become-doctor/list-request-become-doctor.component';
+import { ListDoctorsComponent } from './admin/list-doctors/list-doctors.component';
+import { AddServiceCategoryComponent } from './admin/add-service-category/add-service-category.component';
+import { AddServiceComponent } from './admin/add-service/add-service.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -20,6 +22,8 @@ const routes: Routes = [
   { path: 'list-users', component: ListUsersComponent },
   { path: 'list-request-become-doctor', component: ListRequestBecomeDoctorComponent },
   { path: 'list-doctors', component: ListDoctorsComponent },
+  { path: 'add-service-category', component: AddServiceCategoryComponent },
+  { path: 'add-service', component: AddServiceComponent },
 ];
 
 @NgModule({

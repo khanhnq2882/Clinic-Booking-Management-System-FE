@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { UserResponse } from '../response/user-response.model';
-import { AdminService } from '../service/admin.service';
+import { UserResponse } from '../../response/user-response.model';
+import { AdminService } from '../../service/admin.service';
 
 @Component({
   selector: 'app-list-users',

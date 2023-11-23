@@ -39,6 +39,22 @@
             <a href="/request-become-doctor" class="nav-link" routerLink="request-become-doctor">Request To Become Doctor</a>
           </li>
         </ng-container>
+        <ng-container *ngIf="role === 'ROLE_DOCTOR'">
+          <li class="nav-item">
+            <a href="/update-profile" class="nav-link" routerLink="update-profile">Update Profile</a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="role === 'ROLE_ADMIN'">
+          <li class="nav-item">
+            <a href="/list-users" class="nav-link" routerLink="list-users">List Users</a>
+          </li>
+          <li class="nav-item">
+            <a href="/list-request-become-doctor" class="nav-link" routerLink="list-request-become-doctor">List Request To Become Doctor</a>
+          </li>
+          <li class="nav-item">
+            <a href="/list-doctors" class="nav-link" routerLink="list-doctors">List Doctors</a>
+          </li>
+        </ng-container>
       </ng-container>
       
       <li class="nav-item">

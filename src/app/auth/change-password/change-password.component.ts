@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
-import { StorageService } from '../service/storage.service';
+import { StorageService } from '../../service/storage.service';
 
 @Component({
   selector: 'app-change-password',

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from './service/storage.service';
 import { AuthService } from './service/auth.service';
 import { map } from 'rxjs';
-import { JWT } from './login/login.component';
+import { JWT } from './auth/login/login.component';
 
 @Component({
   selector: 'app-root',

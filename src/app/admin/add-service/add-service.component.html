@@ -1,0 +1,96 @@
+<h2>Add Service</h2>
+<!-- <div class="alert alert-success" role="alert" *ngIf="isSuccessful">
+  {{ successMessage }}
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="isFailed">
+  {{ errorMessage }}
+</div> -->
+<form
+  class="row g-3 needs-validation"
+  novalidate
+  name="addServiceForm"
+  #addServiceForm="ngForm"
+>
+  <div class="col-md-6">
+    <label for="specializations" class="form-label">Specialization</label>
+    <select
+      class="form-select"
+      name="specializations"
+      id="specializations"
+      required
+      ngModel
+    >
+      <option
+        *ngFor="let specialization of listSpecializations"
+        [value]="specialization.specializationId"
+      >
+        {{ specialization.specializationName }}
+      </option>
+    </select>
+    <div class="invalid-feedback">Please select a valid state.</div>
+  </div>
+
+  <div class="col-md-6">
+    <label for="specializations" class="form-label">Service Category</label>
+    <select
+      class="form-select"
+      name="specializations"
+      id="specializations"
+      required
+      ngModel
+    >
+      <option
+        *ngFor="let specialization of listSpecializations"
+        [value]="specialization.specializationId"
+      >
+        {{ specialization.specializationName }}
+      </option>
+    </select>
+    <div class="invalid-feedback">Please select a valid state.</div>
+  </div>
+
+  <div class="col-md-6">
+    <label for="serviceName" class="form-label"
+      >Service Name</label
+    >
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Service name"
+      id="serviceName"
+      name="serviceName"
+      ngModel
+      required
+    />
+  </div>
+
+  <div class="col-md-6">
+    <label for="price" class="form-label"
+      >Price</label
+    >
+    <input
+      type="number"
+      class="form-control"
+      placeholder="Price"
+      id="price"
+      name="price"
+      ngModel
+      required
+    />
+  </div>
+
+  <div class="col-md-12">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      class="form-control"
+      placeholder="Write service category description here..."
+      id="description"
+      name="description"
+      style="height: 100px"
+      ngModel
+    ></textarea>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Save</button>
+  </div>
+</form>

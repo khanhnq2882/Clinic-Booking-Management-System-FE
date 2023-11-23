@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { JWT } from '../login/login.component';
+import { JWT } from '../auth/login/login.component';
 import { JWTResponse } from '../response/jwt-response.model';
 
 export const USER_KEY = 'auth-user';

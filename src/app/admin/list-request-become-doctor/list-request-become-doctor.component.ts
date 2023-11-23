@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
-import { RequestDoctorResponse } from '../response/request-doctor-response.model';
-import { AdminService } from '../service/admin.service';
+import { RequestDoctorResponse } from '../../response/request-doctor-response.model';
+import { AdminService } from '../../service/admin.service';
 import { Observable, map } from 'rxjs';
 
 declare var $: any;
