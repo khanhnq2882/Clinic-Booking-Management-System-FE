@@ -26,7 +26,7 @@ export class RequestBecomeDoctorComponent implements OnInit{
   message = '';
   preview = '';
 
-  constructor(private adminService: AdminService, private userService: UserService) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.getSkills().subscribe((result: Skill[]) => {
@@ -35,7 +35,7 @@ export class RequestBecomeDoctorComponent implements OnInit{
   }
 
   getSkills(): Observable<Skill[]>  {
-    return this.adminService.getAllSkills()
+    return this.userService.getAllSkills()
     .pipe(
       map((response) => {
         if (response) {

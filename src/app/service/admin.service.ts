@@ -23,10 +23,6 @@ export class AdminService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getAllSkills() : Observable<any>{
-    return this.httpClient.get(ADMIN_API+'skills', httpOptions);
-  }
-
   public getAllUsers() : Observable<UserResponse[]>{
     return this.httpClient.get<UserResponse[]>(ADMIN_API+'get-all-users', httpOptions);
   }
@@ -37,6 +33,10 @@ export class AdminService {
 
   public approveRequestDoctor(userId: number) : Observable<any> {
     return this.httpClient.post(ADMIN_API+'approve-request-doctor/'+userId, httpOptions);
+  }
+
+  public rejectRequestDoctor(userId: number) : Observable<any> {
+    return this.httpClient.post(ADMIN_API+'reject-request-doctor/'+userId, httpOptions);
   }
 
   public getAllDoctors() : Observable<DoctorResponse[]>{

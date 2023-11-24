@@ -17,6 +17,10 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
+  public getAllSkills() : Observable<any>{
+    return this.httpClient.get(USER_API+'skills', httpOptions);
+  }
+
   public updateProfile(updateProfileRequest: UpdateProfileRequest) : Observable<any>{
     return this.httpClient.post(USER_API+'update-profile', updateProfileRequest, httpOptions);
   }

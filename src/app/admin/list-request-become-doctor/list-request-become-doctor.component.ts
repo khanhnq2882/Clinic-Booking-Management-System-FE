@@ -55,6 +55,20 @@ export class ListRequestBecomeDoctorComponent {
     })
   }
 
+  rejectRequest(userId : number) {
+    this.adminService.rejectRequestDoctor(userId).subscribe({
+      next : data => {
+        this.isApproveSuccess = true;
+        this.successMessage = data.message;
+        window.location.reload();
+      }, 
+      error : err => {
+        this.isApproveFail = true;
+        this.failMessage = err.error.message;
+      }
+    })
+  }
+
 
 }
 
