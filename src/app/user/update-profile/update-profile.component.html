@@ -5,15 +5,6 @@
 <div class="alert alert-danger" role="alert" *ngIf="isFailed">
   {{ errorMessage }}
 </div>
-<form
-class="row g-3 needs-validation"
-novalidate
-  name="updateProfileForm"
-  #updateProfileForm="ngForm"
-  (ngSubmit)="onSubmit()"
-  *ngIf="!isSuccessful"
->
-
 <div class="col-md-12">
   <label>Avatar</label>
   <div class="row">
@@ -33,7 +24,14 @@ novalidate
     <img [src]="preview" class="preview" />
   </div>
 </div>
-
+<form
+class="row g-3 needs-validation"
+novalidate
+  name="updateProfileForm"
+  #updateProfileForm="ngForm"
+  (ngSubmit)="onSubmit()"
+  *ngIf="!isSuccessful"
+>
 <div class="col-md-6">
   <label for="firstName" class="form-label">First Name</label>
   <input

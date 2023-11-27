@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserResponse } from '../response/user-response.model';
 import { RequestDoctorResponse } from '../response/request-doctor-response.model';
 import { DoctorResponse } from '../response/doctor-response.model';
 import { SpecializationResponse } from '../response/specialization-response.model';
@@ -23,8 +22,8 @@ export class AdminService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getAllUsers() : Observable<UserResponse[]>{
-    return this.httpClient.get<UserResponse[]>(ADMIN_API+'get-all-users', httpOptions);
+  public getAllUsers(params: any) : Observable<any>{
+    return this.httpClient.get<any>(ADMIN_API+'get-all-users', {params});
   }
 
   public getAllRequestDoctors() : Observable<RequestDoctorResponse[]>{
