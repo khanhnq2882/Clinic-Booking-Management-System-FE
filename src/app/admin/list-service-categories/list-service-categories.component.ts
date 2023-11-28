@@ -1,25 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../service/admin.service';
-import { UserDTO } from 'src/app/dto/user-dto.model';
+import { ServiceCategoryResponse } from 'src/app/response/service-category-response.model';
+import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
-  selector: 'app-list-users',
-  templateUrl: './list-users.component.html',
-  styleUrls: ['./list-users.component.css']
+  selector: 'app-list-service-categories',
+  templateUrl: './list-service-categories.component.html',
+  styleUrls: ['./list-service-categories.component.css']
 })
-export class ListUsersComponent implements OnInit{
-  listUsers: UserDTO[] = [];
+export class ListServiceCategoriesComponent implements OnInit{
+
+  listServiceCategories: ServiceCategoryResponse[] = [];
   page = 1;
   size = 3;
   totalItems !: number;
   totalPages !: number;
   currentPage !: number;
   pageSizes = [1,3,6,9];
-  
+
   constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {
-    this.getUsers();
+    this.getServiceCategories();
   }
 
   getRequestParams(page : number, size : number) : any{
@@ -33,11 +34,11 @@ export class ListUsersComponent implements OnInit{
     return params;
   }
 
-  getUsers() : void {
+  getServiceCategories() : void {
     const params = this.getRequestParams(this.page, this.size);
-    this.adminService.getAllUsers(params).subscribe({
+    this.adminService.getAllServiceCategories(params).subscribe({
       next: data => {
-        this.listUsers = data.users;
+        this.listServiceCategories = data.serviceCategories;
         this.totalPages = data.totalPages;
         this.currentPage = data.currentPage;
       },
@@ -50,7 +51,7 @@ export class ListUsersComponent implements OnInit{
   changePageSize(event : any) : void {
     this.size = event.target.value;
     this.page = 1;
-    this.getUsers();
+    this.getServiceCategories();
   }
 
   getNumberArray(n: number): number[] {
@@ -60,7 +61,7 @@ export class ListUsersComponent implements OnInit{
   previousPage() {
     if (this.currentPage > 0) {
       this.page = this.page - 1;
-      this.getUsers();
+      this.getServiceCategories();
     }
   }
 
@@ -68,25 +69,25 @@ export class ListUsersComponent implements OnInit{
     if (this.currentPage < this.totalPages) {
       this.page = this.page + 1;
     } 
-    this.getUsers();
+    this.getServiceCategories();
   }
 
   changePage(i : number) {
     this.page = i;
-    this.getUsers();
+    this.getServiceCategories();
   }
 
   firstPage() {
     if (this.currentPage != 0) {
       this.page = 1;
-      this.getUsers();
+      this.getServiceCategories();
     }
   }
 
   lastPage() {
    if (this.currentPage < this.totalPages) {
     this.page = this.totalPages;
-    this.getUsers();
+    this.getServiceCategories();
    } 
   }
 

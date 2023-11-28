@@ -1,4 +1,4 @@
-import { ExperienceResponse } from "./experience-response.model";
+import { ExperienceDTO } from "../dto/experience-dto.model";
 
 export class RequestDoctorResponse {
     userId !: number;
@@ -18,5 +18,5 @@ export class RequestDoctorResponse {
     medicalLicenseType !: string;
     medicalLicenseName !: string;
     medicalLicenseUrl !: string;
-    doctorExperiences : ExperienceResponse[] = [];
+    doctorExperiences : ExperienceDTO[] = [];
   }

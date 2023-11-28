@@ -12,6 +12,7 @@ import { ListDoctorsComponent } from './admin/list-doctors/list-doctors.componen
 import { AddServiceCategoryComponent } from './admin/add-service-category/add-service-category.component';
 import { AddServiceComponent } from './admin/add-service/add-service.component';
 import { ListServicesComponent } from './admin/list-services/list-services.component';
+import { ListServiceCategoriesComponent } from './admin/list-service-categories/list-service-categories.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'add-service-category', component: AddServiceCategoryComponent },
   { path: 'add-service', component: AddServiceComponent },
   { path: 'list-services', component: ListServicesComponent },
+  { path: 'list-service-categories', component: ListServiceCategoriesComponent },
 ];
 
 @NgModule({

@@ -1,15 +1,8 @@
-import { AddressResponse } from "./address-response.model";
-import { WorkScheduleResponse } from "./work-schedule-response.model";
+import { DoctorDTO } from "../dto/doctor-dto.model";
 
-export class DoctorResponse {
-    userId !: number;
-    userCode !: string;
-    email !: string;
-    firstName !: string;
-    lastName !: string;
-    phoneNumber !: string;
-    doctorAddress !: AddressResponse;
-    specializationName !: string;
-    workSchedules : WorkScheduleResponse[] = [];
-    status !: string;
+export class DoctorPageResponse {
+    totalItems !: number;
+    doctors : DoctorDTO[] = [];
+    totalPages !: string;
+    currentPage !: string;
   }

@@ -1,4 +1,4 @@
-export class WorkScheduleResponse {
+export class WorkScheduleDTO {
     startTime !: string;
     endTime !: string;
   }

@@ -1,23 +1,17 @@
-<h2>List Services</h2>
+<h2>List Service Categories</h2>
 <table class="table table-bordered table-lg">
     <thead>
       <tr>
-        <th scope="col">Service Code</th>
-        <th scope="col">Service Name</th>
-        <th scope="col">Price</th>
-        <th scope="col">Description</th>
         <th scope="col">Service Category Name</th>
-        <th scope="col">Status</th>
+        <th scope="col">Description</th>
+        <th scope="col">Specialization Name</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let service of listServices">
-        <td>{{service.serviceCode}}</td>
-        <td>{{service.serviceName}}</td>
-        <td>{{service.price}}</td>
-        <td>{{service.description}}</td>
-        <td>{{service.serviceCategoryName}}</td>
-        <td>{{service.status}}</td>
+      <tr *ngFor="let serviceCategory of listServiceCategories">
+        <td>{{serviceCategory.serviceCategoryName}}</td>
+        <td>{{serviceCategory.description}}</td>
+        <td>{{serviceCategory.specializationName}}</td>
       </tr>
     </tbody>
 </table>

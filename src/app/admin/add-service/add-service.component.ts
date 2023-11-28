@@ -43,7 +43,7 @@ export class AddServiceComponent implements OnInit{
   }
 
   changeSpecialization(e: any) {
-    this.adminService.getAllServiceCategories(e.target.value)
+    this.adminService.getServiceCategories(e.target.value)
       .pipe(
         map((response) => {
           if (response) {
@@ -55,6 +55,7 @@ export class AddServiceComponent implements OnInit{
       .subscribe((result: ServiceCategoryResponse[]) => {
         this.listServiceCategories = result;
       });
+      this.listServiceCategories = [];
   }
 
   changeServiceCategory(e: any) {
@@ -78,10 +79,7 @@ export class AddServiceComponent implements OnInit{
         this.errorMessage = err.error.message;
       }
     })
-    
 
   }
-
-
 
 }

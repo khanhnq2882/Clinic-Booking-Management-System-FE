@@ -1,4 +1,4 @@
-export class ExperienceResponse {
+export class ExperienceDTO {
     clinicName !: string;
     position !: string;
     specialization !: string;

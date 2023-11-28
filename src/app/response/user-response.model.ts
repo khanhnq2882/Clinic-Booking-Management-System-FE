@@ -1,15 +1,8 @@
-import { AddressResponse } from "./address-response.model";
+import { UserDTO } from "../dto/user-dto.model";
 
-export class UserResponse {
-    userId !: number;
-    userCode !: string;
-    email !: string;
-    firstName !: string;
-    lastName !: string;
-    dateOfBirth !: string;
-    gender !: number;
-    phoneNumber !: string;
-    userAddress !: AddressResponse;
-    roleNames : string[] = [];
-    status !: string;
+export class UserPageResponse {
+    totalItems !: number;
+    users : UserDTO[] = [];
+    totalPages !: string;
+    currentPage !: string;
   }

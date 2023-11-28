@@ -17,6 +17,7 @@ import { ListDoctorsComponent } from './admin/list-doctors/list-doctors.componen
 import { AddServiceCategoryComponent } from './admin/add-service-category/add-service-category.component';
 import { AddServiceComponent } from './admin/add-service/add-service.component';
 import { ListServicesComponent } from './admin/list-services/list-services.component';
+import { ListServiceCategoriesComponent } from './admin/list-service-categories/list-service-categories.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ListServicesComponent } from './admin/list-services/list-services.compo
     AddServiceCategoryComponent,
     AddServiceComponent,
     ListServicesComponent,
+    ListServiceCategoriesComponent,
   ],
   imports: [
     BrowserModule,
