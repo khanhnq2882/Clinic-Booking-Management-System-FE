@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AdminService } from '../../service/admin.service';
-import { Skill } from '../../response/skill.model';
 import { Observable, map } from 'rxjs';
 import { UserService } from '../../service/user.service';
 import { ExperienceRequest } from '../../request/experience-request.model';
+import { SkillDTO } from 'src/app/dto/skill-dto.model';
 
 @Component({
   selector: 'app-request-become-doctor',
@@ -14,7 +13,7 @@ import { ExperienceRequest } from '../../request/experience-request.model';
 export class RequestBecomeDoctorComponent implements OnInit{
   @ViewChild('requestBecomeDoctorForm', {static: false}) requestBecomeDoctorForm !: NgForm;
 
-  skills : Skill[] = [];
+  skills : SkillDTO[] = [];
   skillIds : number[] = [];
   experiences : ExperienceRequest[] = [];
   isSuccessful = false;
@@ -29,12 +28,12 @@ export class RequestBecomeDoctorComponent implements OnInit{
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.getSkills().subscribe((result: Skill[]) => {
+    this.getSkills().subscribe((result: SkillDTO[]) => {
       this.skills = result;
     });
   }
 
-  getSkills(): Observable<Skill[]>  {
+  getSkills(): Observable<SkillDTO[]>  {
     return this.userService.getAllSkills()
     .pipe(
       map((response) => {

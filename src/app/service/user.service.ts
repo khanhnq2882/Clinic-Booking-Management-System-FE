@@ -1,8 +1,9 @@
 import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UpdateProfileRequest } from '../request/update-profile.model';
+import { UpdateProfileRequest } from '../request/update-profile-request.model';
 import { AddRoleDoctorRequest } from '../request/add-role-doctor-request.model';
+import { BookingAppointmentRequest } from '../request/booking-appointment-request.model';
 
 const USER_API = 'http://localhost:8080/user/';
 
@@ -57,6 +58,10 @@ export class UserService {
 
   public requestBecomeDoctor(addRoleDoctorRequest: AddRoleDoctorRequest) : Observable<any>{
     return this.httpClient.post(USER_API+'request-to-become-doctor', addRoleDoctorRequest, httpOptions);
+  }
+
+  public bookingAppointment(bookingAppointmentRequest: BookingAppointmentRequest) : Observable<any>{
+    return this.httpClient.post(USER_API+'booking-appointment', bookingAppointmentRequest, httpOptions);
   }
   
 }

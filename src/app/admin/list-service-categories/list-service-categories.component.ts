@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiceCategoryResponse } from 'src/app/response/service-category-response.model';
+import { ServiceCategoryDTO } from 'src/app/dto/service-category-dto.model';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class ListServiceCategoriesComponent implements OnInit{
 
-  listServiceCategories: ServiceCategoryResponse[] = [];
+  listServiceCategories: ServiceCategoryDTO[] = [];
   page = 1;
   size = 3;
   totalItems !: number;

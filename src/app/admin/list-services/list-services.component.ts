@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { ServicesResponse } from 'src/app/response/service-response.model';
+import { ServicesDTO } from 'src/app/dto/services-dto.model';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
@@ -9,13 +8,13 @@ import { AdminService } from 'src/app/service/admin.service';
   styleUrls: ['./list-services.component.css']
 })
 export class ListServicesComponent implements OnInit{
-  listServices: ServicesResponse[] = [];
+  listServices: ServicesDTO[] = [];
   page = 1;
   size = 3;
   totalItems !: number;
   totalPages !: number;
   currentPage !: number;
-  pageSizes = [1,3,6,9];
+  pageSizes = [3,6,9];
 
   constructor(private adminService: AdminService) {}
 

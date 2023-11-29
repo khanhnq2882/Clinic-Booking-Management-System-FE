@@ -5,7 +5,7 @@ import { RequestDoctorResponse } from '../response/request-doctor-response.model
 import { SpecializationResponse } from '../response/specialization-response.model';
 import { ServiceCategoryRequest } from '../request/service-category-request.model';
 import { ServiceRequest } from '../request/service-request.model';
-import { ServiceCategoryResponse } from '../response/service-category-response.model';
+import { ServiceCategoryDTO } from '../dto/service-category-dto.model';
 
 const ADMIN_API = 'http://localhost:8080/admin/';
 
@@ -44,8 +44,8 @@ export class AdminService {
     return this.httpClient.get<SpecializationResponse[]>(ADMIN_API+'get-all-specializations', httpOptions);
   }
 
-  public getServiceCategories(specializationId : number) : Observable<ServiceCategoryResponse[]>{
-    return this.httpClient.get<ServiceCategoryResponse[]>(ADMIN_API+'get-all-service-categories/'+specializationId, httpOptions);
+  public getServiceCategories(specializationId : number) : Observable<ServiceCategoryDTO[]>{
+    return this.httpClient.get<ServiceCategoryDTO[]>(ADMIN_API+'get-all-service-categories/'+specializationId, httpOptions);
   }
 
   public addServiceCategory(serviceCategoryRequest: ServiceCategoryRequest) : Observable<any>{

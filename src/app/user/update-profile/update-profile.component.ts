@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { City } from '../../request/city.model';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { District } from '../../request/district.model';
-import { Ward } from '../../request/ward.model';
 import { UserService } from '../../service/user.service';
 import { NgForm } from '@angular/forms';
+import { CityResponse } from 'src/app/response/city-response.model';
+import { DistrictResponse } from 'src/app/response/district-response.model';
+import { WardResponse } from 'src/app/response/ward-response.model';
 
 @Component({
   selector: 'app-update-profile',
@@ -19,9 +19,9 @@ export class UpdateProfileComponent implements OnInit {
   isFailed = false;
   errorMessage = '';
   successMessage = '';
-  cities: City[] = [];
-  districts: District[] = [];
-  wards: Ward[] = [];
+  cities: CityResponse[] = [];
+  districts: DistrictResponse[] = [];
+  wards: WardResponse[] = [];
   id: number = 0;
   selectedFiles?: FileList;
   currentFile?: File;
@@ -34,14 +34,14 @@ export class UpdateProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getCities().subscribe((result: City[]) => {
+    this.getCities().subscribe((result: CityResponse[]) => {
       this.cities = result;
     });
   }
 
-  getCities(): Observable<City[]> {
+  getCities(): Observable<CityResponse[]> {
     return this.httpClient
-      .get<City[]>('http://localhost:8080/address/cities')
+      .get<CityResponse[]>('http://localhost:8080/address/cities')
       .pipe(
         map((response) => {
           if (response) {
@@ -54,7 +54,7 @@ export class UpdateProfileComponent implements OnInit {
 
   changeCity(e: any) {
     this.httpClient
-      .get<District[]>(
+      .get<DistrictResponse[]>(
         'http://localhost:8080/address/districts/' + e.target.value
       )
       .pipe(
@@ -65,7 +65,7 @@ export class UpdateProfileComponent implements OnInit {
           return [];
         })
       )
-      .subscribe((result: District[]) => {
+      .subscribe((result: DistrictResponse[]) => {
         this.districts = result;
       });
     this.wards = [];
@@ -73,7 +73,7 @@ export class UpdateProfileComponent implements OnInit {
 
   changeDistrict(e: any) {
     this.httpClient
-      .get<Ward[]>('http://localhost:8080/address/wards/' + e.target.value)
+      .get<WardResponse[]>('http://localhost:8080/address/wards/' + e.target.value)
       .pipe(
         map((response) => {
           if (response) {
@@ -82,7 +82,7 @@ export class UpdateProfileComponent implements OnInit {
           return [];
         })
       )
-      .subscribe((result: Ward[]) => {
+      .subscribe((result: WardResponse[]) => {
         this.wards = result;
       });
   }
@@ -159,4 +159,6 @@ export class UpdateProfileComponent implements OnInit {
   reloadPage(): void {
     window.location.reload();
   }
+  
 }
+

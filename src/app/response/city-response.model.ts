@@ -1,5 +1,4 @@
-export class City {
+export class CityResponse {
     cityId !: number;
     cityName !: string;
   }
-  

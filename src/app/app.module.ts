@@ -18,6 +18,7 @@ import { AddServiceCategoryComponent } from './admin/add-service-category/add-se
 import { AddServiceComponent } from './admin/add-service/add-service.component';
 import { ListServicesComponent } from './admin/list-services/list-services.component';
 import { ListServiceCategoriesComponent } from './admin/list-service-categories/list-service-categories.component';
+import { BookingAppointmentComponent } from './user/booking-appointment/booking-appointment.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ListServiceCategoriesComponent } from './admin/list-service-categories/
     AddServiceComponent,
     ListServicesComponent,
     ListServiceCategoriesComponent,
+    BookingAppointmentComponent,
   ],
   imports: [
     BrowserModule,

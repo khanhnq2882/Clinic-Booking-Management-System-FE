@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable, map } from 'rxjs';
-import { ServiceCategoryResponse } from 'src/app/response/service-category-response.model';
+import { ServiceCategoryDTO } from 'src/app/dto/service-category-dto.model';
 import { SpecializationResponse } from 'src/app/response/specialization-response.model';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -14,7 +14,7 @@ export class AddServiceComponent implements OnInit{
   @ViewChild('addServiceForm', {static: false}) addServiceForm !: NgForm;
 
   listSpecializations: SpecializationResponse[] = [];
-  listServiceCategories: ServiceCategoryResponse[] = [];
+  listServiceCategories: ServiceCategoryDTO[] = [];
   specializationId !: number;
   serviceCategoryId !: number;
   isSuccessful = false;
@@ -52,7 +52,7 @@ export class AddServiceComponent implements OnInit{
           return [];
         })
       )
-      .subscribe((result: ServiceCategoryResponse[]) => {
+      .subscribe((result: ServiceCategoryDTO[]) => {
         this.listServiceCategories = result;
       });
       this.listServiceCategories = [];
