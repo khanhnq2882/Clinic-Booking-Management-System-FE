@@ -1,0 +1,65 @@
+<h2>List User Bookings</h2>
+<table class="table table-bordered table-lg">
+  <thead>
+    <tr>
+      <th scope="col">Booking Code</th>
+      <th scope="col">Full Name</th>
+      <th scope="col">Date Of Birth</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Address</th>
+      <th scope="col">Appointment Date</th>
+      <th scope="col">Appointment Schedule</th>
+      <th scope="col">Describe Symptoms</th>
+      <th scope="col">Status</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let booking of bookings">
+      <td>{{ booking.bookingCode }}</td>
+      <td>
+        {{
+          booking.firstName === null || booking.lastName === null
+            ? " "
+            : booking.firstName + " " + booking.lastName
+        }}
+      </td>
+      <td>{{ booking.dateOfBirth }}</td>
+      <td>{{ booking.gender == 1 ? "Male" : "Female" }}</td>
+      <td>{{ booking.phoneNumber }}</td>
+      <td>
+        {{
+          booking.userAddress.specificAddress === null
+            ? " "
+            : booking.userAddress.specificAddress +
+              ", " +
+              booking.userAddress.wardName +
+              ", " +
+              booking.userAddress.districtName +
+              ", " +
+              booking.userAddress.cityName
+        }}
+      </td>
+      <td>{{ booking.appointmentDate }}</td>
+      <td>{{ booking.startTime + ' - ' +booking.endTime }}</td>
+      <td>{{ booking.describeSymptoms }}</td>
+      <td>{{ booking.status }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-success"
+        >
+          Confirm
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+        >
+          Reject
+        </button>
+      </td>
+
+    </tr>
+  </tbody>
+</table>

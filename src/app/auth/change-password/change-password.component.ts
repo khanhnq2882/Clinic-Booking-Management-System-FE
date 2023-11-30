@@ -14,7 +14,7 @@ export class ChangePasswordComponent implements OnInit, AfterViewInit {
   changePasswordForm!: NgForm;
 
   isSuccessful = false;
-  isChangeFailed = false;
+  isFailed = false;
   successMessage = '';
   errorMessage = '';
   currentUser: any;
@@ -41,11 +41,11 @@ export class ChangePasswordComponent implements OnInit, AfterViewInit {
       next: (data) => {
         this.isSuccessful = true;
         this.successMessage = data.message;
-        this.storageService.clean();
-        this.router.navigate(['/login']);
+        // this.storageService.clean();
+        // this.router.navigate(['/login']);
       },
       error: (err) => {
-        this.isChangeFailed = true;
+        this.isFailed = true;
         this.errorMessage = err.error.message;
       },
     });

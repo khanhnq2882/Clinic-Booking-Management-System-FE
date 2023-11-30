@@ -26,10 +26,10 @@ export class BookingAppointmentComponent implements OnInit {
   cities: CityResponse[] = [];
   districts: DistrictResponse[] = [];
   wards: WardResponse[] = [];
-  wardId: number = 0;
+  wardId !: number;
   listSpecializations: SpecializationResponse[] = [];
   listDoctors : DoctorDTO[] = [];
-  workSchedules : WorkScheduleDTO[] = [];
+  listWorkSchedules : WorkScheduleDTO[] = [];
   specializationId !: number;
   workScheduleId !: number;
 
@@ -139,14 +139,13 @@ export class BookingAppointmentComponent implements OnInit {
       })
     )
     .subscribe((result: WorkScheduleDTO[]) => {
-      this.workSchedules = result;
+      this.listWorkSchedules = result;
     });
-    this.workSchedules = [];
+    this.listWorkSchedules = [];
   }
 
   changeWorkSchedule (e: any) {
     this.workScheduleId = e.target.value;
-    console.log(this.workScheduleId);
   }
 
   onSubmit() {
@@ -165,14 +164,13 @@ export class BookingAppointmentComponent implements OnInit {
     this.userService.bookingAppointment(bookingAppointmentRequest).subscribe({
       next : data => {
         this.isSuccessful = true;
-        this.successMessage = data.message;
+        this.successMessage = data;
       },
       error : err => {
         this.isFailed = true;
-        this.errorMessage = err.error.message;
+        this.errorMessage = err.error;
       }
     })
-
   }
 
 }

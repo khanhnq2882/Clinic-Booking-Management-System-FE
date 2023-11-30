@@ -1,4 +1,10 @@
 <h2>Register New Account</h2>
+<div class="alert alert-success" role="alert" *ngIf="isSuccessful">
+  {{ successMessage }}
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="isFailed">
+  {{ errorMessage }}
+</div>
 <form
   class="row g-3 needs-validation"
   novalidate
@@ -74,11 +80,5 @@
 
   <div class="col-12">
     <button class="btn btn-primary" type="submit">Save</button>
-  </div>
-  <div class="alert alert-success" role="alert" *ngIf="isSuccessful">
-    {{ successMessage }}
-  </div>
-  <div class="alert alert-danger" role="alert" *ngIf="isRegisterFailed">
-    {{ errorMessage }}
   </div>
 </form>

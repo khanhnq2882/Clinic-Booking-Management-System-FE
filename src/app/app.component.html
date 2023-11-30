@@ -35,11 +35,17 @@
           <li class="nav-item">
             <a href="/update-profile" class="nav-link" routerLink="update-profile">Update Profile</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="/request-become-doctor" class="nav-link" routerLink="request-become-doctor">Request To Become Doctor</a>
+          </li> -->
+          <li class="nav-item">
+            <a href="/booking-appointment" class="nav-link" routerLink="booking-appointment">Booking Appointment</a>
           </li>
         </ng-container>
         <ng-container *ngIf="role === 'ROLE_DOCTOR'">
+          <li class="nav-item">
+            <a href="/list-user-booking" class="nav-link" routerLink="list-user-booking">List Bookings</a>
+          </li>
           <li class="nav-item">
             <a href="/update-profile" class="nav-link" routerLink="update-profile">Update Profile</a>
           </li>

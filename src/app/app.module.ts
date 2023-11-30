@@ -19,6 +19,7 @@ import { AddServiceComponent } from './admin/add-service/add-service.component';
 import { ListServicesComponent } from './admin/list-services/list-services.component';
 import { ListServiceCategoriesComponent } from './admin/list-service-categories/list-service-categories.component';
 import { BookingAppointmentComponent } from './user/booking-appointment/booking-appointment.component';
+import { ListUserBookingComponent } from './doctor/list-user-booking/list-user-booking.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { BookingAppointmentComponent } from './user/booking-appointment/booking-
     ListServicesComponent,
     ListServiceCategoriesComponent,
     BookingAppointmentComponent,
+    ListUserBookingComponent,
   ],
   imports: [
     BrowserModule,

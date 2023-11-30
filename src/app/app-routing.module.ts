@@ -14,6 +14,7 @@ import { AddServiceComponent } from './admin/add-service/add-service.component';
 import { ListServicesComponent } from './admin/list-services/list-services.component';
 import { ListServiceCategoriesComponent } from './admin/list-service-categories/list-service-categories.component';
 import { BookingAppointmentComponent } from './user/booking-appointment/booking-appointment.component';
+import { ListUserBookingComponent } from './doctor/list-user-booking/list-user-booking.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'list-services', component: ListServicesComponent },
   { path: 'list-service-categories', component: ListServiceCategoriesComponent },
   { path: 'booking-appointment', component: BookingAppointmentComponent },
+  { path: 'list-user-booking', component: ListUserBookingComponent },
 ];
 
 @NgModule({

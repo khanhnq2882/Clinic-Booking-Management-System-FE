@@ -11,7 +11,7 @@ export class RegisterComponent{
   @ViewChild('registerForm', {static : false}) registerForm !: NgForm;
 
   isSuccessful = false;
-  isRegisterFailed = false;
+  isFailed = false;
   successMessage = '';
   errorMessage = '';
   roles : string[] = [];
@@ -33,7 +33,7 @@ export class RegisterComponent{
         this.successMessage = data.message;
       },
       error: err => {
-        this.isRegisterFailed = true;
+        this.isFailed = true;
         this.errorMessage = err.error.message;
       }
     });

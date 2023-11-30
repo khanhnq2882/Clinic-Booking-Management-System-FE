@@ -196,7 +196,7 @@
     ngModel
   >
     <option
-      *ngFor="let workSchedule of workSchedules"
+      *ngFor="let workSchedule of listWorkSchedules"
       [value]="workSchedule.workScheduleId"
     >
       {{ workSchedule.startTime +' - '+workSchedule.endTime }}
