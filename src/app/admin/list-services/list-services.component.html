@@ -31,15 +31,4 @@
       <li class="page-item"><a class="page-link" type="button" (click)="lastPage()">Last</a></li>
     </ul>
   </nav>
-  <select
-    name="pageSizes"
-    id="pageSizes"
-    (change)="changePageSize($event)"
-    required
-    ngModel
-  >
-    <option *ngFor="let pageSize of pageSizes" [value]="pageSize">
-      {{ pageSize }}
-    </option>
-  </select>
 </div>

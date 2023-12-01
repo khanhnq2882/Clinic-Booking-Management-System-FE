@@ -25,16 +25,14 @@ export class RegisterComponent{
       password: this.registerForm.value.password,
       roles : this.roles
     };
-    console.log(registerRequest);
     this.authService.register(registerRequest).subscribe({
       next: data => {
-        console.log(data);
         this.isSuccessful = true;
         this.successMessage = data.message;
       },
       error: err => {
         this.isFailed = true;
-        this.errorMessage = err.error.message;
+        this.errorMessage = err.error;
       }
     });
 

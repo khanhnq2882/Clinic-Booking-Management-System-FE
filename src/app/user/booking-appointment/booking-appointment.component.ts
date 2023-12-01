@@ -164,7 +164,7 @@ export class BookingAppointmentComponent implements OnInit {
     this.userService.bookingAppointment(bookingAppointmentRequest).subscribe({
       next : data => {
         this.isSuccessful = true;
-        this.successMessage = data;
+        this.successMessage = data.message;
       },
       error : err => {
         this.isFailed = true;

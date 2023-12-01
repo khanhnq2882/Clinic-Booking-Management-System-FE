@@ -46,7 +46,7 @@ export class ChangePasswordComponent implements OnInit, AfterViewInit {
       },
       error: (err) => {
         this.isFailed = true;
-        this.errorMessage = err.error.message;
+        this.errorMessage = err.error;
       },
     });
   }
