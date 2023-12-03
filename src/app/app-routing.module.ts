@@ -17,6 +17,7 @@ import { BookingAppointmentComponent } from './user/booking-appointment/booking-
 import { ListUserBookingComponent } from './doctor/list-user-booking/list-user-booking.component';
 import { ScheduleComponent } from './commons/schedule/schedule.component';
 import { UpdateDoctorProfileComponent } from './doctor/update-doctor-profile/update-doctor-profile.component';
+import { UpdateServiceCategoryComponent } from './admin/update-service-category/update-service-category.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'list-user-booking', component: ListUserBookingComponent },
   { path: 'schedule', component: ScheduleComponent },
   { path: 'update-doctor-profile', component: UpdateDoctorProfileComponent },
+  { path: 'update-service-category/:serviceCategoryId', component: UpdateServiceCategoryComponent },
 ];
 
 @NgModule({

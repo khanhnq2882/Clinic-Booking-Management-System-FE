@@ -5,6 +5,7 @@
         <th scope="col">Service Category Name</th>
         <th scope="col">Description</th>
         <th scope="col">Specialization Name</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -12,6 +13,15 @@
         <td>{{serviceCategory.serviceCategoryName}}</td>
         <td>{{serviceCategory.description}}</td>
         <td>{{serviceCategory.specializationName}}</td>
+        <td>
+          <button
+          type="button"
+          class="btn btn-primary"
+          (click)="navigateToUpdate(serviceCategory.serviceCategoryId)"
+        >
+          Update
+        </button>
+        </td>
       </tr>
     </tbody>
 </table>

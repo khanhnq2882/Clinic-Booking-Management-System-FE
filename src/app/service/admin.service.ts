@@ -64,4 +64,9 @@ export class AdminService {
     return this.httpClient.get<any>(ADMIN_API+'get-all-services', {params});
   } 
 
+  public updateServiceCategory(serviceCategoryId : number, serviceCategoryRequest: ServiceCategoryRequest) : Observable<any>{
+    return this.httpClient.post(ADMIN_API+'update-service-category/'+serviceCategoryId, serviceCategoryRequest, httpOptions);
+  }
+
+
 }

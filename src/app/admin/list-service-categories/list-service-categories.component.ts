@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ServiceCategoryDTO } from 'src/app/dto/service-category-dto.model';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -17,7 +18,7 @@ export class ListServiceCategoriesComponent implements OnInit{
   currentPage !: number;
   pageSizes = [1,3,6,9];
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService, private router: Router) {}
 
   ngOnInit(): void {
     this.getServiceCategories();
@@ -89,6 +90,10 @@ export class ListServiceCategoriesComponent implements OnInit{
     this.page = this.totalPages;
     this.getServiceCategories();
    } 
+  }
+
+  navigateToUpdate(serviceCategoryId : number) : void {
+    this.router.navigate(['update-service-category', serviceCategoryId]);
   }
 
 }
