@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DoctorProfileRequest } from '../request/doctor-information-request.model';
 
 const DOCTOR_API = 'http://localhost:8080/doctor/';
 
@@ -25,6 +26,10 @@ export class DoctorService {
 
   public cancelledBooking(bookingId: number) : Observable<any> {
     return this.httpClient.post(DOCTOR_API+'cancelled-booking/'+bookingId, httpOptions);
+  }
+
+  public updateDoctorInformation(doctorProfileRequest: DoctorProfileRequest) : Observable<any>{
+    return this.httpClient.post(DOCTOR_API+'update-doctor-information', doctorProfileRequest, httpOptions);
   }
 
 

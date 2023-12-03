@@ -1,34 +1,20 @@
-<h3>Update Profile</h3>
+<!-- <schedule-component></schedule-component> -->
 <div class="alert alert-success" role="alert" *ngIf="isSuccessful">
-  {{ successMessage }}
-</div>
-<div class="alert alert-danger" role="alert" *ngIf="isFailed">
-  {{ errorMessage }}
-</div>
-<div class="col-md-12">
-  <label>Avatar</label>
-  <div class="row">
-    <div class="col-8">
-      <label class="btn btn-default p-0">
-        <input type="file" (change)="selectFile($event)" />
-      </label>
-      <button class="btn btn-success btn-sm float-left" (click)="upload()">
-        Upload
-      </button>
-    </div>
+    {{ successMessage }}
   </div>
-  <div>
-    <img [src]="preview" class="preview" />
+  <div class="alert alert-danger" role="alert" *ngIf="isFailed">
+    {{ errorMessage }}
   </div>
-</div>
+
 <form
   class="row g-3 needs-validation"
   novalidate
-  name="updateProfileForm"
-  #updateProfileForm="ngForm"
+  name="updateDoctorProfileForm"
+  #updateDoctorProfileForm="ngForm"
   (ngSubmit)="onSubmit()"
   *ngIf="!isSuccessful"
 >
+<h2>Update Profile</h2>
   <div class="col-md-6">
     <label for="firstName" class="form-label">First Name</label>
     <input
@@ -148,6 +134,74 @@
       ngModel
       required
     />
+  </div>
+
+  <div class="col-md-4">
+    <label for="skill" class="form-label">Skills</label>
+    <div class="btn-group">
+      <button
+        type="button"
+        class="btn btn-secondary dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+        style="width: 420px"
+      ></button>
+      <ul class="dropdown-menu">
+        <li *ngFor="let skill of skills">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="option1"
+            [value]="skill.skillId"
+            (change)="onChangeSkills(skill.skillId)"
+          />
+          <label class="form-check-label" for="skill">{{
+            skill.skillName
+          }}</label>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <label for="workSchedule" class="form-label">Work Schedules</label>
+    <div class="btn-group">
+      <button
+        type="button"
+        class="btn btn-secondary dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+        style="width: 420px"
+      ></button>
+      <ul class="dropdown-menu">
+        <li *ngFor="let workScheduleDTO of workSchedulesDTO">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="option1"
+            [value]="workScheduleDTO"
+            (change)="onChangeWorkSchedules(workScheduleDTO)"
+          />
+          <label class="form-check-label" for="workSchedule">{{
+            workScheduleDTO.startTime +' - '+ workScheduleDTO.endTime
+          }}</label>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <label for="describeExperiences" class="form-label">Describe Experiences</label>
+    <textarea
+      class="form-control"
+      placeholder="Write describe experiences here..."
+      id="describeExperiences"
+      name="describeExperiences"
+      style="height: 100px"
+      ngModel
+    ></textarea>
   </div>
 
   <div class="col-12">

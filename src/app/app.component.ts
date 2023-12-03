@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from './service/storage.service';
 import { AuthService } from './service/auth.service';
-import { map } from 'rxjs';
-import { JWT } from './auth/login/login.component';
 
 @Component({
   selector: 'app-root',
@@ -38,19 +36,5 @@ export class AppComponent implements OnInit{
       })           
     }
   }
-
-  logout(): void {
-    console.log(JWT);
-    this.authService.logoutUser().subscribe({
-      next: res => {
-        localStorage.removeItem('eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFuaG5xIiwiaWF0IjoxNzAwNjc3NzY4LCJleHAiOjE3MDA3NjQxNjh9._FGLnrMNbfmAy3ZSOgD_I3wJuguSIjNwCg1mRDMS9Ts');
-        window.location.reload();
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
-  }
-
 
 }

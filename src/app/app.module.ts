@@ -20,6 +20,9 @@ import { ListServicesComponent } from './admin/list-services/list-services.compo
 import { ListServiceCategoriesComponent } from './admin/list-service-categories/list-service-categories.component';
 import { BookingAppointmentComponent } from './user/booking-appointment/booking-appointment.component';
 import { ListUserBookingComponent } from './doctor/list-user-booking/list-user-booking.component';
+import { ScheduleModule } from './commons/schedule/schedule.module';
+import { UpdateDoctorProfileComponent } from './doctor/update-doctor-profile/update-doctor-profile.component';
+import { AddressComponent } from './commons/address/address.component';
 
 @NgModule({
   declarations: [
@@ -39,12 +42,15 @@ import { ListUserBookingComponent } from './doctor/list-user-booking/list-user-b
     ListServiceCategoriesComponent,
     BookingAppointmentComponent,
     ListUserBookingComponent,
+    UpdateDoctorProfileComponent,
+    AddressComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
-    HttpClientModule
+    HttpClientModule,
+    ScheduleModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
