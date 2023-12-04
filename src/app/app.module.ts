@@ -10,7 +10,6 @@ import { httpInterceptorProviders } from './helpers/auth.interceptor';
 import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 import { UpdateProfileComponent } from './user/update-profile/update-profile.component';
 import { RequestBecomeDoctorComponent } from './user/request-become-doctor/request-become-doctor.component';
-import { HomeComponent } from './home/home.component';
 import { ListUsersComponent } from './admin/list-users/list-users.component';
 import { ListRequestBecomeDoctorComponent } from './admin/list-request-become-doctor/list-request-become-doctor.component';
 import { ListDoctorsComponent } from './admin/list-doctors/list-doctors.component';
@@ -24,6 +23,7 @@ import { ScheduleModule } from './commons/schedule/schedule.module';
 import { UpdateDoctorProfileComponent } from './doctor/update-doctor-profile/update-doctor-profile.component';
 import { AddressComponent } from './commons/address/address.component';
 import { UpdateServiceCategoryComponent } from './admin/update-service-category/update-service-category.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,6 @@ import { UpdateServiceCategoryComponent } from './admin/update-service-category/
     ChangePasswordComponent,
     UpdateProfileComponent,
     RequestBecomeDoctorComponent,
-    HomeComponent,
     ListUsersComponent,
     ListRequestBecomeDoctorComponent,
     ListDoctorsComponent,
@@ -46,6 +45,7 @@ import { UpdateServiceCategoryComponent } from './admin/update-service-category/
     UpdateDoctorProfileComponent,
     AddressComponent,
     UpdateServiceCategoryComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

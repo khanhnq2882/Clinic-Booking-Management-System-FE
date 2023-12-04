@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
+import { ServiceCategoryDTO } from 'src/app/dto/service-category-dto.model';
 import { SpecializationResponse } from 'src/app/response/specialization-response.model';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -14,6 +15,7 @@ export class UpdateServiceCategoryComponent {
   @ViewChild('updateServiceCategoryForm', {static: false}) updateServiceCategoryForm !: NgForm;
 
   listSpecializations: SpecializationResponse[] = [];
+  serviceCategory !: ServiceCategoryDTO;
   specializationId !: number;
   isSuccessful = false;
   isFailed = false;
@@ -25,6 +27,11 @@ export class UpdateServiceCategoryComponent {
 
   ngOnInit(): void {
     this.serviceCategoryId = this.route.snapshot.params['serviceCategoryId'];
+    
+    this.adminService.getServiceCategory(this.serviceCategoryId).subscribe((result : ServiceCategoryDTO) => {
+      this.serviceCategory = result;
+    });
+
     this.getAllSpecializations().subscribe((result: SpecializationResponse[]) => {
       this.listSpecializations = result;
     });
@@ -63,7 +70,6 @@ export class UpdateServiceCategoryComponent {
         this.errorMessage = err.error;
       }
     })
-
   }
 
 
