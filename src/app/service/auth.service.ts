@@ -34,6 +34,10 @@ export class AuthService {
     return this.httpClient.get(AUTH_API+'get-user-info', httpOptions);
   }
 
+  public getUserByUsername(username : string) : Observable<any>{
+    return this.httpClient.get(AUTH_API+'get-user/'+username, httpOptions);
+  }
+
   public logoutUser() : Observable<any>{
     return this.httpClient.post(AUTH_API+'logout', httpOptions);
   }

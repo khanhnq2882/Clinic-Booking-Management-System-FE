@@ -27,20 +27,21 @@
             "styles": [
 
               "src/styles.css",
-              "src/assets/css/style.css"
+              "src/assets/css/style.css",
+              "src/assets/css/font-awesome.min.css"
             ],
             "scripts": [
                 "node_modules/jquery/dist/jquery.min.js",
                 "node_modules/bootstrap/dist/js/bootstrap.min.js",
                 "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
                 "src/assets/bootstrap/popper.min.js",
-                "src/assets/bootstrap/bootstrap.min.js",
                 "src/assets/js/modernizr.js",
                 "src/assets/js/jquery-main.js",
                 "src/assets/js/jquery-migrate.js",
                 "src/assets/js/jquery-ui.min.js",
                 "src/assets/js/plugincollection.js",
-                "src/assets/js/custom.js"
+                "src/assets/js/custom.js",
+                "src/assets/js/main.js"
             ]
           },
           "configurations": {
