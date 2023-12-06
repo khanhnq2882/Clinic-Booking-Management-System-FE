@@ -24,6 +24,7 @@ import { UpdateDoctorProfileComponent } from './doctor/update-doctor-profile/upd
 import { AddressComponent } from './commons/address/address.component';
 import { UpdateServiceCategoryComponent } from './admin/update-service-category/update-service-category.component';
 import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './commons/header/header.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { HomeComponent } from './home/home.component';
     AddressComponent,
     UpdateServiceCategoryComponent,
     HomeComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

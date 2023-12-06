@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 import { NgForm } from '@angular/forms';
 import { StorageService } from '../../service/storage.service';
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private storageService: StorageService,
-    private router: Router
+    private router: Router,
   ) {}
 
   onSubmit() {
@@ -42,11 +42,11 @@ export class LoginComponent implements OnInit {
         window.localStorage.setItem(JWT, data.jwtTokenResponse);
         this.isSuccessful = true;
         this.username = this.storageService.getUser().sub;
-        this.reloadPage();
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         this.isLoginFailed = true;
-        this.errorMessage = err.error.message;
+        this.errorMessage = err.error;
       }
     })
   }

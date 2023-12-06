@@ -9117,7 +9117,7 @@ textarea {
   position:relative;
   z-index:2;
   overflow:hidden;
-
+  height: 1000px;
 }
 
 ._lk_de{
