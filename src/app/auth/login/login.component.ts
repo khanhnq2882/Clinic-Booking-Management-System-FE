@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         window.localStorage.setItem(JWT, data.jwtTokenResponse);
         this.isSuccessful = true;
         this.username = this.storageService.getUser().sub;
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home']).then(() => window.location.reload());
       },
       error: (err) => {
         this.isLoginFailed = true;

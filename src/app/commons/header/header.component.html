@@ -1,58 +1,63 @@
-<header class="header-area header-default transparent">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-12">
-          <div class="header-align">
-            <div class="header-logo-area">
-              <a href="/home">
-                <img class="logo-main" src="assets/img/logo.png" alt="Logo" />
-                <img
-                  class="logo-light"
-                  src="assets/img/logo-light.png"
-                  alt="Logo"
-                />
-              </a>
+<header class="header-area header-default sticky-header">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-12">
+        <div class="header-align">
+          <div class="header-logo-area">
+            <a href="/home">
+              <img class="logo-main" src="assets/img/logo.png" alt="Logo" />
+              <img
+                class="logo-light"
+                src="assets/img/logo-light.png"
+                alt="Logo"
+              />
+            </a>
+          </div>
+          <ng-container *ngFor="let role of roles">
+            <div class="header-navigation-area">
+              <ul class="main-menu nav justify-content-center">
+                <li><a href="/home">Home</a></li>
+
+                <ng-container *ngIf="role === 'ROLE_USER'">
+                  <li><a href="/update-profile">Update Profile</a></li>
+                  <li>
+                    <a href="/booking-appointment">Booking Appointment</a>
+                  </li>
+                </ng-container>
+
+                <ng-container *ngIf="role === 'ROLE_DOCTOR'">
+                  <li><a href="/list-user-booking">List Bookings</a></li>
+                  <li><a href="/update-doctor-profile">Update Profile</a></li>
+                </ng-container>
+
+                <ng-container *ngIf="role === 'ROLE_ADMIN'">
+                  <li><a href="/list-users">List Users</a></li>
+                  <li><a href="/list-doctors">List Doctors</a></li>
+                  <li>
+                    <a href="/list-service-categories">List Service Category</a>
+                  </li>
+                  <li><a href="/list-services">List Service</a></li>
+                </ng-container>
+              </ul>
             </div>
-            <ng-container *ngFor="let role of roles">
-              <div class="header-navigation-area">
-                <ul class="main-menu nav justify-content-center">
-                  <li><a href="/home">Home</a></li>
-  
-                  <ng-container *ngIf="role === 'ROLE_USER'">
-                    <li><a href="/update-profile">Update Profile</a></li>
-                    <li><a href="/booking-appointment">Booking Appointment</a></li>
-                  </ng-container>
-  
-                  <ng-container *ngIf="role === 'ROLE_DOCTOR'">
-                    <li><a href="/list-user-booking">List Bookings</a></li>
-                    <li><a href="/update-doctor-profile">Update Profile</a></li>
-                  </ng-container>
-  
-                  <ng-container *ngIf="role === 'ROLE_ADMIN'">
-                    <li><a href="/list-users">List Users</a></li>
-                    <li><a href="/list-doctors">List Doctors</a></li>
-                    <li><a href="/list-service-categories">List Service Category</a></li>
-                    <li><a href="/list-services">List Service</a></li>
-                  </ng-container>
-                </ul>
+          </ng-container>
+          <div class="header-action-area">
+            <ng-container *ngIf="!isLoggedIn">
+              <div class="login-reg">
+                <a href="/login">log in</a><span>/</span
+                ><a href="/register">register</a>
+                <i class="icon icofont-user-alt-3"></i>
               </div>
             </ng-container>
-            <div class="header-action-area">
-              <ng-container *ngIf="!isLoggedIn">
-                <div class="login-reg">
-                  <a href="/login">log in</a><span>/</span><a href="/register">register</a>
-                  <i class="icon icofont-user-alt-3"></i>
-                </div>
-              </ng-container>
-              <ng-container *ngIf="isLoggedIn">
-                <div class="login-reg">
-                  <a>{{username}}</a>
-                  <i class="icon icofont-user-alt-3"></i>
-                </div>
-              </ng-container>
-            </div>
+            <ng-container *ngIf="isLoggedIn">
+              <div class="login-reg">
+                <a>{{ username }}</a>
+                <i class="icon icofont-user-alt-3"></i>
+              </div>
+            </ng-container>
           </div>
         </div>
       </div>
     </div>
-  </header>
+  </div>
+</header>
