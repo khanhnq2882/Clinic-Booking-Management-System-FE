@@ -14,8 +14,8 @@ export class ListUsersComponent implements OnInit{
   totalItems !: number;
   totalPages !: number;
   currentPage !: number;
-  selectedValue : number = 0;
-  pageSizes = [1,3,6,9];
+  selectedValue : number = 3;
+  pageSizes = [3,6,9];
   
   constructor(private adminService: AdminService) {}
 
