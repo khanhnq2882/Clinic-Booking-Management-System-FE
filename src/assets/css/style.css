@@ -6626,9 +6626,9 @@ table p {
   }
 }
 
-.contact-form .form-group {
+/* .contact-form .form-group {
   margin-bottom: 30px;
-}
+} */
 .contact-form .form-group .form-control {
   background-clip: inherit;
   border: 1px solid #d9d9d9;
@@ -6691,7 +6691,7 @@ table p {
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0;
-  margin-top: 51px;
+  /* margin-top: 51px; */
   padding: 10px 26.05px;
 }
 .contact-form .form-group .btn-theme:hover, .contact-form .form-group .btn-theme:focus {
@@ -9269,4 +9269,35 @@ textarea {
 
 ._lbl {
   text-align: center;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    
+}
+.search{
+  top:6px;
+  left:10px;
+}
+
+.form-control{
+  padding-left:32px;
+}
+
+.form-control:focus{
+    
+    border:none;
+    box-shadow:none;
+}
+
+.green{
+    
+    color:green;
+}
+
+.form-select._dropdown{
+  height: 50px;
+  margin-top: 15px;
 }

@@ -19,6 +19,7 @@ import { ScheduleComponent } from './commons/schedule/schedule.component';
 import { UpdateDoctorProfileComponent } from './doctor/update-doctor-profile/update-doctor-profile.component';
 import { UpdateServiceCategoryComponent } from './admin/update-service-category/update-service-category.component';
 
+
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },

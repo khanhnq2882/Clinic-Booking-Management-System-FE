@@ -27,11 +27,19 @@ export class BookingAppointmentComponent implements OnInit {
   districts: DistrictResponse[] = [];
   wards: WardResponse[] = [];
   wardId !: number;
+  gender !: number;
   listSpecializations: SpecializationResponse[] = [];
   listDoctors : DoctorDTO[] = [];
   listWorkSchedules : WorkScheduleDTO[] = [];
   specializationId !: number;
   workScheduleId !: number;
+  selectedValue = 0;
+  selectedCity = 0;
+  isDistrictsDisabled = false;
+  isWardsDisabled = false;
+  selectedSpecialization = 0;
+  isDoctorsDisabled = false;
+  isWorkSchedulesDisabled = false;
 
   constructor(
     private httpClient: HttpClient,
@@ -43,9 +51,17 @@ export class BookingAppointmentComponent implements OnInit {
     this.getCities().subscribe((result: CityResponse[]) => {
       this.cities = result;
     });
+    if (this.selectedCity == 0) {
+      this.isDistrictsDisabled = true;
+      this.isWardsDisabled = true;
+    }
     this.getAllSpecializations().subscribe((result: SpecializationResponse[]) => {
       this.listSpecializations = result;
     });
+    if (this.selectedSpecialization == 0) {
+      this.isDoctorsDisabled = true;
+      this.isWorkSchedulesDisabled = true;
+    }
   }
 
   getAllSpecializations(): Observable<SpecializationResponse[]>  {
@@ -89,7 +105,13 @@ export class BookingAppointmentComponent implements OnInit {
       .subscribe((result: DistrictResponse[]) => {
         this.districts = result;
       });
-    this.wards = [];
+      if (e.target.value == 0) {
+        this.isDistrictsDisabled = true;
+        this.isWardsDisabled = true;
+      } else {
+        this.isDistrictsDisabled = false;
+      }
+      this.wards = [];
   }
 
   changeDistrict(e: any) {
@@ -106,10 +128,17 @@ export class BookingAppointmentComponent implements OnInit {
       .subscribe((result: WardResponse[]) => {
         this.wards = result;
       });
+      if (e.target.value == 0) {
+        this.isWardsDisabled = true;
+      } else {
+        this.isWardsDisabled = false;
+      }
   }
 
   changeWard(e: any) {
-    this.wardId = e.target.value;
+    if (e.target.value != 0) {
+      this.wardId = e.target.value;
+    }
   }
 
   changeSpecialization(e: any) {
@@ -125,7 +154,13 @@ export class BookingAppointmentComponent implements OnInit {
       .subscribe((result: DoctorDTO[]) => {
         this.listDoctors = result;
       });
-      this.listDoctors = [];
+      if (e.target.value == 0) {
+        this.isDoctorsDisabled = true;
+        this.isWorkSchedulesDisabled = true;
+      } else {
+        this.isDoctorsDisabled = false;
+      }
+      this.listWorkSchedules = [];
   }
 
   changeDoctor(e: any) {
@@ -141,11 +176,17 @@ export class BookingAppointmentComponent implements OnInit {
     .subscribe((result: WorkScheduleDTO[]) => {
       this.listWorkSchedules = result;
     });
-    this.listWorkSchedules = [];
+    if (e.target.value == 0) {
+      this.isWorkSchedulesDisabled = true;
+    } else {
+      this.isWorkSchedulesDisabled = false;
+    }
   }
 
   changeWorkSchedule (e: any) {
-    this.workScheduleId = e.target.value;
+    if (e.target.value != 0) {
+      this.workScheduleId = e.target.value;
+    }
   }
 
   onSubmit() {
@@ -171,6 +212,13 @@ export class BookingAppointmentComponent implements OnInit {
         this.errorMessage = err.error;
       }
     })
+  }
+
+  onChange(e : any) {
+    if (e.target.value == "1") {
+      this.gender = 1;
+    }       
+    this.gender = 0;
   }
 
 }

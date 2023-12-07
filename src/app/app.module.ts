@@ -26,6 +26,7 @@ import { UpdateServiceCategoryComponent } from './admin/update-service-category/
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './commons/header/header.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,7 @@ import { HeaderComponent } from './commons/header/header.component';
     AppRoutingModule,
     FormsModule, 
     HttpClientModule,
-    ScheduleModule
+    ScheduleModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

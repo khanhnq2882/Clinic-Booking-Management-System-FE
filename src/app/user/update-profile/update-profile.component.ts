@@ -22,11 +22,16 @@ export class UpdateProfileComponent implements OnInit {
   cities: CityResponse[] = [];
   districts: DistrictResponse[] = [];
   wards: WardResponse[] = [];
-  id: number = 0;
+  wardId !: number;
+  gender : number = 1;
   selectedFiles?: FileList;
   currentFile?: File;
   message = '';
   preview = '';
+  selectedCity = 0;
+  selectedValue = 0;
+  isDistrictsDisabled = false;
+  isWardsDisabled = false;
 
   constructor(
     private httpClient: HttpClient,
@@ -37,6 +42,10 @@ export class UpdateProfileComponent implements OnInit {
     this.getCities().subscribe((result: CityResponse[]) => {
       this.cities = result;
     });
+    if (this.selectedCity == 0) {
+      this.isDistrictsDisabled = true;
+      this.isWardsDisabled = true;
+    }
   }
 
   getCities(): Observable<CityResponse[]> {
@@ -68,6 +77,12 @@ export class UpdateProfileComponent implements OnInit {
       .subscribe((result: DistrictResponse[]) => {
         this.districts = result;
       });
+      if (e.target.value == 0) {
+        this.isDistrictsDisabled = true;
+        this.isWardsDisabled = true;
+      } else {
+        this.isDistrictsDisabled = false;
+      }
     this.wards = [];
   }
 
@@ -85,10 +100,17 @@ export class UpdateProfileComponent implements OnInit {
       .subscribe((result: WardResponse[]) => {
         this.wards = result;
       });
+      if (e.target.value == 0) {
+        this.isWardsDisabled = true;
+      } else {
+        this.isWardsDisabled = false;
+      }
   }
 
   changeWard(e: any) {
-    this.id = e.target.value;
+    if (e.target.value != 0) {
+      this.wardId = e.target.value;
+    }
   }
 
   onSubmit() {
@@ -96,10 +118,10 @@ export class UpdateProfileComponent implements OnInit {
       firstName: this.updateProfileForm.value.firstName,
       lastName: this.updateProfileForm.value.lastName,
       dateOfBirth: this.updateProfileForm.value.dateOfBirth,
-      gender: this.updateProfileForm.value.gender,
+      gender: this.gender,
       phoneNumber: this.updateProfileForm.value.phoneNumber,
       specificAddress: this.updateProfileForm.value.specificAddress,
-      wardId: this.id,
+      wardId: this.wardId,
     };
     this.userService.updateProfile(updateProfileRequest).subscribe({
       next: (data) => {
@@ -158,6 +180,13 @@ export class UpdateProfileComponent implements OnInit {
 
   reloadPage(): void {
     window.location.reload();
+  }
+
+  onChange(e : any) {
+    if (e.target.value == "1") {
+      this.gender = 1;
+    }       
+    this.gender = 0;
   }
   
 }
