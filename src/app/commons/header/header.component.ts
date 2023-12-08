@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { JWT } from 'src/app/auth/login/login.component';
 import { AuthService } from 'src/app/service/auth.service';
 import { StorageService } from 'src/app/service/storage.service';
 
@@ -16,7 +18,7 @@ export class HeaderComponent {
   username = '';
   roles: string[] = [];
 
-  constructor(private storageService: StorageService, private authService: AuthService) {}
+  constructor(private storageService: StorageService, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
@@ -34,5 +36,17 @@ export class HeaderComponent {
         },
       })           
     }
+  }
+
+  logout() {
+    this.authService.logout().subscribe({
+      next: data => {
+        window.localStorage.removeItem(JWT);
+        this.router.navigate(['/home']).then(() => window.location.reload());
+      },
+      error: err => {
+
+      }
+    })
   }
 }

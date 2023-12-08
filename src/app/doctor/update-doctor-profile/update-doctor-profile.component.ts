@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { SkillDTO } from 'src/app/dto/skill-dto.model';
 import { WorkScheduleDTO } from 'src/app/dto/work-schedule-dto.model';
@@ -13,22 +14,29 @@ import { UserService } from 'src/app/service/user.service';
 @Component({
   selector: 'app-update-doctor-profile',
   templateUrl: './update-doctor-profile.component.html',
-  styleUrls: ['./update-doctor-profile.component.css']
+  styleUrls: ['./update-doctor-profile.component.css'],
 })
 export class UpdateDoctorProfileComponent {
-  @ViewChild('updateDoctorProfileForm', { static: false }) updateDoctorProfileForm!: NgForm;
+  @ViewChild('updateDoctorProfileForm', { static: false })
+  updateDoctorProfileForm!: NgForm;
 
-  skills : SkillDTO[] = [];
-  skillIds : number[] = [];
-  cities : CityResponse[] = [];
-  districts : DistrictResponse[] = [];
-  wards : WardResponse[] = [];
-  id !: number;
+  skills: SkillDTO[] = [];
+  skillIds: number[] = [];
+  cities: CityResponse[] = [];
+  districts: DistrictResponse[] = [];
+  wards: WardResponse[] = [];
+  wardId!: number;
   isSuccessful = false;
   isFailed = false;
   errorMessage = '';
   successMessage = '';
-  workSchedulesDTO : WorkScheduleDTO[] = [
+  gender!: number;
+  selectedCity = 0;
+  selectedValue = 0;
+  isDistrictsDisabled = false;
+  isWardsDisabled = false;
+
+  workSchedulesDTO: WorkScheduleDTO[] = [
     new WorkScheduleDTO('08:00', '08:30'),
     new WorkScheduleDTO('08:30', '09:00'),
     new WorkScheduleDTO('09:00', '09:30'),
@@ -47,17 +55,26 @@ export class UpdateDoctorProfileComponent {
     new WorkScheduleDTO('18:00', '18:30'),
     new WorkScheduleDTO('18:30', '19:00'),
     new WorkScheduleDTO('19:00', '19:30'),
-    new WorkScheduleDTO('19:30', '20:00')
+    new WorkScheduleDTO('19:30', '20:00'),
   ];
 
-  workSchedules : WorkScheduleDTO[] = [];
- 
-  constructor(private userService: UserService, private httpClient: HttpClient, private doctorService : DoctorService) {}
+  workSchedules: WorkScheduleDTO[] = [];
+
+  constructor(
+    private userService: UserService,
+    private httpClient: HttpClient,
+    private doctorService: DoctorService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getCities().subscribe((result: CityResponse[]) => {
       this.cities = result;
     });
+    if (this.selectedCity == 0) {
+      this.isDistrictsDisabled = true;
+      this.isWardsDisabled = true;
+    }
     this.getSkills().subscribe((result: SkillDTO[]) => {
       this.skills = result;
     });
@@ -92,12 +109,20 @@ export class UpdateDoctorProfileComponent {
       .subscribe((result: DistrictResponse[]) => {
         this.districts = result;
       });
+    if (e.target.value == 0) {
+      this.isDistrictsDisabled = true;
+      this.isWardsDisabled = true;
+    } else {
+      this.isDistrictsDisabled = false;
+    }
     this.wards = [];
   }
 
   changeDistrict(e: any) {
     this.httpClient
-      .get<WardResponse[]>('http://localhost:8080/address/wards/' + e.target.value)
+      .get<WardResponse[]>(
+        'http://localhost:8080/address/wards/' + e.target.value
+      )
       .pipe(
         map((response) => {
           if (response) {
@@ -109,15 +134,21 @@ export class UpdateDoctorProfileComponent {
       .subscribe((result: WardResponse[]) => {
         this.wards = result;
       });
+    if (e.target.value == 0) {
+      this.isWardsDisabled = true;
+    } else {
+      this.isWardsDisabled = false;
+    }
   }
 
   changeWard(e: any) {
-    this.id = e.target.value;
+    if (e.target.value != 0) {
+      this.wardId = e.target.value;
+    }
   }
 
-  getSkills(): Observable<SkillDTO[]>  {
-    return this.userService.getAllSkills()
-    .pipe(
+  getSkills(): Observable<SkillDTO[]> {
+    return this.userService.getAllSkills().pipe(
       map((response) => {
         if (response) {
           return Object.values(response);
@@ -127,7 +158,7 @@ export class UpdateDoctorProfileComponent {
     );
   }
 
-  onChangeSkills(value : number) {
+  onChangeSkills(value: number) {
     if (this.skillIds.includes(value)) {
       this.skillIds = this.skillIds.filter((item) => item !== value);
     } else {
@@ -136,9 +167,11 @@ export class UpdateDoctorProfileComponent {
     console.log(this.skillIds);
   }
 
-  onChangeWorkSchedules(workSchedule : WorkScheduleDTO) {
+  onChangeWorkSchedules(workSchedule: WorkScheduleDTO) {
     if (this.workSchedules.includes(workSchedule)) {
-      this.workSchedules = this.workSchedules.filter((item) => item !== workSchedule);
+      this.workSchedules = this.workSchedules.filter(
+        (item) => item !== workSchedule
+      );
     } else {
       this.workSchedules.push(workSchedule);
     }
@@ -153,15 +186,17 @@ export class UpdateDoctorProfileComponent {
       gender: this.updateDoctorProfileForm.value.gender,
       phoneNumber: this.updateDoctorProfileForm.value.phoneNumber,
       specificAddress: this.updateDoctorProfileForm.value.specificAddress,
-      wardId: this.id,
-      skillIds : this.skillIds,
-      describeExperiences : this.updateDoctorProfileForm.value.describeExperiences,
-      workSchedules : this.workSchedules
+      wardId: this.wardId,
+      skillIds: this.skillIds,
+      describeExperiences:
+        this.updateDoctorProfileForm.value.describeExperiences,
+      workSchedules: this.workSchedules,
     };
     this.doctorService.updateDoctorInformation(doctorProfileRequest).subscribe({
       next: (data) => {
         this.isSuccessful = true;
         this.successMessage = data.message;
+        this.router.navigate(['/home']).then(() => window.location.reload());
       },
       error: (err) => {
         this.isFailed = true;
@@ -169,5 +204,11 @@ export class UpdateDoctorProfileComponent {
       },
     });
   }
-  
+
+  onChange(e: any) {
+    if (e.target.value == '1') {
+      this.gender = 1;
+    }
+    this.gender = 0;
+  }
 }

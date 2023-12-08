@@ -8494,9 +8494,10 @@ table p {
 -----------------------------------------------------------------------
 */
 .contact-area {
-  background-color: #e9edee;
+  background-color: #3399997d;
   padding: 0 0 181px;
   position: relative;
+  height: 1000px;
 }
 @media only screen and (max-width: 1199px) {
   .contact-area {

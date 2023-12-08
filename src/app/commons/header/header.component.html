@@ -1,4 +1,4 @@
-<header class="header-area header-default sticky-header">
+<header class="header-area header-default">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-12">
@@ -48,6 +48,10 @@
                 <div class="login-reg">
                   <a>{{username}}</a>
                   <i class="icon icofont-user-alt-3"></i>
+                </div>
+                <div class="login-reg">
+                  <a class="nav-link" (click)="logout()" style="margin-right: -20px; margin-left: 10px;">Logout</a>
+                  <i class="icon icofont-sign-out"></i>
                 </div>
               </ng-container>
             </div>

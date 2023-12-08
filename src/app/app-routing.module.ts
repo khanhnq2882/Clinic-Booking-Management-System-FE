@@ -19,6 +19,7 @@ import { ScheduleComponent } from './commons/schedule/schedule.component';
 import { UpdateDoctorProfileComponent } from './doctor/update-doctor-profile/update-doctor-profile.component';
 import { UpdateServiceCategoryComponent } from './admin/update-service-category/update-service-category.component';
 import { AddressComponent } from './commons/address/address.component';
+import { UpdateServiceComponent } from './admin/update-service/update-service.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'schedule', component: ScheduleComponent },
   { path: 'update-doctor-profile', component: UpdateDoctorProfileComponent },
   { path: 'update-service-category/:serviceCategoryId', component: UpdateServiceCategoryComponent },
+  { path: 'update-service/:serviceId', component: UpdateServiceComponent },
 ];
 
 @NgModule({

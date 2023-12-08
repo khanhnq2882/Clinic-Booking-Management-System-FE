@@ -15,8 +15,8 @@ export class ListUserBookingComponent implements OnInit{
   totalItems !: number;
   totalPages !: number;
   currentPage !: number;
-  pageSizes = [1,3,6,9];
-
+  pageSizes = [3,6,9];
+  selectedValue = 3;
   isConfirmedSuccess =  false;
   isCancelledSuccess = false;
   confirmedMessage !: string;

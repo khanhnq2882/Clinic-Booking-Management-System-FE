@@ -1,210 +1,270 @@
-<!-- <schedule-component></schedule-component> -->
-<div class="alert alert-success" role="alert" *ngIf="isSuccessful">
-    {{ successMessage }}
-  </div>
-  <div class="alert alert-danger" role="alert" *ngIf="isFailed">
-    {{ errorMessage }}
-  </div>
+<section class="contact-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="contact-form">
+          <div class="section-title text-center">
+            <h2 class="title">Update Profile</h2>
+          </div>
+          <form
+            class="contact-form-wrapper"
+            name="updateDoctorProfileForm"
+            #updateDoctorProfileForm="ngForm"
+            (ngSubmit)="onSubmit()"
+            *ngIf="!isSuccessful"
+          >
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    placeholder="First Name"
+                    ngModel
+                  />
+                </div>
+              </div>
 
-<form
-  class="row g-3 needs-validation"
-  novalidate
-  name="updateDoctorProfileForm"
-  #updateDoctorProfileForm="ngForm"
-  (ngSubmit)="onSubmit()"
-  *ngIf="!isSuccessful"
->
-<h2>Update Profile</h2>
-  <div class="col-md-6">
-    <label for="firstName" class="form-label">First Name</label>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="First Name"
-      id="firstName"
-      name="firstName"
-      ngModel
-      required
-    />
-  </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Last Name"
+                    ngModel
+                  />
+                </div>
+              </div>
 
-  <div class="col-md-6">
-    <label for="lastName" class="form-label">Last Name</label>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Last name"
-      id="lastName"
-      name="lastName"
-      ngModel
-      required
-    />
-  </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="date"
+                    id="dateOfBirth"
+                    name="dateOfBirth"
+                    placeholder="Date Of Birth"
+                    ngModel
+                  />
+                </div>
+              </div>
 
-  <div class="col-md-6">
-    <label for="dateOfBirth" class="form-label">Date Of Birth</label>
-    <input
-      type="date"
-      class="form-control"
-      placeholder="Date Of Birth"
-      id="dateOfBirth"
-      name="dateOfBirth"
-      ngModel
-      required
-    />
-  </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="d-flex justify-content">
+                    <div class="form-check" style="margin-right: 30px">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="gender"
+                        id="doctor"
+                        [value]="1"
+                        (change)="onChange($event)"
+                        checked
+                      />
+                      <label
+                        class="form-check-label"
+                        for="user"
+                        style="font-size: 1rem"
+                      >
+                        Male
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="gender"
+                        id="doctor"
+                        [value]="0"
+                        (change)="onChange($event)"
+                      />
+                      <label
+                        class="form-check-label"
+                        for="doctor"
+                        style="font-size: 1rem"
+                      >
+                        Female
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-  <div class="col-md-6">
-    <label for="gender" class="form-label">Gender</label>
-    <select class="form-select" name="gender" id="gender" required ngModel>
-      <option [value]="1">Male</option>
-      <option [value]="0">Female</option>
-    </select>
-  </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    placeholder="Phone Number"
+                    ngModel
+                  />
+                </div>
+              </div>
 
-  <div class="col-md-6">
-    <label for="phoneNumber" class="form-label">Phone Number</label>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Phone Number"
-      id="phoneNumber"
-      name="phoneNumber"
-      ngModel
-      required
-    />
-  </div>
+              <div class="col-md-6">
+                <select
+                  class="form-select _dropdown"
+                  name="cities"
+                  id="cities"
+                  (change)="changeCity($event)"
+                  required
+                  [ngModel]="selectedValue"
+                >
+                  <option [value]="0">--- Cities ---</option>
+                  <option *ngFor="let city of cities" [value]="city.cityId">
+                    {{ city.cityName }}
+                  </option>
+                </select>
+              </div>
 
-  <div class="col-md-6">
-    <label for="cities" class="form-label">Cities</label>
-    <select
-      class="form-select"
-      name="cities"
-      id="cities"
-      (change)="changeCity($event)"
-      required
-      ngModel
-    >
-      <option *ngFor="let city of cities" [value]="city.cityId">
-        {{ city.cityName }}
-      </option>
-    </select>
-  </div>
+              <div class="col-md-6">
+                <select
+                  class="form-select _dropdown"
+                  name="districts"
+                  id="districts"
+                  (change)="changeDistrict($event)"
+                  required
+                  [ngModel]="selectedValue"
+                  [disabled]="isDistrictsDisabled"
+                >
+                  <option [value]="0">--- Districts ---</option>
+                  <option
+                    *ngFor="let district of districts"
+                    [value]="district.districtId"
+                  >
+                    {{ district.districtName }}
+                  </option>
+                </select>
+              </div>
 
-  <div class="col-md-6">
-    <label for="cities" class="form-label">Districts</label>
-    <select
-      class="form-select"
-      name="districts"
-      id="districts"
-      (change)="changeDistrict($event)"
-      required
-      ngModel
-    >
-      <option *ngFor="let district of districts" [value]="district.districtId">
-        {{ district.districtName }}
-      </option>
-    </select>
-  </div>
+              <div class="col-md-6">
+                <select
+                  class="form-select _dropdown"
+                  name="wards"
+                  id="wards"
+                  (change)="changeWard($event)"
+                  required
+                  [ngModel]="selectedValue"
+                  [disabled]="isWardsDisabled"
+                >
+                  <option [value]="0">--- Wards ---</option>
+                  <option *ngFor="let ward of wards" [value]="ward.wardId">
+                    {{ ward.wardName }}
+                  </option>
+                </select>
+              </div>
 
-  <div class="col-md-6">
-    <label for="cities" class="form-label">Wards</label>
-    <select
-      class="form-select"
-      name="wards"
-      id="wards"
-      (change)="changeWard($event)"
-      required
-      ngModel
-    >
-      <option *ngFor="let ward of wards" [value]="ward.wardId">
-        {{ ward.wardName }}
-      </option>
-    </select>
-  </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="specificAddress"
+                    name="specificAddress"
+                    placeholder="Specific Address"
+                    ngModel
+                  />
+                </div>
+              </div>
 
-  <div class="col-md-12">
-    <label for="specificAddress" class="form-label">Specific Address</label>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Specific Address"
-      id="specificAddress"
-      name="specificAddress"
-      ngModel
-      required
-    />
-  </div>
+              <div class="col-md-6">
+                <div class="btn-group">
+                  <button
+                    type="button"
+                    class="btn btn-secondary dropdown-toggle multiselect-dropdown"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    style="
+                      width: 520px;
+                      height: 50px;
+                      margin-top: 15px;
+                      margin-bottom: 15px;
+                    "
+                  ></button>
+                  <ul class="dropdown-menu">
+                    <li *ngFor="let skill of skills">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="option1"
+                        [value]="skill.skillId"
+                        (change)="onChangeSkills(skill.skillId)"
+                      />
+                      <label class="form-check-label" for="skill">{{
+                        skill.skillName
+                      }}</label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
 
-  <div class="col-md-4">
-    <label for="skill" class="form-label">Skills</label>
-    <div class="btn-group">
-      <button
-        type="button"
-        class="btn btn-secondary dropdown-toggle"
-        data-bs-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-        style="width: 420px"
-      ></button>
-      <ul class="dropdown-menu">
-        <li *ngFor="let skill of skills">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="option1"
-            [value]="skill.skillId"
-            (change)="onChangeSkills(skill.skillId)"
-          />
-          <label class="form-check-label" for="skill">{{
-            skill.skillName
-          }}</label>
-        </li>
-      </ul>
+              <div class="col-md-6">
+                <div class="btn-group">
+                  <button
+                    type="button"
+                    class="btn btn-secondary dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    style="
+                      width: 520px;
+                      height: 50px;
+                      margin-top: 15px;
+                      margin-bottom: 15px;
+                    "
+                  ></button>
+                  <ul class="dropdown-menu">
+                    <li *ngFor="let workScheduleDTO of workSchedulesDTO">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="option1"
+                        [value]="workScheduleDTO"
+                        (change)="onChangeWorkSchedules(workScheduleDTO)"
+                      />
+                      <label class="form-check-label" for="workSchedule">{{
+                        workScheduleDTO.startTime +
+                          " - " +
+                          workScheduleDTO.endTime
+                      }}</label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group mb-0">
+                  <textarea
+                    rows="5"
+                    placeholder="Write describe experiences here..."
+                    id="describeExperiences"
+                    name="describeExperiences"
+                    ngModel
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="col-md-12 text-center">
+                <div class="form-group mb-0">
+                  <button class="btn btn-theme btn-block" type="submit">
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- Message Notification -->
+        <div class="form-message"></div>
+      </div>
     </div>
   </div>
-
-  <div class="col-md-4">
-    <label for="workSchedule" class="form-label">Work Schedules</label>
-    <div class="btn-group">
-      <button
-        type="button"
-        class="btn btn-secondary dropdown-toggle"
-        data-bs-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-        style="width: 420px"
-      ></button>
-      <ul class="dropdown-menu">
-        <li *ngFor="let workScheduleDTO of workSchedulesDTO">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="option1"
-            [value]="workScheduleDTO"
-            (change)="onChangeWorkSchedules(workScheduleDTO)"
-          />
-          <label class="form-check-label" for="workSchedule">{{
-            workScheduleDTO.startTime +' - '+ workScheduleDTO.endTime
-          }}</label>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="col-md-12">
-    <label for="describeExperiences" class="form-label">Describe Experiences</label>
-    <textarea
-      class="form-control"
-      placeholder="Write describe experiences here..."
-      id="describeExperiences"
-      name="describeExperiences"
-      style="height: 100px"
-      ngModel
-    ></textarea>
-  </div>
-
-  <div class="col-12">
-    <button class="btn btn-primary" type="submit">Save</button>
-  </div>
-</form>
+</section>

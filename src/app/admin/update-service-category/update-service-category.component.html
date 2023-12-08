@@ -22,7 +22,7 @@
                   id="specializations"
                   (change)="changeSpecialization($event)"
                   required
-                  [ngModel]="serviceCategory.specializationId"
+                  ngModel
                 >
                   <option [value]="0">--- Specialization ---</option>
                   <option *ngFor="let specialization of listSpecializations" [value]="specialization.specializationId">
@@ -39,7 +39,7 @@
                     id="serviceCategoryName"
                     name="serviceCategoryName"
                     placeholder="Service Category Name"
-                    [ngModel]="serviceCategory.serviceCategoryName"
+                    ngModel
                   />
                 </div>
               </div>
@@ -51,7 +51,7 @@
                     name="description"
                     rows="5"
                     placeholder="Write service category description here..."
-                    [ngModel]="serviceCategory.description"
+                    ngModel
                   ></textarea>
                 </div>
               </div>
