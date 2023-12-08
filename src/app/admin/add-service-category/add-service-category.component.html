@@ -1,63 +1,75 @@
-<h2>Add Service Category</h2>
-<div class="alert alert-success" role="alert" *ngIf="isSuccessful">
-  {{ successMessage }}
-</div>
-<div class="alert alert-danger" role="alert" *ngIf="isFailed">
-  {{ errorMessage }}
-</div>
-<form
-  class="row g-3 needs-validation"
-  novalidate
-  name="addServiceCategoryForm"
-  #addServiceCategoryForm="ngForm"
-  (ngSubmit)="onSubmit()"
-  *ngIf="!isSuccessful"
->
-  <div class="col-md-6">
-    <label for="specializations" class="form-label">Specialization</label>
-    <select
-      class="form-select"
-      name="specializations"
-      id="specializations"
-      (change)="changeSpecialization($event)"
-      required
-      ngModel
-    >
-      <option
-        *ngFor="let specialization of listSpecializations"
-        [value]="specialization.specializationId"
-      >
-        {{ specialization.specializationName }}
-      </option>
-    </select>
-    <div class="invalid-feedback">Please select a valid state.</div>
+<section class="contact-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="contact-form">
+          <div class="section-title text-center">
+            <h2 class="title">Add Service Category</h2>
+          </div>
+          <form
+            class="contact-form-wrapper"
+            name="addServiceCategoryForm"
+            #addServiceCategoryForm="ngForm"
+            (ngSubmit)="onSubmit()"
+            *ngIf="!isSuccessful"
+          >
+            <div class="row">
+
+              <div class="col-md-6">
+                <select
+                  class="form-select _dropdown"
+                  name="specializations"
+                  id="specializations"
+                  (change)="changeSpecialization($event)"
+                  required
+                  [ngModel]="selectedValue"
+                >
+                  <option [value]="0">--- Specialization ---</option>
+                  <option *ngFor="let specialization of listSpecializations" [value]="specialization.specializationId">
+                    {{ specialization.specializationName }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="serviceCategoryName"
+                    name="serviceCategoryName"
+                    placeholder="Service Category Name"
+                    ngModel
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group mb-0">
+                  <textarea
+                    id="description"
+                    name="description"
+                    rows="5"
+                    placeholder="Write service category description here..."
+                    ngModel
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="col-md-12 text-center">
+                <div class="form-group mb-0">
+                  <button class="btn btn-theme btn-block" type="submit" style="margin-right: 10px;">
+                    Save
+                  </button>
+                  <a class="btn btn-theme btn-block" href="/list-service-categories">Back To List</a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- Message Notification -->
+        <div class="form-message"></div>
+      </div>
+    </div>
   </div>
-  <div class="col-md-6">
-    <label for="serviceCategoryName" class="form-label"
-      >Service Category Name</label
-    >
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Service category name"
-      id="serviceCategoryName"
-      name="serviceCategoryName"
-      ngModel
-      required
-    />
-  </div>
-  <div class="col-md-12">
-    <label for="description" class="form-label">Description</label>
-    <textarea
-      class="form-control"
-      placeholder="Write service category description here..."
-      id="description"
-      name="description"
-      style="height: 100px"
-      ngModel
-    ></textarea>
-  </div>
-  <div class="col-12">
-    <button class="btn btn-primary" type="submit">Save</button>
-  </div>
-</form>
+</section>

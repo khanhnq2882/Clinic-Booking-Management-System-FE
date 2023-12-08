@@ -18,6 +18,7 @@ import { ListUserBookingComponent } from './doctor/list-user-booking/list-user-b
 import { ScheduleComponent } from './commons/schedule/schedule.component';
 import { UpdateDoctorProfileComponent } from './doctor/update-doctor-profile/update-doctor-profile.component';
 import { UpdateServiceCategoryComponent } from './admin/update-service-category/update-service-category.component';
+import { AddressComponent } from './commons/address/address.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'list-service-categories', component: ListServiceCategoriesComponent },
   { path: 'booking-appointment', component: BookingAppointmentComponent },
   { path: 'list-user-booking', component: ListUserBookingComponent },
+  { path: 'address', component: AddressComponent },
   { path: 'schedule', component: ScheduleComponent },
   { path: 'update-doctor-profile', component: UpdateDoctorProfileComponent },
   { path: 'update-service-category/:serviceCategoryId', component: UpdateServiceCategoryComponent },

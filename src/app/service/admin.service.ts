@@ -48,29 +48,36 @@ export class AdminService {
     return this.httpClient.get<ServiceCategoryDTO[]>(ADMIN_API+'get-all-service-categories/'+specializationId, httpOptions);
   }
 
-  public addServiceCategory(serviceCategoryRequest: ServiceCategoryRequest) : Observable<any>{
-    return this.httpClient.post(ADMIN_API+'add-service-category', serviceCategoryRequest, httpOptions);
-  }
-
-  public addService(serviceRequest: ServiceRequest) : Observable<any>{
-    return this.httpClient.post(ADMIN_API+'add-service', serviceRequest, httpOptions);
-  }
-
   public getAllServiceCategories(params: any) : Observable<any>{
     return this.httpClient.get<any>(ADMIN_API+'get-all-service-categories', {params});
   } 
 
-  public getAllServices(params: any) : Observable<any>{
-    return this.httpClient.get<any>(ADMIN_API+'get-all-services', {params});
-  } 
-
-  public updateServiceCategory(serviceCategoryId : number, serviceCategoryRequest: ServiceCategoryRequest) : Observable<any>{
-    return this.httpClient.post(ADMIN_API+'update-service-category/'+serviceCategoryId, serviceCategoryRequest, httpOptions);
+  public addServiceCategory(serviceCategoryRequest: ServiceCategoryRequest) : Observable<any>{
+    return this.httpClient.post(ADMIN_API+'add-service-category', serviceCategoryRequest, httpOptions);
   }
 
   public getServiceCategory (serviceCategoryId : number) : Observable<any>{
     return this.httpClient.get<any>(ADMIN_API+'get-service-category/'+serviceCategoryId, httpOptions);
   }
 
+  public updateServiceCategory(serviceCategoryId : number, serviceCategoryRequest: ServiceCategoryRequest) : Observable<any>{
+    return this.httpClient.post(ADMIN_API+'update-service-category/'+serviceCategoryId, serviceCategoryRequest, httpOptions);
+  }
+
+  public getAllServices(params: any) : Observable<any>{
+    return this.httpClient.get<any>(ADMIN_API+'get-all-services', {params});
+  } 
+
+  public addService(serviceRequest: ServiceRequest) : Observable<any>{
+    return this.httpClient.post(ADMIN_API+'add-service', serviceRequest, httpOptions);
+  }
+
+  public getService (serviceId : number) : Observable<any>{
+    return this.httpClient.get<any>(ADMIN_API+'get-service/'+serviceId, httpOptions);
+  }
+
+  public updateService(serviceId : number, serviceRequest: ServiceRequest) : Observable<any>{
+    return this.httpClient.post(ADMIN_API+'update-service/'+serviceId, serviceRequest, httpOptions);
+  }
 
 }

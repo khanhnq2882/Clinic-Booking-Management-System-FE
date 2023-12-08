@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ServicesDTO } from 'src/app/dto/services-dto.model';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -14,9 +15,10 @@ export class ListServicesComponent implements OnInit{
   totalItems !: number;
   totalPages !: number;
   currentPage !: number;
+  selectedValue : number = 3;
   pageSizes = [3,6,9];
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService, private router : Router) {}
 
   ngOnInit(): void {
     this.getServices();
@@ -88,6 +90,10 @@ export class ListServicesComponent implements OnInit{
     this.page = this.totalPages;
     this.getServices();
    } 
+  }
+
+  navigateToUpdate(serviceId : number) : void {
+    this.router.navigate(['update-service', serviceId]);
   }
   
 }

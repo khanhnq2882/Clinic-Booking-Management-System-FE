@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { ServiceCategoryDTO } from 'src/app/dto/service-category-dto.model';
 import { SpecializationResponse } from 'src/app/response/specialization-response.model';
@@ -21,13 +22,20 @@ export class AddServiceComponent implements OnInit{
   isFailed = false;
   successMessage = '';
   errorMessage = '';
+  selectedSpecialization = 0;
+  selectedValue = 0;
+  isServiceCategoriesDisabled = false;
 
-  constructor(private adminService : AdminService) {}
+
+  constructor(private adminService : AdminService, private router : Router) {}
 
   ngOnInit(): void {
     this.getAllSpecializations().subscribe((result: SpecializationResponse[]) => {
       this.listSpecializations = result;
     });
+    if (this.selectedSpecialization == 0) {
+      this.isServiceCategoriesDisabled = true;
+    }
   }
 
   getAllSpecializations(): Observable<SpecializationResponse[]>  {
@@ -55,6 +63,11 @@ export class AddServiceComponent implements OnInit{
       .subscribe((result: ServiceCategoryDTO[]) => {
         this.listServiceCategories = result;
       });
+      if (e.target.value == 0) {
+        this.isServiceCategoriesDisabled = true;
+      } else {
+        this.isServiceCategoriesDisabled = false;
+      }
       this.listServiceCategories = [];
   }
 
@@ -73,6 +86,7 @@ export class AddServiceComponent implements OnInit{
       next : data => {
         this.isSuccessful = true;
         this.successMessage = data.message;
+        this.router.navigate(['/list-services']).then(() => window.location.reload());
       },
       error : err => {
         this.isFailed = true;

@@ -9,37 +9,43 @@ import { AdminService } from 'src/app/service/admin.service';
 @Component({
   selector: 'app-update-service-category',
   templateUrl: './update-service-category.component.html',
-  styleUrls: ['./update-service-category.component.css']
+  styleUrls: ['./update-service-category.component.css'],
 })
 export class UpdateServiceCategoryComponent {
-  @ViewChild('updateServiceCategoryForm', {static: false}) updateServiceCategoryForm !: NgForm;
+  @ViewChild('updateServiceCategoryForm', { static: false })
+  updateServiceCategoryForm!: NgForm;
 
   listSpecializations: SpecializationResponse[] = [];
-  serviceCategory !: ServiceCategoryDTO;
-  specializationId !: number;
+  serviceCategory!: ServiceCategoryDTO;
+  specializationId!: number;
   isSuccessful = false;
   isFailed = false;
   successMessage = '';
   errorMessage = '';
-  serviceCategoryId !: number;
-  
-  constructor(private adminService : AdminService, private route : ActivatedRoute, private router : Router) {}
+  serviceCategoryId!: number;
+
+  constructor(
+    private adminService: AdminService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.serviceCategoryId = this.route.snapshot.params['serviceCategoryId'];
-    
-    this.adminService.getServiceCategory(this.serviceCategoryId).subscribe((result : ServiceCategoryDTO) => {
-      this.serviceCategory = result;
-    });
-
-    this.getAllSpecializations().subscribe((result: SpecializationResponse[]) => {
-      this.listSpecializations = result;
-    });
+    this.adminService
+      .getServiceCategory(this.serviceCategoryId)
+      .subscribe((result: ServiceCategoryDTO) => {
+        this.serviceCategory = result;
+      });
+    this.getAllSpecializations().subscribe(
+      (result: SpecializationResponse[]) => {
+        this.listSpecializations = result;
+      }
+    );
   }
 
-  getAllSpecializations(): Observable<SpecializationResponse[]>  {
-    return this.adminService.getAllSpecializations()
-    .pipe(
+  getAllSpecializations(): Observable<SpecializationResponse[]> {
+    return this.adminService.getAllSpecializations().pipe(
       map((response) => {
         if (response) {
           return Object.values(response);
@@ -55,22 +61,23 @@ export class UpdateServiceCategoryComponent {
 
   onSubmit() {
     const updateServiceCategoryForm = {
-      specializationId : this.specializationId,
-      serviceCategoryName : this.updateServiceCategoryForm.value.serviceCategoryName,
-      description : this.updateServiceCategoryForm.value.description
+      specializationId: this.specializationId,
+      serviceCategoryName:
+        this.updateServiceCategoryForm.value.serviceCategoryName,
+      description: this.updateServiceCategoryForm.value.description,
     };
-    this.adminService.updateServiceCategory(this.serviceCategoryId , updateServiceCategoryForm).subscribe({
-      next : data => {
-        this.isSuccessful = true;
-        this.successMessage = data.message;
-        this.router.navigate(['/list-service-categories']);
-      },
-      error : err => {
-        this.isFailed = true;
-        this.errorMessage = err.error;
-      }
-    })
+    this.adminService
+      .updateServiceCategory(this.serviceCategoryId, updateServiceCategoryForm)
+      .subscribe({
+        next: (data) => {
+          this.isSuccessful = true;
+          this.successMessage = data.message;
+          this.router.navigate(['/list-service-categories']);
+        },
+        error: (err) => {
+          this.isFailed = true;
+          this.errorMessage = err.error;
+        },
+      });
   }
-
-
 }
