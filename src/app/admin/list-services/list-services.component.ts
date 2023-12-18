@@ -17,6 +17,13 @@ export class ListServicesComponent implements OnInit{
   currentPage !: number;
   selectedValue : number = 3;
   pageSizes = [3,6,9];
+  isSuccess = false;
+  isFail = false;
+  successMessage = '';
+  errorMessage = '';
+  selectedFiles?: FileList;
+  currentFile?: File;
+  message = '';
 
   constructor(private adminService: AdminService, private router : Router) {}
 
@@ -94,6 +101,43 @@ export class ListServicesComponent implements OnInit{
 
   navigateToUpdate(serviceId : number) : void {
     this.router.navigate(['update-service', serviceId]);
+  }
+
+  selectFile(event: any): void {
+    this.message = '';
+    this.selectedFiles = event.target.files;
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+      if (file) {
+        this.currentFile = file;
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          console.log(e.target.result);
+        };
+        reader.readAsDataURL(this.currentFile);
+      }
+    }
+  }
+
+  importServicesFromExcel() {
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+      if (file) {
+        this.currentFile = file;
+        this.adminService.importServicesFromExcel(this.currentFile).subscribe({
+          next: (data: any) => {
+            this.isSuccess = true;
+            this.successMessage = data.message;
+          },
+          error: (err: any) => {
+            this.isFail = true;
+            this.errorMessage = err.error;
+            this.currentFile = undefined;
+          },
+        });
+      }
+      this.selectedFiles = undefined;
+    }
   }
   
 }

@@ -18,12 +18,13 @@ export class ListServiceCategoriesComponent implements OnInit{
   currentPage !: number;
   selectedValue : number = 3;
   pageSizes = [3,6,9];
+  isSuccess = false;
+  isFail = false;
   successMessage = '';
   errorMessage = '';
   selectedFiles?: FileList;
   currentFile?: File;
   message = '';
-  preview = '';
 
   constructor(private adminService: AdminService, private router: Router) {}
 
@@ -105,17 +106,14 @@ export class ListServiceCategoriesComponent implements OnInit{
 
   selectFile(event: any): void {
     this.message = '';
-    this.preview = '';
     this.selectedFiles = event.target.files;
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
-        this.preview = '';
         this.currentFile = file;
         const reader = new FileReader();
         reader.onload = (e: any) => {
           console.log(e.target.result);
-          this.preview = e.target.result;
         };
         reader.readAsDataURL(this.currentFile);
       }
@@ -128,16 +126,13 @@ export class ListServiceCategoriesComponent implements OnInit{
       if (file) {
         this.currentFile = file;
         this.adminService.importServiceCategoriesFromExcel(this.currentFile).subscribe({
-          next: (event: any) => {
-            window.location.reload();
+          next: (data: any) => {
+            this.isSuccess = true;
+            this.successMessage = data.message;
           },
           error: (err: any) => {
-            console.log(err);
-            if (err.error && err.error.message) {
-              this.errorMessage = err.error.message;
-            } else {
-              this.errorMessage = 'Could not upload file excel!';
-            }
+            this.isFail = true;
+            this.errorMessage = err.error;
             this.currentFile = undefined;
           },
         });

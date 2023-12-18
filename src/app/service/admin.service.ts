@@ -84,14 +84,16 @@ export class AdminService {
     return this.httpClient.get<any>(ADMIN_API+'export-users-to-excel', httpOptions);
   }
 
-  public importServiceCategoriesFromExcel(file : File) : Observable<HttpEvent<any>>{
+  public importServiceCategoriesFromExcel(file : File) : Observable<any>{
     const formData: FormData = new FormData();
     formData.append('file', file);
-    const req = new HttpRequest('POST', ADMIN_API+'import-service-categories-from-excel', formData, {
-      reportProgress: true,
-      responseType: 'json',
-    });
-    return this.httpClient.request(req);
+    return this.httpClient.post<any>(ADMIN_API+'import-service-categories-from-excel', formData);
+  }
+
+  public importServicesFromExcel(file : File) : Observable<any>{
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    return this.httpClient.post<any>(ADMIN_API+'import-services-from-excel', formData);
   }
 
 }
