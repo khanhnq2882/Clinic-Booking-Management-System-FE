@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestDoctorResponse } from '../response/request-doctor-response.model';
@@ -78,6 +78,20 @@ export class AdminService {
 
   public updateService(serviceId : number, serviceRequest: ServiceRequest) : Observable<any>{
     return this.httpClient.post(ADMIN_API+'update-service/'+serviceId, serviceRequest, httpOptions);
+  }
+
+  public exportUsersToExcel () : Observable<any>{
+    return this.httpClient.get<any>(ADMIN_API+'export-users-to-excel', httpOptions);
+  }
+
+  public importServiceCategoriesFromExcel(file : File) : Observable<HttpEvent<any>>{
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    const req = new HttpRequest('POST', ADMIN_API+'import-service-categories-from-excel', formData, {
+      reportProgress: true,
+      responseType: 'json',
+    });
+    return this.httpClient.request(req);
   }
 
 }
