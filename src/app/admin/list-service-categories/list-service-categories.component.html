@@ -5,12 +5,15 @@
         <div class="contact-form">
           <div class="section-title text-center mb-3">
             <h2 class="title">List Service Categories</h2>
-            <div class="alert alert-success" role="alert" *ngIf="isSuccess">
-              {{ successMessage }}
-            </div>
-            <div class="alert alert-danger" role="alert" *ngIf="isFail">
-              {{ errorMessage }}
-            </div>
+
+          <ngb-toast [autohide]="true" id='success' *ngIf="isSuccess" class="alert alert-success"> 
+            {{ successMessage }} 
+          </ngb-toast>
+
+          <ngb-toast [autohide]="true" id='fail' *ngIf="isFail" class="alert alert-danger"> 
+            {{ errorMessage }} 
+          </ngb-toast>
+
           </div>
           <div class="container mt-5 px-2">
             <div class="mb-2 d-flex justify-content-between align-items-center">

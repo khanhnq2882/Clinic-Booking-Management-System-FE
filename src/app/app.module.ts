@@ -25,6 +25,7 @@ import { AddressComponent } from './commons/address/address.component';
 import { UpdateServiceCategoryComponent } from './admin/update-service-category/update-service-category.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './commons/header/header.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -49,13 +50,14 @@ import { HeaderComponent } from './commons/header/header.component';
     UpdateServiceCategoryComponent,
     HomeComponent,
     HeaderComponent,
-  ],
+      ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
     HttpClientModule,
     ScheduleModule,
+    NgbModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

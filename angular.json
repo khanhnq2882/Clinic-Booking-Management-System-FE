@@ -25,7 +25,7 @@
               "src/assets"
             ],
             "styles": [
-
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
               "src/assets/css/style.css",
               "src/assets/css/font-awesome.min.css"

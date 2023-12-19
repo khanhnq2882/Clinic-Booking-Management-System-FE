@@ -1,0 +1,9 @@
+#success { 
+    margin:40px;
+    background-color: #d4edda;
+}
+
+#fail { 
+    margin:40px;
+    background-color: #f8d7da;
+}
