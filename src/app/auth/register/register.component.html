@@ -25,6 +25,16 @@
                   ngModel
                 />
               </div>
+              <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="
+                registerForm.controls['username']?.dirty &&
+                registerForm.controls['username']?.errors
+              "
+            >
+            Username can't be blank.
+            </div>
 
               <div class="form-group">
                 <input
@@ -37,6 +47,19 @@
                   aria-required="true"
                   ngModel
                 />
+              </div>
+              <div class="alert alert-danger" role="alert" *ngIf="isEmailError">
+                {{ errorsMap.get("email") }}
+              </div>
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="
+                  registerForm.controls['email']?.dirty &&
+                  registerForm.controls['email']?.errors
+                "
+              >
+                Email must be a valid email.
               </div>
 
               <div class="form-group">
@@ -51,6 +74,25 @@
                   ngModel
                 />
               </div>
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="isPasswordError"
+              >
+                {{ errorsMap.get("password") }}
+              </div>
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="
+                  registerForm.controls['password']?.dirty &&
+                  registerForm.controls['password']?.errors
+                "
+              >
+                Password must have at least 8 characters, must contain lowercase
+                letters, uppercase letters, numbers and contain at least 1
+                special character.
+              </div>
 
               <div class="form-group">
                 <div class="d-flex justify-content">
@@ -64,7 +106,13 @@
                       (change)="onChange($event)"
                       checked
                     />
-                    <label class="form-check-label" for="user" style="font-size: 1rem;"> Patient  </label>
+                    <label
+                      class="form-check-label"
+                      for="user"
+                      style="font-size: 1rem"
+                    >
+                      Patient
+                    </label>
                   </div>
                   <div class="form-check">
                     <input
@@ -75,19 +123,30 @@
                       value="doctor"
                       (change)="onChange($event)"
                     />
-                    <label class="form-check-label" for="doctor" style="font-size: 1rem;"> Doctor </label>
+                    <label
+                      class="form-check-label"
+                      for="doctor"
+                      style="font-size: 1rem"
+                    >
+                      Doctor
+                    </label>
                   </div>
                 </div>
               </div>
 
               <div class="form-group">
-                <button type="submit" class="btn btn-primary _btn_04">
+                <button
+                  type="submit"
+                  class="btn btn-primary _btn_04"
+                  [disabled]="registerButtonDisabled()"
+                >
                   Register
                 </button>
               </div>
               <div class="form-group nm_lk">
                 <p>
-                  Have already an account? <b><a href="/login">Login here</a></b>
+                  Have already an account?
+                  <b><a href="/login">Login here</a></b>
                 </p>
               </div>
             </div>
