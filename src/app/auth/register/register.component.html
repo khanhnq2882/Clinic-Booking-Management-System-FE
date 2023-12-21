@@ -1,9 +1,4 @@
-<form
-  name="registerForm"
-  #registerForm="ngForm"
-  *ngIf="!isSuccessful"
-  (ngSubmit)="onSubmit()"
->
+<form name="registerForm" #registerForm="ngForm" *ngIf="!isSuccessful" (ngSubmit)="onSubmit()">
   <section class="form-02-main">
     <div class="container">
       <div class="row">
@@ -14,81 +9,41 @@
                 <h2>Register</h2>
               </div>
               <div class="form-group">
-                <input
-                  type="username"
-                  id="username"
-                  name="username"
-                  class="form-control _ge_de_ol"
-                  type="text"
-                  placeholder="Username"
-                  aria-required="true"
-                  ngModel
-                />
+                <input type="username" id="username" name="username" class="form-control _ge_de_ol" type="text"
+                  placeholder="Username" aria-required="true" ngModel />
               </div>
-              <div
-              class="alert alert-danger"
-              role="alert"
-              *ngIf="
+              <div class="alert alert-danger" role="alert" *ngIf="
                 registerForm.controls['username']?.dirty &&
                 registerForm.controls['username']?.errors
-              "
-            >
-            Username can't be blank.
-            </div>
+              ">
+                Username can't be blank.
+              </div>
 
               <div class="form-group">
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  class="form-control _ge_de_ol"
-                  type="text"
-                  placeholder="Email"
-                  aria-required="true"
-                  ngModel
-                />
+                <input type="email" id="email" name="email" class="form-control _ge_de_ol" type="text"
+                  placeholder="Email" aria-required="true" ngModel />
               </div>
               <div class="alert alert-danger" role="alert" *ngIf="isEmailError">
                 {{ errorsMap.get("email") }}
               </div>
-              <div
-                class="alert alert-danger"
-                role="alert"
-                *ngIf="
+              <div class="alert alert-danger" role="alert" *ngIf="
                   registerForm.controls['email']?.dirty &&
                   registerForm.controls['email']?.errors
-                "
-              >
+                ">
                 Email must be a valid email.
               </div>
 
               <div class="form-group">
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  class="form-control _ge_de_ol"
-                  type="password"
-                  placeholder="Password"
-                  aria-required="true"
-                  ngModel
-                />
+                <input type="password" id="password" name="password" class="form-control _ge_de_ol" type="password"
+                  placeholder="Password" aria-required="true" ngModel />
               </div>
-              <div
-                class="alert alert-danger"
-                role="alert"
-                *ngIf="isPasswordError"
-              >
+              <div class="alert alert-danger" role="alert" *ngIf="isPasswordError">
                 {{ errorsMap.get("password") }}
               </div>
-              <div
-                class="alert alert-danger"
-                role="alert"
-                *ngIf="
+              <div class="alert alert-danger" role="alert" *ngIf="
                   registerForm.controls['password']?.dirty &&
                   registerForm.controls['password']?.errors
-                "
-              >
+                ">
                 Password must have at least 8 characters, must contain lowercase
                 letters, uppercase letters, numbers and contain at least 1
                 special character.
@@ -97,37 +52,16 @@
               <div class="form-group">
                 <div class="d-flex justify-content">
                   <div class="form-check" style="margin-right: 30px">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="role"
-                      id="user"
-                      value="user"
-                      (change)="onChange($event)"
-                      checked
-                    />
-                    <label
-                      class="form-check-label"
-                      for="user"
-                      style="font-size: 1rem"
-                    >
+                    <input class="form-check-input" type="radio" name="role" id="user" value="user"
+                      (change)="onChange($event)" checked />
+                    <label class="form-check-label" for="user" style="font-size: 1rem">
                       Patient
                     </label>
                   </div>
                   <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="role"
-                      id="doctor"
-                      value="doctor"
-                      (change)="onChange($event)"
-                    />
-                    <label
-                      class="form-check-label"
-                      for="doctor"
-                      style="font-size: 1rem"
-                    >
+                    <input class="form-check-input" type="radio" name="role" id="doctor" value="doctor"
+                      (change)="onChange($event)" />
+                    <label class="form-check-label" for="doctor" style="font-size: 1rem">
                       Doctor
                     </label>
                   </div>
@@ -135,11 +69,7 @@
               </div>
 
               <div class="form-group">
-                <button
-                  type="submit"
-                  class="btn btn-primary _btn_04"
-                  [disabled]="registerButtonDisabled()"
-                >
+                <button type="submit" class="btn btn-primary _btn_04" [disabled]="registerButtonDisabled()">
                   Register
                 </button>
               </div>

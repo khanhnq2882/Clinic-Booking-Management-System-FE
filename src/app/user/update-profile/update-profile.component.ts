@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../service/user.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, Validators } from '@angular/forms';
 import { CityResponse } from 'src/app/response/city-response.model';
 import { DistrictResponse } from 'src/app/response/district-response.model';
 import { WardResponse } from 'src/app/response/ward-response.model';
@@ -12,7 +12,7 @@ import { WardResponse } from 'src/app/response/ward-response.model';
   templateUrl: './update-profile.component.html',
   styleUrls: ['./update-profile.component.css'],
 })
-export class UpdateProfileComponent implements OnInit {
+export class UpdateProfileComponent implements OnInit, AfterViewInit{
   @ViewChild('updateProfileForm', { static: false }) updateProfileForm!: NgForm;
 
   isSuccessful = false;
@@ -32,10 +32,11 @@ export class UpdateProfileComponent implements OnInit {
   selectedValue = 0;
   isDistrictsDisabled = false;
   isWardsDisabled = false;
+  isButtonDisabled = false;
 
   constructor(
     private httpClient: HttpClient,
-    private userService: UserService
+    private userService: UserService,
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +47,34 @@ export class UpdateProfileComponent implements OnInit {
       this.isDistrictsDisabled = true;
       this.isWardsDisabled = true;
     }
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.updateProfileForm.controls["firstName"].addValidators([
+        Validators.required,
+        Validators.maxLength(20)
+      ]); 
+      this.updateProfileForm.controls["firstName"].updateValueAndValidity;
+
+      this.updateProfileForm.controls["lastName"].addValidators([
+        Validators.required,
+        Validators.maxLength(20)
+      ]); 
+      this.updateProfileForm.controls["lastName"].updateValueAndValidity;
+
+      this.updateProfileForm.controls["phoneNumber"].addValidators([
+        Validators.required,
+        Validators.pattern("^0[2|3|5|7|8|9][0-9]{8}$")
+      ]); 
+      this.updateProfileForm.controls["phoneNumber"].updateValueAndValidity;
+
+      this.updateProfileForm.controls["specificAddress"].addValidators([
+        Validators.required,
+        Validators.maxLength(100)
+      ]); 
+      this.updateProfileForm.controls["specificAddress"].updateValueAndValidity;
+    }, 0); 
   }
 
   getCities(): Observable<CityResponse[]> {
@@ -131,7 +160,7 @@ export class UpdateProfileComponent implements OnInit {
       },
       error: (err) => {
         this.isFailed = true;
-        this.errorMessage = err.error.message;
+        this.errorMessage = err.error;
       },
     });
   }
@@ -188,6 +217,14 @@ export class UpdateProfileComponent implements OnInit {
     }       
     this.gender = 0;
   }
-  
+
+  updateProfileButtonDisabled(): boolean {
+    if(this.updateProfileForm?.invalid || !this.isButtonDisabled){
+      this.isButtonDisabled = true;
+    }else{
+      this.isButtonDisabled = false;
+    }   
+    return this.isButtonDisabled;
+  }
 }
 
