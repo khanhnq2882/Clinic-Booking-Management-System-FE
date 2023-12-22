@@ -1,0 +1,88 @@
+<section class="contact-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="contact-form">
+            <div class="section-title text-center mb-3">
+              <h2 class="title">List Bookings</h2>
+          <ngb-toast [autohide]="true" id='success' *ngIf="isSuccess" class="alert alert-success"> 
+            {{ successMessage }} 
+          </ngb-toast>
+
+          <ngb-toast [autohide]="true" id='fail' *ngIf="isFail" class="alert alert-danger"> 
+            {{ errorMessage }} 
+          </ngb-toast>
+            </div>
+            <div class="container mt-5 px-2">
+                <div class="mb-2 d-flex justify-content-between align-items-center">
+                    <div class="px-2">
+                        <div class="d-flex">
+                          <label class="btn btn-default p-0 mr-1">
+                            <input type="file" (change)="selectFile($event)"/>
+                          </label>
+                          <button
+                            class="btn btn-success btn-sm float-left"
+                            (click)="importBookingsFromExcel()"
+                          >
+                            Upload
+                          </button>
+                        </div>
+                      </div>
+                  </div>
+              <div class="table-responsive">
+                <table class="table table-responsive table-bordered">
+                  <thead>
+                    <tr class="bg-light">
+                      <th scope="col" width="5%">Booking Code</th>
+                      <th scope="col" width="10%">Full Name</th>
+                      <th scope="col" width="10%">Date Of Birth</th>
+                      <th scope="col" width="5%">Gender</th>
+                      <th scope="col" width="10%">Phone Number</th>
+                      <th scope="col" width="20%">Address</th>
+                      <th scope="col" width="10%">Appointment Date</th>
+                      <th scope="col" width="10%">Appointment Schedule</th>
+                      <th scope="col" width="10%">Describe Symptoms</th>
+                      <th scope="col" width="5%">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let booking of bookings">
+                      <td>{{ booking.bookingCode }}</td>
+                      <td>
+                        {{
+                          booking.firstName === null || booking.lastName === null
+                            ? " "
+                            : booking.firstName + " " + booking.lastName
+                        }}
+                      </td>
+                      <td>{{ booking.dateOfBirth }}</td>
+                      <td>{{ booking.gender == 1 ? "Male" : "Female" }}</td>
+                      <td>{{ booking.phoneNumber }}</td>
+                      <td>
+                        {{
+                          booking.userAddress.specificAddress === null
+                            ? " "
+                            : booking.userAddress.specificAddress +
+                              ", " +
+                              booking.userAddress.wardName +
+                              ", " +
+                              booking.userAddress.districtName +
+                              ", " +
+                              booking.userAddress.cityName
+                        }}
+                      </td>
+                      <td>{{ booking.appointmentDate }}</td>
+                      <td> </td>
+                      <td>{{ booking.describeSymptoms }}</td>
+                      <td>{{ booking.status }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

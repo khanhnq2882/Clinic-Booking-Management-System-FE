@@ -26,6 +26,7 @@ import { UpdateServiceCategoryComponent } from './admin/update-service-category/
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './commons/header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ListBookingsComponent } from './admin/list-bookings/list-bookings.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UpdateServiceCategoryComponent,
     HomeComponent,
     HeaderComponent,
+    ListBookingsComponent,
       ],
   imports: [
     BrowserModule,

@@ -96,4 +96,14 @@ export class AdminService {
     return this.httpClient.post<any>(ADMIN_API+'import-services-from-excel', formData);
   }
 
+  public getBookings() : Observable<any>{
+    return this.httpClient.get<any>(ADMIN_API+'get-bookings');
+  }
+
+  public importBookingsFromExcel(file : File) : Observable<any>{
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    return this.httpClient.post<any>(ADMIN_API+'import-bookings-from-excel', formData);
+  }
+
 }

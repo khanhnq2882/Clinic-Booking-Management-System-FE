@@ -27,6 +27,13 @@
         <div class="contact-form">
           <div class="section-title text-center">
             <h2 class="title">Update Profile</h2>
+            <ngb-toast [autohide]="true" id='success' *ngIf="isSuccessful" class="alert alert-success"> 
+              {{ successMessage }} 
+            </ngb-toast>
+  
+            <ngb-toast [autohide]="true" id='fail' *ngIf="isFailed" class="alert alert-danger"> 
+              {{ errorMessage }} 
+            </ngb-toast>
           </div>
           <form class="contact-form-wrapper" name="updateProfileForm" #updateProfileForm="ngForm"
             (ngSubmit)="onSubmit()" *ngIf="!isSuccessful">
@@ -95,9 +102,6 @@
                 updateProfileForm.controls['phoneNumber']?.errors
               ">
                   Phone number must be a valid phone number.
-                </div>
-                <div class="alert alert-danger" role="alert" *ngIf="isFailed">
-                  {{errorMessage}}
                 </div>
               </div>
 
