@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { ServicesResponse } from 'src/app/response/service-response.model';
+import { Router } from '@angular/router';
+import { ServicesDTO } from 'src/app/dto/services-dto.model';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
@@ -9,15 +9,23 @@ import { AdminService } from 'src/app/service/admin.service';
   styleUrls: ['./list-services.component.css']
 })
 export class ListServicesComponent implements OnInit{
-  listServices: ServicesResponse[] = [];
+  listServices: ServicesDTO[] = [];
   page = 1;
   size = 3;
   totalItems !: number;
   totalPages !: number;
   currentPage !: number;
-  pageSizes = [1,3,6,9];
+  selectedValue : number = 3;
+  pageSizes = [3,6,9];
+  isSuccess = false;
+  isFail = false;
+  successMessage = '';
+  errorMessage = '';
+  selectedFiles?: FileList;
+  currentFile?: File;
+  message = '';
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService, private router : Router) {}
 
   ngOnInit(): void {
     this.getServices();
@@ -89,6 +97,47 @@ export class ListServicesComponent implements OnInit{
     this.page = this.totalPages;
     this.getServices();
    } 
+  }
+
+  navigateToUpdate(serviceId : number) : void {
+    this.router.navigate(['update-service', serviceId]);
+  }
+
+  selectFile(event: any): void {
+    this.message = '';
+    this.selectedFiles = event.target.files;
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+      if (file) {
+        this.currentFile = file;
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          console.log(e.target.result);
+        };
+        reader.readAsDataURL(this.currentFile);
+      }
+    }
+  }
+
+  importServicesFromExcel() {
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+      if (file) {
+        this.currentFile = file;
+        this.adminService.importServicesFromExcel(this.currentFile).subscribe({
+          next: (data: any) => {
+            this.isSuccess = true;
+            this.successMessage = data.message;
+          },
+          error: (err: any) => {
+            this.isFail = true;
+            this.errorMessage = err.error;
+            this.currentFile = undefined;
+          },
+        });
+      }
+      this.selectedFiles = undefined;
+    }
   }
   
 }

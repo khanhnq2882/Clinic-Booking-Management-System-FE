@@ -1,0 +1,276 @@
+<section class="contact-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="contact-form">
+          <div class="section-title text-center">
+            <h2 class="title">Booking Appointment</h2>
+          </div>
+          <form
+            class="contact-form-wrapper"
+            name="updateProfileForm"
+            #updateProfileForm="ngForm"
+            (ngSubmit)="onSubmit()"
+            *ngIf="!isSuccessful"
+          >
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    placeholder="First Name"
+                    ngModel
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Last Name"
+                    ngModel
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="date"
+                    id="dateOfBirth"
+                    name="dateOfBirth"
+                    placeholder="Date Of Birth"
+                    ngModel
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="d-flex justify-content">
+                    <div class="form-check" style="margin-right: 30px">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="gender"
+                        id="doctor"
+                        [value]="1"
+                        (change)="onChange($event)"
+                        checked
+                      />
+                      <label
+                        class="form-check-label"
+                        for="user"
+                        style="font-size: 1rem"
+                      >
+                        Male
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="gender"
+                        id="doctor"
+                        [value]="0"
+                        (change)="onChange($event)"
+                      />
+                      <label
+                        class="form-check-label"
+                        for="doctor"
+                        style="font-size: 1rem"
+                      >
+                        Female
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    placeholder="Phone Number"
+                    ngModel
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <select
+                  class="form-select _dropdown"
+                  name="cities"
+                  id="cities"
+                  (change)="changeCity($event)"
+                  required
+                  [ngModel]="selectedValue"
+                >
+                  <option [value]="0">--- Cities ---</option>
+                  <option *ngFor="let city of cities" [value]="city.cityId">
+                    {{ city.cityName }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <select
+                  class="form-select _dropdown"
+                  name="districts"
+                  id="districts"
+                  (change)="changeDistrict($event)"
+                  required
+                  [ngModel]="selectedValue"
+                  [disabled]="isDistrictsDisabled"
+                >
+                  <option [value]="0">--- Districts ---</option>
+                  <option
+                    *ngFor="let district of districts"
+                    [value]="district.districtId"
+                  >
+                    {{ district.districtName }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <select
+                  class="form-select _dropdown"
+                  name="wards"
+                  id="wards"
+                  (change)="changeWard($event)"
+                  required
+                  [ngModel]="selectedValue"
+                  [disabled]="isWardsDisabled"
+                >
+                  <option [value]="0">--- Wards ---</option>
+                  <option *ngFor="let ward of wards" [value]="ward.wardId">
+                    {{ ward.wardName }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="specificAddress"
+                    name="specificAddress"
+                    placeholder="Specific Address"
+                    ngModel
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="date"
+                    id="appointmentDate"
+                    name="appointmentDate"
+                    placeholder="Appointment Date"
+                    ngModel
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <select
+                  class="form-select _dropdown"
+                  name="specializations"
+                  id="specializations"
+                  (change)="changeSpecialization($event)"
+                  required
+                  [ngModel]="selectedValue"
+                >
+                  <option [value]="0">--- Specializations ---</option>
+                  <option
+                    *ngFor="let specialization of listSpecializations"
+                    [value]="specialization.specializationId"
+                  >
+                    {{ specialization.specializationName }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <select
+                  class="form-select _dropdown"
+                  name="doctors"
+                  id="doctors"
+                  (change)="changeDoctor($event)"
+                  required
+                  [ngModel]="selectedValue"
+                  [disabled]="isDoctorsDisabled"
+                >
+                  <option [value]="0">--- Doctors ---</option>
+                  <option
+                    *ngFor="let doctor of listDoctors"
+                    [value]="doctor.userId"
+                  >
+                    {{ doctor.firstName + " " + doctor.lastName }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <select
+                  class="form-select _dropdown"
+                  name="workSchedules"
+                  id="workSchedules"
+                  (change)="changeWorkSchedule($event)"
+                  required
+                  [ngModel]="selectedValue"
+                  [disabled]="isWorkSchedulesDisabled"
+                >
+                  <option [value]="0">--- Work Schedules ---</option>
+                  <option
+                    *ngFor="let workSchedule of listWorkSchedules"
+                    [value]="workSchedule.workScheduleId"
+                  >
+                    {{ workSchedule.startTime + " - " + workSchedule.endTime }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group mb-0">
+                  <textarea
+                    id="describeSymptoms"
+                    name="describeSymptoms"
+                    rows="5"
+                    placeholder="Write describe symptoms here..."
+                    ngModel
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="col-md-12 text-center">
+                <div class="form-group mb-0">
+                  <button class="btn btn-theme btn-block" type="submit">
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- Message Notification -->
+        <div class="form-message"></div>
+      </div>
+    </div>
+  </div>
+</section>

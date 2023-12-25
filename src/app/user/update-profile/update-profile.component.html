@@ -1,5 +1,4 @@
-<h3>Update Profile</h3>
-<div class="alert alert-success" role="alert" *ngIf="isSuccessful">
+<!-- <div class="alert alert-success" role="alert" *ngIf="isSuccessful">
   {{ successMessage }}
 </div>
 <div class="alert alert-danger" role="alert" *ngIf="isFailed">
@@ -12,10 +11,7 @@
       <label class="btn btn-default p-0">
         <input type="file" (change)="selectFile($event)" />
       </label>
-      <button
-        class="btn btn-success btn-sm float-left"
-        (click)="upload()"
-      >
+      <button class="btn btn-success btn-sm float-left" (click)="upload()">
         Upload
       </button>
     </div>
@@ -23,142 +19,146 @@
   <div>
     <img [src]="preview" class="preview" />
   </div>
-</div>
-<form
-class="row g-3 needs-validation"
-novalidate
-  name="updateProfileForm"
-  #updateProfileForm="ngForm"
-  (ngSubmit)="onSubmit()"
-  *ngIf="!isSuccessful"
->
-<div class="col-md-6">
-  <label for="firstName" class="form-label">First Name</label>
-  <input
-    type="text"
-    class="form-control"
-    placeholder="First Name"
-    id="firstName"
-    name="firstName"
-    ngModel
-    required
-  />
-</div>
+</div> -->
+<section class="contact-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="contact-form">
+          <div class="section-title text-center">
+            <h2 class="title">Update Profile</h2>
+            <ngb-toast [autohide]="true" id='success' *ngIf="isSuccessful" class="alert alert-success"> 
+              {{ successMessage }} 
+            </ngb-toast>
+  
+            <ngb-toast [autohide]="true" id='fail' *ngIf="isFailed" class="alert alert-danger"> 
+              {{ errorMessage }} 
+            </ngb-toast>
+          </div>
+          <form class="contact-form-wrapper" name="updateProfileForm" #updateProfileForm="ngForm"
+            (ngSubmit)="onSubmit()" *ngIf="!isSuccessful">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input class="form-control" type="text" id="firstName" name="firstName" placeholder="First Name"
+                    ngModel />
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="
+                updateProfileForm.controls['firstName']?.dirty &&
+                updateProfileForm.controls['firstName']?.errors
+              ">
+                  First name can't be empty and has a maximum of 20 characters.
+                </div>
+              </div>
 
-<div class="col-md-6">
-  <label for="lastName" class="form-label">Last Name</label>
-  <input
-    type="text"
-    class="form-control"
-    placeholder="Last name"
-    id="lastName"
-    name="lastName"
-    ngModel
-    required
-  />
-</div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input class="form-control" type="text" id="lastName" name="lastName" placeholder="Last Name"
+                    ngModel />
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="
+                updateProfileForm.controls['lastName']?.dirty &&
+                updateProfileForm.controls['lastName']?.errors
+              ">
+                  Last name can't be empty and has a maximum of 20 characters.
+                </div>
+              </div>
 
-<div class="col-md-6">
-  <label for="dateOfBirth" class="form-label">Date Of Birth</label>
-  <input
-    type="date"
-    class="form-control"
-    placeholder="Date Of Birth"
-    id="dateOfBirth"
-    name="dateOfBirth"
-    ngModel
-    required
-  />
-</div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input class="form-control" type="date" id="dateOfBirth" name="dateOfBirth"
+                    placeholder="Date Of Birth" ngModel />
+                </div>
+              </div>
 
-<div class="col-md-6">
-  <label for="gender" class="form-label">Gender</label>
-  <select
-    class="form-select"
-    name="gender"
-    id="gender"
-    required
-    ngModel
-  >
-  <option [value]="1">Male</option>
-    <option [value]="0">Female</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="d-flex justify-content">
+                    <div class="form-check" style="margin-right: 30px">
+                      <input class="form-check-input" type="radio" name="gender" id="doctor" [value]="1"
+                        (change)="onChange($event)" checked />
+                      <label class="form-check-label" for="user" style="font-size: 1rem">
+                        Male
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gender" id="doctor" [value]="0"
+                        (change)="onChange($event)" />
+                      <label class="form-check-label" for="doctor" style="font-size: 1rem">
+                        Female
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input class="form-control" type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number"
+                    ngModel />
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="
+                updateProfileForm.controls['phoneNumber']?.dirty &&
+                updateProfileForm.controls['phoneNumber']?.errors
+              ">
+                  Phone number must be a valid phone number.
+                </div>
+              </div>
 
-<div class="col-md-6">
-  <label for="phoneNumber" class="form-label">Phone Number</label>
-  <input
-    type="text"
-    class="form-control"
-    placeholder="Phone Number"
-    id="phoneNumber"
-    name="phoneNumber"
-    ngModel
-    required
-  />
-</div>
+              <div class="col-md-6">
+                <select class="form-select _dropdown" name="cities" id="cities" (change)="changeCity($event)" required
+                  [ngModel]="selectedValue">
+                  <option [value]="0">--- Cities ---</option>
+                  <option *ngFor="let city of cities" [value]="city.cityId">
+                    {{ city.cityName }}
+                  </option>
+                </select>
+              </div>
 
-  <div class="col-md-6">
-    <label for="cities" class="form-label">Cities</label>
-    <select
-      class="form-select"
-      name="cities"
-      id="cities"
-      (change)="changeCity($event)"
-      required
-      ngModel
-    >
-      <option *ngFor="let city of cities" [value]="city.cityId">
-        {{ city.cityName }}
-      </option>
-    </select>
+              <div class="col-md-6">
+                <select class="form-select _dropdown" name="districts" id="districts" (change)="changeDistrict($event)"
+                  required [ngModel]="selectedValue" [disabled]="isDistrictsDisabled">
+                  <option [value]="0">--- Districts ---</option>
+                  <option *ngFor="let district of districts" [value]="district.districtId">
+                    {{ district.districtName }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <select class="form-select _dropdown" name="wards" id="wards" (change)="changeWard($event)" required
+                  [ngModel]="selectedValue" [disabled]="isWardsDisabled">
+                  <option [value]="0">--- Wards ---</option>
+                  <option *ngFor="let ward of wards" [value]="ward.wardId">
+                    {{ ward.wardName }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <input class="form-control" type="text" id="specificAddress" name="specificAddress"
+                    placeholder="Specific Address" ngModel />
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="
+                updateProfileForm.controls['specificAddress']?.dirty &&
+                updateProfileForm.controls['specificAddress']?.errors
+              ">
+                  Specific address can't be empty and has a maximum of 100 characters.
+                </div>
+              </div>
+
+              <div class="col-md-12 text-center">
+                <div class="form-group mb-0">
+                  <button class="btn btn-theme btn-block" type="submit" [disabled]="updateProfileButtonDisabled()">
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="col-md-6">
-    <label for="cities" class="form-label">Districts</label>
-    <select
-      class="form-select"
-      name="districts"
-      id="districts"
-      (change)="changeDistrict($event)"
-      required
-      ngModel
-    >
-      <option *ngFor="let district of districts" [value]="district.districtId">
-        {{ district.districtName }}
-      </option>
-    </select>
-  </div>
-
-  <div class="col-md-6">
-    <label for="cities" class="form-label">Wards</label>
-    <select
-      class="form-select"
-      name="wards" id="wards" (change)="changeWard($event)"
-      required
-      ngModel
-    >
-      <option *ngFor="let ward of wards" [value]="ward.wardId">
-        {{ ward.wardName }}
-      </option>
-    </select>
-  </div>
-
-  <div class="col-md-12">
-    <label for="specificAddress" class="form-label">Specific Address</label>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Specific Address"
-      id="specificAddress"
-      name="specificAddress"
-      ngModel
-      required
-    />
-  </div>
-
-  <div class="col-12">
-    <button class="btn btn-primary" type="submit">Save</button>
-  </div>
-</form>
+</section>

@@ -1,0 +1,113 @@
+<!-- <section class="contact-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="contact-form">
+            <div class="section-title text-center">
+              <h2 class="title">Update Service</h2>
+            </div>
+            <form
+              class="contact-form-wrapper"
+              name="updateServiceForm"
+              #updateServiceForm="ngForm"
+              (ngSubmit)="onSubmit()"
+              *ngIf="!isSuccessful"
+            >
+              <div class="row">
+                <div class="col-md-6">
+                  <select
+                    class="form-select _dropdown"
+                    name="specializations"
+                    id="specializations"
+                    (change)="changeSpecialization($event)"
+                    ngModel
+                  >
+                    <option [value]="0">--- Specialization ---</option>
+                    <option
+                      *ngFor="let specialization of listSpecializations"
+                      [value]="specialization.specializationId"
+                    >
+                      {{ specialization.specializationName }}
+                    </option>
+                  </select>
+                </div>
+  
+                <div class="col-md-6">
+                  <select
+                    class="form-select _dropdown"
+                    name="serviceCategories"
+                    id="serviceCategories"
+                    (change)="changeServiceCategory($event)"
+                    required
+                    [disabled]="isServiceCategoriesDisabled"
+                  >
+                    <option [value]="0">--- Service Categories ---</option>
+                    <option
+                      *ngFor="let serviceCategory of listServiceCategories"
+                      [value]="serviceCategory.serviceCategoryId"
+                    >
+                      {{ serviceCategory.serviceCategoryName }}
+                    </option>
+                  </select>
+                </div>
+  
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="serviceName"
+                      name="serviceName"
+                      placeholder="Service Name"
+                      ngModel
+                    />
+                  </div>
+                </div>
+  
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      class="form-control"
+                      type="number"
+                      id="price"
+                      name="price"
+                      placeholder="Price"
+                      ngModel
+                    />
+                  </div>
+                </div>
+  
+                <div class="col-md-12">
+                  <div class="form-group mb-0">
+                    <textarea
+                      id="description"
+                      name="description"
+                      rows="5"
+                      placeholder="Write service description here..."
+                      ngModel
+                    ></textarea>
+                  </div>
+                </div>
+  
+                <div class="col-md-12 text-center">
+                  <div class="form-group mb-0">
+                    <button
+                      class="btn btn-theme btn-block"
+                      type="submit"
+                      style="margin-right: 10px"
+                    >
+                      Save
+                    </button>
+                    <a class="btn btn-theme btn-block" href="/list-services"
+                      >Back To List</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+   -->

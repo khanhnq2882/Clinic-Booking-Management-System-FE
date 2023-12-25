@@ -14,7 +14,8 @@ export class ListUsersComponent implements OnInit{
   totalItems !: number;
   totalPages !: number;
   currentPage !: number;
-  pageSizes = [1,3,6,9];
+  selectedValue : number = 3;
+  pageSizes = [3,6,9];
   
   constructor(private adminService: AdminService) {}
 
@@ -48,6 +49,7 @@ export class ListUsersComponent implements OnInit{
   }
   
   changePageSize(event : any) : void {
+    this.selectedValue = 0;
     this.size = event.target.value;
     this.page = 1;
     this.getUsers();

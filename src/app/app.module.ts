@@ -10,7 +10,6 @@ import { httpInterceptorProviders } from './helpers/auth.interceptor';
 import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 import { UpdateProfileComponent } from './user/update-profile/update-profile.component';
 import { RequestBecomeDoctorComponent } from './user/request-become-doctor/request-become-doctor.component';
-import { HomeComponent } from './home/home.component';
 import { ListUsersComponent } from './admin/list-users/list-users.component';
 import { ListRequestBecomeDoctorComponent } from './admin/list-request-become-doctor/list-request-become-doctor.component';
 import { ListDoctorsComponent } from './admin/list-doctors/list-doctors.component';
@@ -18,6 +17,17 @@ import { AddServiceCategoryComponent } from './admin/add-service-category/add-se
 import { AddServiceComponent } from './admin/add-service/add-service.component';
 import { ListServicesComponent } from './admin/list-services/list-services.component';
 import { ListServiceCategoriesComponent } from './admin/list-service-categories/list-service-categories.component';
+import { BookingAppointmentComponent } from './user/booking-appointment/booking-appointment.component';
+import { ListUserBookingComponent } from './doctor/list-user-booking/list-user-booking.component';
+import { ScheduleModule } from './commons/schedule/schedule.module';
+import { UpdateDoctorProfileComponent } from './doctor/update-doctor-profile/update-doctor-profile.component';
+import { AddressComponent } from './commons/address/address.component';
+import { UpdateServiceCategoryComponent } from './admin/update-service-category/update-service-category.component';
+import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './commons/header/header.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ListBookingsComponent } from './admin/list-bookings/list-bookings.component';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +37,6 @@ import { ListServiceCategoriesComponent } from './admin/list-service-categories/
     ChangePasswordComponent,
     UpdateProfileComponent,
     RequestBecomeDoctorComponent,
-    HomeComponent,
     ListUsersComponent,
     ListRequestBecomeDoctorComponent,
     ListDoctorsComponent,
@@ -35,12 +44,22 @@ import { ListServiceCategoriesComponent } from './admin/list-service-categories/
     AddServiceComponent,
     ListServicesComponent,
     ListServiceCategoriesComponent,
-  ],
+    BookingAppointmentComponent,
+    ListUserBookingComponent,
+    UpdateDoctorProfileComponent,
+    AddressComponent,
+    UpdateServiceCategoryComponent,
+    HomeComponent,
+    HeaderComponent,
+    ListBookingsComponent,
+      ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
-    HttpClientModule
+    HttpClientModule,
+    ScheduleModule,
+    NgbModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

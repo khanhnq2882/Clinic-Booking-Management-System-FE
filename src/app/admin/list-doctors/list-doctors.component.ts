@@ -14,7 +14,8 @@ export class ListDoctorsComponent {
   totalItems !: number;
   totalPages !: number;
   currentPage !: number;
-  pageSizes = [1,3,6,9];
+  selectedValue : number = 3;
+  pageSizes = [3,6,9];
 
   constructor(private adminService: AdminService) {}
 

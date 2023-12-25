@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-4">
+    <label for="cities" class="form-label">Cities</label>
+    <select
+      class="form-select"
+      name="cities"
+      id="cities"
+      (change)="changeCity($event)"
+      required
+      ngModel
+    >
+      <option *ngFor="let city of cities" [value]="city.cityId">
+        {{ city.cityName }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-md-4">
+    <label for="cities" class="form-label">Districts</label>
+    <select
+      class="form-select"
+      name="districts"
+      id="districts"
+      (change)="changeDistrict($event)"
+      required
+      ngModel
+    >
+      <option *ngFor="let district of districts" [value]="district.districtId">
+        {{ district.districtName }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-md-4">
+    <label for="cities" class="form-label">Wards</label>
+    <select
+      class="form-select"
+      name="wards"
+      id="wards"
+      (change)="changeWard($event)"
+      required
+      ngModel
+    >
+      <option *ngFor="let ward of wards" [value]="ward.wardId">
+        {{ ward.wardName }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-md-12">
+    <label for="specificAddress" class="form-label">Specific Address</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Specific Address"
+      id="specificAddress"
+      name="specificAddress"
+      ngModel
+      required
+    />
+  </div>
+
+</div>

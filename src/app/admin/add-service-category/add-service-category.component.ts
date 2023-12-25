@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { SpecializationResponse } from 'src/app/response/specialization-response.model';
 import { AdminService } from 'src/app/service/admin.service';
@@ -18,8 +19,9 @@ export class AddServiceCategoryComponent implements OnInit{
   isFailed = false;
   successMessage = '';
   errorMessage = '';
+  selectedValue = 0;
 
-  constructor(private adminService : AdminService) {}
+  constructor(private adminService : AdminService, private router : Router) {}
 
   ngOnInit(): void {
     this.getAllSpecializations().subscribe((result: SpecializationResponse[]) => {
@@ -53,13 +55,13 @@ export class AddServiceCategoryComponent implements OnInit{
       next : data => {
         this.isSuccessful = true;
         this.successMessage = data.message;
+        this.router.navigate(['/list-service-categories']).then(() => window.location.reload());
       },
       error : err => {
         this.isFailed = true;
         this.errorMessage = err.error.message;
       }
     })
-
   }
 
 }

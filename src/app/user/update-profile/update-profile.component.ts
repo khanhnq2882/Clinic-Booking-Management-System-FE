@@ -1,47 +1,85 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { City } from '../../request/city.model';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { District } from '../../request/district.model';
-import { Ward } from '../../request/ward.model';
 import { UserService } from '../../service/user.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, Validators } from '@angular/forms';
+import { CityResponse } from 'src/app/response/city-response.model';
+import { DistrictResponse } from 'src/app/response/district-response.model';
+import { WardResponse } from 'src/app/response/ward-response.model';
 
 @Component({
   selector: 'app-update-profile',
   templateUrl: './update-profile.component.html',
   styleUrls: ['./update-profile.component.css'],
 })
-export class UpdateProfileComponent implements OnInit {
+export class UpdateProfileComponent implements OnInit, AfterViewInit{
   @ViewChild('updateProfileForm', { static: false }) updateProfileForm!: NgForm;
 
   isSuccessful = false;
   isFailed = false;
   errorMessage = '';
   successMessage = '';
-  cities: City[] = [];
-  districts: District[] = [];
-  wards: Ward[] = [];
-  id: number = 0;
+  cities: CityResponse[] = [];
+  districts: DistrictResponse[] = [];
+  wards: WardResponse[] = [];
+  wardId !: number;
+  gender : number = 1;
   selectedFiles?: FileList;
   currentFile?: File;
   message = '';
   preview = '';
+  selectedCity = 0;
+  selectedValue = 0;
+  isDistrictsDisabled = false;
+  isWardsDisabled = false;
+  isButtonDisabled = false;
 
   constructor(
     private httpClient: HttpClient,
-    private userService: UserService
+    private userService: UserService,
   ) {}
 
   ngOnInit(): void {
-    this.getCities().subscribe((result: City[]) => {
+    this.getCities().subscribe((result: CityResponse[]) => {
       this.cities = result;
     });
+    if (this.selectedCity == 0) {
+      this.isDistrictsDisabled = true;
+      this.isWardsDisabled = true;
+    }
   }
 
-  getCities(): Observable<City[]> {
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.updateProfileForm.controls["firstName"].addValidators([
+        Validators.required,
+        Validators.maxLength(20)
+      ]); 
+      this.updateProfileForm.controls["firstName"].updateValueAndValidity;
+
+      this.updateProfileForm.controls["lastName"].addValidators([
+        Validators.required,
+        Validators.maxLength(20)
+      ]); 
+      this.updateProfileForm.controls["lastName"].updateValueAndValidity;
+
+      this.updateProfileForm.controls["phoneNumber"].addValidators([
+        Validators.required,
+        Validators.pattern("^0[2|3|5|7|8|9][0-9]{8}$")
+      ]); 
+      this.updateProfileForm.controls["phoneNumber"].updateValueAndValidity;
+
+      this.updateProfileForm.controls["specificAddress"].addValidators([
+        Validators.required,
+        Validators.maxLength(100)
+      ]); 
+      this.updateProfileForm.controls["specificAddress"].updateValueAndValidity;
+    }, 0); 
+  }
+
+  getCities(): Observable<CityResponse[]> {
     return this.httpClient
-      .get<City[]>('http://localhost:8080/address/cities')
+      .get<CityResponse[]>('http://localhost:8080/address/cities')
       .pipe(
         map((response) => {
           if (response) {
@@ -54,7 +92,7 @@ export class UpdateProfileComponent implements OnInit {
 
   changeCity(e: any) {
     this.httpClient
-      .get<District[]>(
+      .get<DistrictResponse[]>(
         'http://localhost:8080/address/districts/' + e.target.value
       )
       .pipe(
@@ -65,15 +103,21 @@ export class UpdateProfileComponent implements OnInit {
           return [];
         })
       )
-      .subscribe((result: District[]) => {
+      .subscribe((result: DistrictResponse[]) => {
         this.districts = result;
       });
+      if (e.target.value == 0) {
+        this.isDistrictsDisabled = true;
+        this.isWardsDisabled = true;
+      } else {
+        this.isDistrictsDisabled = false;
+      }
     this.wards = [];
   }
 
   changeDistrict(e: any) {
     this.httpClient
-      .get<Ward[]>('http://localhost:8080/address/wards/' + e.target.value)
+      .get<WardResponse[]>('http://localhost:8080/address/wards/' + e.target.value)
       .pipe(
         map((response) => {
           if (response) {
@@ -82,13 +126,20 @@ export class UpdateProfileComponent implements OnInit {
           return [];
         })
       )
-      .subscribe((result: Ward[]) => {
+      .subscribe((result: WardResponse[]) => {
         this.wards = result;
       });
+      if (e.target.value == 0) {
+        this.isWardsDisabled = true;
+      } else {
+        this.isWardsDisabled = false;
+      }
   }
 
   changeWard(e: any) {
-    this.id = e.target.value;
+    if (e.target.value != 0) {
+      this.wardId = e.target.value;
+    }
   }
 
   onSubmit() {
@@ -96,10 +147,10 @@ export class UpdateProfileComponent implements OnInit {
       firstName: this.updateProfileForm.value.firstName,
       lastName: this.updateProfileForm.value.lastName,
       dateOfBirth: this.updateProfileForm.value.dateOfBirth,
-      gender: this.updateProfileForm.value.gender,
+      gender: this.gender,
       phoneNumber: this.updateProfileForm.value.phoneNumber,
       specificAddress: this.updateProfileForm.value.specificAddress,
-      wardId: this.id,
+      wardId: this.wardId,
     };
     this.userService.updateProfile(updateProfileRequest).subscribe({
       next: (data) => {
@@ -109,7 +160,7 @@ export class UpdateProfileComponent implements OnInit {
       },
       error: (err) => {
         this.isFailed = true;
-        this.errorMessage = err.error.message;
+        this.errorMessage = err.error;
       },
     });
   }
@@ -159,4 +210,21 @@ export class UpdateProfileComponent implements OnInit {
   reloadPage(): void {
     window.location.reload();
   }
+
+  onChange(e : any) {
+    if (e.target.value == "1") {
+      this.gender = 1;
+    }       
+    this.gender = 0;
+  }
+
+  updateProfileButtonDisabled(): boolean {
+    if(this.updateProfileForm?.invalid || !this.isButtonDisabled){
+      this.isButtonDisabled = true;
+    }else{
+      this.isButtonDisabled = false;
+    }   
+    return this.isButtonDisabled;
+  }
 }
+

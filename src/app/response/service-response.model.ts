@@ -1,9 +1,8 @@
-export class ServicesResponse {
-    serviceId !: number;
-    serviceCode !: string;
-    serviceName !: string;
-    price !: number;
-    description !: string;
-    status !: string;
-    serviceCategoryName !: string;
+import { ServicesDTO } from "../dto/services-dto.model";
+
+export class ServicePageResponse {
+    totalItems !: number;
+    services : ServicesDTO[] = [];
+    totalPages !: string;
+    currentPage !: string;
   }

@@ -1,75 +1,12 @@
-<div id="app">
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">Clinic</a>
-    <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item">
-        <a href="/#" class="nav-link" routerLink="home">Home </a>
-      </li>
-      <li class="nav-item" *ngIf="isShowUserBoard">
-        <a href="/#" class="nav-link" routerLink="admin">User Board</a>
-      </li>
-      <li class="nav-item" *ngIf="isShowAdminBoard">
-        <a href="/#" class="nav-link" routerLink="admin">Admin Board</a>
-      </li>
-      <li class="nav-item" *ngIf="isShowDoctorBoard">
-        <a href="/#" class="nav-link" routerLink="mod">Doctor Board</a>
-      </li>
-    </ul>
-
-    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-      <li class="nav-item">
-        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
-      </li>
-      <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login">Login</a>
-      </li>
-    </ul>
-
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-      <li class="nav-item">
-        <a href="/#" class="nav-link" routerLink="profile">{{ username }}</a>
-      </li>
-      
-      <ng-container *ngFor="let role of roles">
-        <ng-container *ngIf="role === 'ROLE_USER'">
-          <li class="nav-item">
-            <a href="/update-profile" class="nav-link" routerLink="update-profile">Update Profile</a>
-          </li>
-          <li class="nav-item">
-            <a href="/request-become-doctor" class="nav-link" routerLink="request-become-doctor">Request To Become Doctor</a>
-          </li>
-        </ng-container>
-        <ng-container *ngIf="role === 'ROLE_DOCTOR'">
-          <li class="nav-item">
-            <a href="/update-profile" class="nav-link" routerLink="update-profile">Update Profile</a>
-          </li>
-        </ng-container>
-        <ng-container *ngIf="role === 'ROLE_ADMIN'">
-          <li class="nav-item">
-            <a href="/list-users" class="nav-link" routerLink="list-users">List Users</a>
-          </li>
-          <li class="nav-item">
-            <a href="/list-request-become-doctor" class="nav-link" routerLink="list-request-become-doctor">List Request To Become Doctor</a>
-          </li>
-          <li class="nav-item">
-            <a href="/list-doctors" class="nav-link" routerLink="list-doctors">List Doctors</a>
-          </li>
-          <li class="nav-item">
-            <a href="/list-service-categories" class="nav-link" routerLink="list-service-categories">List Service Category</a>
-          </li>
-          <li class="nav-item">
-            <a href="/list-services" class="nav-link" routerLink="list-services">List Service</a>
-          </li>
-        </ng-container>
-      </ng-container>
-      
-      <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">LogOut</a>
-      </li>
-    </ul>
-  </nav>
-
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
+<div class="wrapper">
+  <header-component></header-component>
 </div>
+
+<main class="main-content site-wrapper-reveal">
+  <router-outlet></router-outlet> 
+</main>
+
+
+
+
+
