@@ -1,7 +1,6 @@
-import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RequestDoctorResponse } from '../response/request-doctor-response.model';
 import { SpecializationResponse } from '../response/specialization-response.model';
 import { ServiceCategoryRequest } from '../request/service-category-request.model';
 import { ServiceRequest } from '../request/service-request.model';
@@ -22,18 +21,6 @@ export class AdminService {
 
   public getAllUsers(params: any) : Observable<any>{
     return this.httpClient.get<any>(ADMIN_API+'get-all-users', {params});
-  }
-
-  public getAllRequestDoctors() : Observable<RequestDoctorResponse[]>{
-    return this.httpClient.get<RequestDoctorResponse[]>(ADMIN_API+'get-all-request-doctors', httpOptions);
-  }
-
-  public approveRequestDoctor(userId: number) : Observable<any> {
-    return this.httpClient.post(ADMIN_API+'approve-request-doctor/'+userId, httpOptions);
-  }
-
-  public rejectRequestDoctor(userId: number) : Observable<any> {
-    return this.httpClient.post(ADMIN_API+'reject-request-doctor/'+userId, httpOptions);
   }
 
   public getAllDoctors(params: any) : Observable<any>{

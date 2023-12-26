@@ -9,9 +9,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { httpInterceptorProviders } from './helpers/auth.interceptor';
 import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 import { UpdateProfileComponent } from './user/update-profile/update-profile.component';
-import { RequestBecomeDoctorComponent } from './user/request-become-doctor/request-become-doctor.component';
 import { ListUsersComponent } from './admin/list-users/list-users.component';
-import { ListRequestBecomeDoctorComponent } from './admin/list-request-become-doctor/list-request-become-doctor.component';
 import { ListDoctorsComponent } from './admin/list-doctors/list-doctors.component';
 import { AddServiceCategoryComponent } from './admin/add-service-category/add-service-category.component';
 import { AddServiceComponent } from './admin/add-service/add-service.component';
@@ -36,9 +34,7 @@ import { ListBookingsComponent } from './admin/list-bookings/list-bookings.compo
     LoginComponent,
     ChangePasswordComponent,
     UpdateProfileComponent,
-    RequestBecomeDoctorComponent,
     ListUsersComponent,
-    ListRequestBecomeDoctorComponent,
     ListDoctorsComponent,
     AddServiceCategoryComponent,
     AddServiceComponent,

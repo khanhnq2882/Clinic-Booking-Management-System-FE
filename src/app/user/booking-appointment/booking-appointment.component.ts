@@ -194,7 +194,7 @@ export class BookingAppointmentComponent implements OnInit {
       firstName: this.addBookingAppointmentForm.value.firstName,
       lastName: this.addBookingAppointmentForm.value.lastName,
       dateOfBirth: this.addBookingAppointmentForm.value.dateOfBirth,
-      gender: this.addBookingAppointmentForm.value.gender,
+      gender: this.gender,
       phoneNumber: this.addBookingAppointmentForm.value.phoneNumber,
       specificAddress: this.addBookingAppointmentForm.value.specificAddress,
       wardId: this.wardId,

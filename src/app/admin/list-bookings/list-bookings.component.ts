@@ -61,7 +61,7 @@ export class ListBookingsComponent implements OnInit{
           },
           error: (err: any) => {
             this.isFail = true;
-            this.errorMessage = err.error;
+            this.errorMessage = err.error.message;
             this.currentFile = undefined;
           },
         });

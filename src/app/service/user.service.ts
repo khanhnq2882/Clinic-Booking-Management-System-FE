@@ -2,7 +2,6 @@ import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UpdateProfileRequest } from '../request/update-profile-request.model';
-import { AddRoleDoctorRequest } from '../request/add-role-doctor-request.model';
 import { BookingAppointmentRequest } from '../request/booking-appointment-request.model';
 import { DoctorDTO } from '../dto/doctor-dto.model';
 import { WorkScheduleDTO } from '../dto/work-schedule-dto.model';
@@ -36,30 +35,6 @@ export class UserService {
       responseType: 'json',
     });
     return this.httpClient.request(req);
-  }
-
-  public uploadMedicalLicense(medicalLicense : File) : Observable<HttpEvent<any>>{
-    const formData: FormData = new FormData();
-    formData.append('medicalLicense', medicalLicense);
-    const req = new HttpRequest('POST', USER_API+'upload-medical-license', formData, {
-      reportProgress: true,
-      responseType: 'json',
-    });
-    return this.httpClient.request(req);
-  }
-
-  public uploadMedicalDegree(medicalDegree : File) : Observable<HttpEvent<any>>{
-    const formData: FormData = new FormData();
-    formData.append('medicalDegree', medicalDegree);
-    const req = new HttpRequest('POST', USER_API+'upload-medical-degree', formData, {
-      reportProgress: true,
-      responseType: 'json',
-    });
-    return this.httpClient.request(req);
-  }
-
-  public requestBecomeDoctor(addRoleDoctorRequest: AddRoleDoctorRequest) : Observable<any>{
-    return this.httpClient.post(USER_API+'request-to-become-doctor', addRoleDoctorRequest, httpOptions);
   }
 
   public getDoctorsBySpecialization(specializationId : number) : Observable<DoctorDTO[]>{
