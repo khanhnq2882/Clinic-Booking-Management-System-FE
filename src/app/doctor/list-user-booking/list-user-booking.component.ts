@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, map } from 'rxjs';
 import { BookingDTO } from 'src/app/dto/booking-dto.model';
 import { DoctorService } from 'src/app/service/doctor.service';
 

@@ -213,7 +213,6 @@ table p {
   font-weight: 700;
   letter-spacing: -1.377px;
   line-height: 1.1;
-  margin-bottom: 25px;
   margin-top: 25px;
 }
 @media only screen and (max-width: 1199px) {
@@ -8681,7 +8680,7 @@ table p {
 }
 .contact-form .contact-form-wrapper {
   background-color: #fff;
-  padding: 45px 50px 61px;
+  /* padding: 45px 50px 61px; */
 }
 @media only screen and (max-width: 479.98px) {
   .contact-form .contact-form-wrapper {
