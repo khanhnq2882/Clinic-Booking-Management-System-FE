@@ -19,7 +19,7 @@ import { UpdateServiceCategoryComponent } from './admin/update-service-category/
 import { AddressComponent } from './commons/address/address.component';
 import { UpdateServiceComponent } from './admin/update-service/update-service.component';
 import { ListBookingsComponent } from './admin/list-bookings/list-bookings.component';
-
+import { RegisterWorkSchedulesComponent } from './doctor/register-work-schedules/register-work-schedules.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -41,6 +41,7 @@ const routes: Routes = [
   { path: 'update-service-category/:serviceCategoryId', component: UpdateServiceCategoryComponent },
   { path: 'update-service/:serviceId', component: UpdateServiceComponent },
   { path: 'list-bookings', component: ListBookingsComponent },
+  { path: 'register-work-schedules', component: RegisterWorkSchedulesComponent },
 ];
 
 @NgModule({
@@ -48,3 +49,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+

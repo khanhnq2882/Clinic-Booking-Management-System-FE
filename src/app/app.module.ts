@@ -25,6 +25,7 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './commons/header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListBookingsComponent } from './admin/list-bookings/list-bookings.component';
+import { RegisterWorkSchedulesComponent } from './doctor/register-work-schedules/register-work-schedules.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { ListBookingsComponent } from './admin/list-bookings/list-bookings.compo
     HomeComponent,
     HeaderComponent,
     ListBookingsComponent,
+    RegisterWorkSchedulesComponent,
       ],
   imports: [
     BrowserModule,

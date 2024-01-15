@@ -8,7 +8,6 @@ export class DoctorProfileRequest {
     phoneNumber !: string;
     specificAddress !: string;
     wardId !: number;
-    skillIds: number[] = [];
     workSchedules : WorkScheduleDTO[] = [];
     describeExperiences !: string;
   }

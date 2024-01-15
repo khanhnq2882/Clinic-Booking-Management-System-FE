@@ -178,38 +178,6 @@
                 <div class="btn-group">
                   <button
                     type="button"
-                    class="btn btn-secondary dropdown-toggle multiselect-dropdown"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    style="
-                      width: 520px;
-                      height: 50px;
-                      margin-top: 15px;
-                      margin-bottom: 15px;
-                    "
-                  ></button>
-                  <ul class="dropdown-menu">
-                    <li *ngFor="let skill of skills">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        id="option1"
-                        [value]="skill.skillId"
-                        (change)="onChangeSkills(skill.skillId)"
-                      />
-                      <label class="form-check-label" for="skill">{{
-                        skill.skillName
-                      }}</label>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="btn-group">
-                  <button
-                    type="button"
                     class="btn btn-secondary dropdown-toggle"
                     data-bs-toggle="dropdown"
                     aria-haspopup="true"

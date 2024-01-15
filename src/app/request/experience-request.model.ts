@@ -4,7 +4,6 @@ export class ExperienceRequest {
     startWork !: Date;
     endWork !: Date;
     specialization !: string;
-    skillIds: number[] = [];
     jobDescription !: string;
   }
   

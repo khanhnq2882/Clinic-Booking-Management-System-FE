@@ -23,33 +23,33 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>Booking Code</th>
-                    <th>Full Name</th>
-                    <th>Date Of Birth</th>
-                    <th>Gender</th>
-                    <th>Phone Number</th>
-                    <th>Address</th>
-                    <th>Appointment Date</th>
-                    <th>Appointment Schedule</th>
-                    <th>Describe Symptoms</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th class="text-nowrap">Booking Code</th>
+                    <th class="text-nowrap">Full Name</th>
+                    <th class="text-nowrap">Date Of Birth</th>
+                    <th class="text-nowrap">Gender</th>
+                    <th class="text-nowrap">Phone Number</th>
+                    <th class="text-nowrap">Address</th>
+                    <th class="text-nowrap">Appointment Date</th>
+                    <th class="text-nowrap">Appointment Schedule</th>
+                    <th class="text-nowrap">Describe Symptoms</th>
+                    <th class="text-nowrap">Status</th>
+                    <th class="text-nowrap" >Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let booking of bookings">
-                    <td>{{ booking.bookingCode }}</td>
-                    <td>
+                    <td class="text-nowrap">{{ booking.bookingCode }}</td>
+                    <td class="text-nowrap">
                       {{
                       booking.firstName === null || booking.lastName === null
                       ? " "
                       : booking.firstName + " " + booking.lastName
                       }}
                     </td>
-                    <td>{{ booking.dateOfBirth }}</td>
-                    <td>{{ booking.gender == 1 ? "Male" : "Female" }}</td>
-                    <td>{{ booking.phoneNumber }}</td>
-                    <td>
+                    <td class="text-nowrap">{{ booking.dateOfBirth }}</td>
+                    <td class="text-nowrap">{{ booking.gender == 1 ? "Male" : "Female" }}</td>
+                    <td class="text-nowrap">{{ booking.phoneNumber }}</td>
+                    <td class="text-nowrap">
                       {{
                       booking.userAddress.specificAddress === null
                       ? " "
@@ -62,11 +62,11 @@
                       booking.userAddress.cityName
                       }}
                     </td>
-                    <td>{{ booking.appointmentDate }}</td>
-                    <td>{{ booking.startTime + " - " + booking.endTime }}</td>
-                    <td>{{ booking.describeSymptoms }}</td>
-                    <td>{{ booking.status }}</td>
-                    <td>
+                    <td class="text-nowrap">{{ booking.appointmentDate }}</td>
+                    <td class="text-nowrap">{{ booking.startTime + " - " + booking.endTime }}</td>
+                    <td class="text-nowrap">{{ booking.describeSymptoms }}</td>
+                    <td class="text-nowrap">{{ booking.status }}</td>
+                    <td class="text-nowrap">
                       <div class="d-flex justify-content">
                         <button type="button" class="btn btn-success" (click)="confirmedBooking(booking.bookingId)" style="margin-right: 10px;">
                           Confirm

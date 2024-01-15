@@ -3,7 +3,6 @@ import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { SkillDTO } from 'src/app/dto/skill-dto.model';
 import { WorkScheduleDTO } from 'src/app/dto/work-schedule-dto.model';
 import { CityResponse } from 'src/app/response/city-response.model';
 import { DistrictResponse } from 'src/app/response/district-response.model';
@@ -20,8 +19,6 @@ export class UpdateDoctorProfileComponent {
   @ViewChild('updateDoctorProfileForm', { static: false })
   updateDoctorProfileForm!: NgForm;
 
-  skills: SkillDTO[] = [];
-  skillIds: number[] = [];
   cities: CityResponse[] = [];
   districts: DistrictResponse[] = [];
   wards: WardResponse[] = [];
@@ -75,9 +72,6 @@ export class UpdateDoctorProfileComponent {
       this.isDistrictsDisabled = true;
       this.isWardsDisabled = true;
     }
-    this.getSkills().subscribe((result: SkillDTO[]) => {
-      this.skills = result;
-    });
   }
 
   getCities(): Observable<CityResponse[]> {
@@ -147,26 +141,6 @@ export class UpdateDoctorProfileComponent {
     }
   }
 
-  getSkills(): Observable<SkillDTO[]> {
-    return this.userService.getAllSkills().pipe(
-      map((response) => {
-        if (response) {
-          return Object.values(response);
-        }
-        return [];
-      })
-    );
-  }
-
-  onChangeSkills(value: number) {
-    if (this.skillIds.includes(value)) {
-      this.skillIds = this.skillIds.filter((item) => item !== value);
-    } else {
-      this.skillIds.push(value);
-    }
-    console.log(this.skillIds);
-  }
-
   onChangeWorkSchedules(workSchedule: WorkScheduleDTO) {
     if (this.workSchedules.includes(workSchedule)) {
       this.workSchedules = this.workSchedules.filter(
@@ -187,7 +161,6 @@ export class UpdateDoctorProfileComponent {
       phoneNumber: this.updateDoctorProfileForm.value.phoneNumber,
       specificAddress: this.updateDoctorProfileForm.value.specificAddress,
       wardId: this.wardId,
-      skillIds: this.skillIds,
       describeExperiences:
         this.updateDoctorProfileForm.value.describeExperiences,
       workSchedules: this.workSchedules,

@@ -5,5 +5,4 @@ export class ExperienceDTO {
     startWork !: string;
     endWork !: string;
     jobDescription !: string;
-    skillNames : string[] = [];
   }
