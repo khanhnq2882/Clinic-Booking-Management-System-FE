@@ -8,17 +8,15 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { JWT } from '../auth/login/login.component';
-import { USER_KEY } from '../service/storage.service';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     req = req.clone({
       withCredentials: true,
       setHeaders: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Accept': 'application/json',
         "Authorization": `Bearer ${window.localStorage.getItem(JWT)}`,
     }
     });

@@ -209,11 +209,10 @@ table p {
   }
 }
 .section-title .title {
-  font-size: 48px;
   font-weight: 700;
   letter-spacing: -1.377px;
   line-height: 1.1;
-  margin-top: 25px;
+  float: left;
 }
 @media only screen and (max-width: 1199px) {
   .section-title .title {
@@ -9132,7 +9131,7 @@ textarea {
 .form-03-main{
   width:500px;
   display:block;
-  margin:20px auto;
+  margin:100px auto;
   padding:25px 50px 25px;
   background:rgba(255,255,255,0.6);
   border-radius:6px;

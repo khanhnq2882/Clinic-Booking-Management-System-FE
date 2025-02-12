@@ -143,6 +143,7 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
   }
 
   onSubmit() {
+    const formData = new FormData();
     const updateProfileRequest = {
       firstName: this.updateProfileForm.value.firstName,
       lastName: this.updateProfileForm.value.lastName,
@@ -152,7 +153,15 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
       specificAddress: this.updateProfileForm.value.specificAddress,
       wardId: this.wardId,
     };
-    this.userService.updateProfile(updateProfileRequest).subscribe({
+    const userProfileJson = JSON.stringify(updateProfileRequest);
+    const userProfileBlob = new Blob([userProfileJson], {type: 'application/json'})
+    formData.append('userprofile', userProfileJson);
+    if (this.currentFile) {
+      formData.append('avatar', this.currentFile);
+    }
+    console.log(formData.get('userprofile'));
+
+    this.userService.updateProfile(formData).subscribe({
       next: (data) => {
         this.isSuccessful = true;
         this.successMessage = data.message;
@@ -165,7 +174,7 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
     });
   }
 
-  selectFile(event: any): void {
+  selectedFile(event: any){
     this.message = '';
     this.preview = '';
     this.selectedFiles = event.target.files;
@@ -181,29 +190,6 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
         };
         reader.readAsDataURL(this.currentFile);
       }
-    }
-  }
-
-  upload() {
-    if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
-      if (file) {
-        this.currentFile = file;
-        this.userService.uploadAvatar(this.currentFile).subscribe({
-          next: (event: any) => {
-            this.reloadPage();
-          },
-          error: (err: any) => {
-            if (err.error && err.error.message) {
-              this.errorMessage = err.error.message;
-            } else {
-              this.errorMessage = 'Could not upload the image!';
-            }
-            this.currentFile = undefined;
-          },
-        });
-      }
-      this.selectedFiles = undefined;
     }
   }
 

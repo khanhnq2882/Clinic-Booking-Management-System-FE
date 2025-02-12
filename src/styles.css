@@ -1,2 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.css';
+
+.toast-container {
+    top: 100px !important;
+    right: 30px !important;
+    left: auto !important;
+    background-color: aqua;
+    color: black;
+    padding: 15px;
+    border-radius: 10px;
+}

@@ -4,3 +4,7 @@ div.address{
 .preview {
     max-width: 200px;
   }
+
+  .update-profile-form{
+    float: right;
+  }

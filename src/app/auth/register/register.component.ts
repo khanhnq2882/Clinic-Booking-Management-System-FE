@@ -1,6 +1,8 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { NgForm, Validators } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -20,12 +22,19 @@ export class RegisterComponent implements AfterViewInit{
   isEmailError = false;
   isPasswordError = false;
   
-  constructor(private authService: AuthService){}
+  constructor(
+    private authService: AuthService, 
+    private toastr: ToastrService, 
+    private cdRef: ChangeDetectorRef,
+    private router: Router
+  ){}
 
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.registerForm.controls["username"].addValidators([
-        Validators.required
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(20)
       ]); 
       this.registerForm.controls["username"].updateValueAndValidity;
 
@@ -40,6 +49,7 @@ export class RegisterComponent implements AfterViewInit{
         Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[ !\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~]).{8,25}$")
       ]); 
       this.registerForm.controls["password"].updateValueAndValidity;
+      // this.cdRef.detectChanges();
     }, 0);   
   }
 
@@ -54,24 +64,14 @@ export class RegisterComponent implements AfterViewInit{
       next: data => {
         this.isSuccessful = true;
         this.successMessage = data.message;
+        sessionStorage.setItem('successMessage', this.successMessage);
+        this.router.navigate(['/login']);
       },
       error: err => {
         this.isFailed = true;
         this.handleErrors(err.error);
       }
     });
-  }
-
-  onChange(e : any) {
-    if (e.target.value == 'user' && !this.roles.includes('ROLE_USER')) {
-      this.roles = this.roles.filter(item => item == 'ROLE_USER');
-      this.roles.push('ROLE_USER');
-    } 
-    if (e.target.value == 'doctor' && !this.roles.includes('ROLE_DOCTOR')) {
-      this.roles = this.roles.filter(item => item == 'ROLE_DOCTOR');
-      this.roles.push('ROLE_DOCTOR');
-    }
-    console.log(this.roles);
   }
 
   handleErrors(errorMessage : string) {

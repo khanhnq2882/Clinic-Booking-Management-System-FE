@@ -26,7 +26,8 @@ import { HeaderComponent } from './commons/header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListBookingsComponent } from './admin/list-bookings/list-bookings.component';
 import { RegisterWorkSchedulesComponent } from './doctor/register-work-schedules/register-work-schedules.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -50,16 +51,22 @@ import { RegisterWorkSchedulesComponent } from './doctor/register-work-schedules
     HeaderComponent,
     ListBookingsComponent,
     RegisterWorkSchedulesComponent,
-      ],
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, 
+    FormsModule,
     HttpClientModule,
     ScheduleModule,
     NgbModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right', 
+      timeOut: 5000, 
+      progressBar: true,
+    }),
   ],
   providers: [httpInterceptorProviders],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

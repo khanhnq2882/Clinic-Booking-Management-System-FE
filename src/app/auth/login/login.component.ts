@@ -3,6 +3,7 @@ import { AuthService } from '../../service/auth.service';
 import { NgForm } from '@angular/forms';
 import { StorageService } from '../../service/storage.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 export const JWT = 'JWT';
 
@@ -20,17 +21,24 @@ export class LoginComponent implements OnInit {
   username !: string;
   roles: string[] = [];
 
-  ngOnInit(): void {
-    if (this.storageService.isLoggedIn()) {
-      this.isSuccessful = true;
-    }
-  }
-
   constructor(
     private authService: AuthService,
     private storageService: StorageService,
     private router: Router,
+    private toastr: ToastrService
   ) {}
+
+  ngOnInit(): void {
+    const successMessage = sessionStorage.getItem('successMessage');
+    if (successMessage) {
+      this.toastr.success(successMessage);
+      sessionStorage.removeItem('successMessage');
+    }
+
+    if (this.storageService.isLoggedIn()) {
+      this.isSuccessful = true;
+    }
+  }
 
   onSubmit() {
     const loginRequest = {
@@ -46,7 +54,8 @@ export class LoginComponent implements OnInit {
       },
       error: (err) => {
         this.isLoginFailed = true;
-        this.errorMessage = err.error;
+        this.errorMessage = err.error.errorMessage;
+        this.toastr.error(this.errorMessage);
       }
     })
   }

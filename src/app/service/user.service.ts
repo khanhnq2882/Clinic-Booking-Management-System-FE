@@ -19,19 +19,19 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public updateProfile(updateProfileRequest: UpdateProfileRequest) : Observable<any>{
-    return this.httpClient.post(USER_API+'update-profile', updateProfileRequest, httpOptions);
+  public updateProfile(formData: FormData) : Observable<any>{
+    return this.httpClient.post(USER_API+'update-profile', formData, httpOptions);
   }
 
-  public uploadAvatar(avatar : File) : Observable<HttpEvent<any>>{
-    const formData: FormData = new FormData();
-    formData.append('avatar', avatar);
-    const req = new HttpRequest('POST', USER_API+'upload-avatar', formData, {
-      reportProgress: true,
-      responseType: 'json',
-    });
-    return this.httpClient.request(req);
-  }
+  // public uploadAvatar(avatar : File) : Observable<HttpEvent<any>>{
+  //   const formData: FormData = new FormData();
+  //   formData.append('avatar', avatar);
+  //   const req = new HttpRequest('POST', USER_API+'upload-avatar', formData, {
+  //     reportProgress: true,
+  //     responseType: 'json',
+  //   });
+  //   return this.httpClient.request(req);
+  // }
 
   public getDoctorsBySpecialization(specializationId : number) : Observable<DoctorDTO[]>{
     return this.httpClient.get<DoctorDTO[]>(USER_API+'get-doctors-by-specialization/'+specializationId, httpOptions);
