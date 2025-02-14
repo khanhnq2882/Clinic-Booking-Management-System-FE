@@ -1,10 +1,30 @@
-div.address{
-    display: flex;
+div.address {
+  display: flex;
 }
-.preview {
-    max-width: 200px;
-  }
 
-  .update-profile-form{
-    float: right;
-  }
+.update-profile-form {
+  float: right;
+}
+
+.avatar-container {
+  text-align: center;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.hidden {
+  display: none;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}

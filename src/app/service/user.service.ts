@@ -19,9 +19,9 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public updateProfile(formData: FormData) : Observable<any>{
-    return this.httpClient.post(USER_API+'update-profile', formData, httpOptions);
-  }
+public updateProfile(formData: FormData): Observable<any> {
+    return this.httpClient.post(USER_API + 'update-profile', formData);
+}
 
   // public uploadAvatar(avatar : File) : Observable<HttpEvent<any>>{
   //   const formData: FormData = new FormData();

@@ -4,7 +4,7 @@
       <div class="col-lg-12">
         <div class="contact-form">
           <div class="section-title text-center">
-            <h2 class="title">Update Profile</h2>
+            <h2 class="update-profile-title">Update Profile</h2>
           </div>
           <div class="update-profile-form">
             <form
@@ -14,24 +14,22 @@
               (ngSubmit)="onSubmit()"
               *ngIf="!isSuccessful"
             >
-              <div class="col-md-12">
-                <label>Avatar</label>
-                <div class="row">
-                  <div class="col-8">
-                    <label class="btn btn-default p-0">
-                      <input type="file" (change)="selectedFile($event)" />
-                    </label>
-                    <!-- <button
-                      class="btn btn-success btn-sm float-left"
-                      (click)="upload()"
-                    >
-                      Upload
-                    </button> -->
-                  </div>
-                </div>
-                <div>
-                  <img [src]="preview" class="preview" />
-                </div>
+              <div class="avatar-container">
+                <input
+                  type="file"
+                  #fileInput
+                  class="hidden"
+                  (change)="selectedFile($event)"
+                  accept="image/*"
+                />
+                <img
+                  [src]="avatarSrc"
+                  alt="Avatar"
+                  class="avatar"
+                  (click)="triggerFileInput()"
+                />
+                <h5 class="mb-2"><strong>Avatar</strong></h5>
+                <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
               </div>
               <div class="row">
                 <div class="col-md-6">
@@ -81,7 +79,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="form-group">
                     <input
                       class="form-control"
@@ -94,7 +92,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="form-group">
                     <div class="d-flex justify-content">
                       <div class="form-check" style="margin-right: 30px">
@@ -102,14 +100,14 @@
                           class="form-check-input"
                           type="radio"
                           name="gender"
-                          id="doctor"
+                          id="gender"
                           [value]="1"
                           (change)="onChange($event)"
                           checked
                         />
                         <label
                           class="form-check-label"
-                          for="user"
+                          for="male"
                           style="font-size: 1rem"
                         >
                           Male
@@ -120,13 +118,13 @@
                           class="form-check-input"
                           type="radio"
                           name="gender"
-                          id="doctor"
+                          id="gender"
                           [value]="0"
                           (change)="onChange($event)"
                         />
                         <label
                           class="form-check-label"
-                          for="doctor"
+                          for="female"
                           style="font-size: 1rem"
                         >
                           Female
@@ -136,7 +134,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="form-group">
                     <input
                       class="form-control"
@@ -168,7 +166,7 @@
                     required
                     [ngModel]="selectedValue"
                   >
-                    <option [value]="0">--- Cities ---</option>
+                    <option [value]="0">City</option>
                     <option *ngFor="let city of cities" [value]="city.cityId">
                       {{ city.cityName }}
                     </option>
@@ -185,7 +183,7 @@
                     [ngModel]="selectedValue"
                     [disabled]="isDistrictsDisabled"
                   >
-                    <option [value]="0">--- Districts ---</option>
+                    <option [value]="0">District</option>
                     <option
                       *ngFor="let district of districts"
                       [value]="district.districtId"
@@ -205,14 +203,14 @@
                     [ngModel]="selectedValue"
                     [disabled]="isWardsDisabled"
                   >
-                    <option [value]="0">--- Wards ---</option>
+                    <option [value]="0">Ward</option>
                     <option *ngFor="let ward of wards" [value]="ward.wardId">
                       {{ ward.wardName }}
                     </option>
                   </select>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <div class="form-group">
                     <input
                       class="form-control"
@@ -238,10 +236,7 @@
 
                 <div class="col-md-12 text-center">
                   <div class="form-group mb-0">
-                    <button
-                      class="btn btn-theme btn-block"
-                      type="submit"
-                    >
+                    <button class="btn btn-theme btn-block" type="submit">
                       Save
                     </button>
                   </div>

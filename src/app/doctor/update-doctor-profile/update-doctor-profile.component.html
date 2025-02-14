@@ -117,7 +117,7 @@
                   required
                   [ngModel]="selectedValue"
                 >
-                  <option [value]="0">--- Cities ---</option>
+                  <option [value]="0">City</option>
                   <option *ngFor="let city of cities" [value]="city.cityId">
                     {{ city.cityName }}
                   </option>
@@ -134,7 +134,7 @@
                   [ngModel]="selectedValue"
                   [disabled]="isDistrictsDisabled"
                 >
-                  <option [value]="0">--- Districts ---</option>
+                  <option [value]="0">District</option>
                   <option
                     *ngFor="let district of districts"
                     [value]="district.districtId"
@@ -154,7 +154,7 @@
                   [ngModel]="selectedValue"
                   [disabled]="isWardsDisabled"
                 >
-                  <option [value]="0">--- Wards ---</option>
+                  <option [value]="0">Ward</option>
                   <option *ngFor="let ward of wards" [value]="ward.wardId">
                     {{ ward.wardName }}
                   </option>

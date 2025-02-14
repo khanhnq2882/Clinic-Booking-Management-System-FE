@@ -22,7 +22,7 @@
                     (change)="changeSpecialization($event)"
                     ngModel
                   >
-                    <option [value]="0">--- Specialization ---</option>
+                    <option [value]="0">Specialization</option>
                     <option
                       *ngFor="let specialization of listSpecializations"
                       [value]="specialization.specializationId"
@@ -41,7 +41,7 @@
                     required
                     [disabled]="isServiceCategoriesDisabled"
                   >
-                    <option [value]="0">--- Service Categories ---</option>
+                    <option [value]="0">Service Categories</option>
                     <option
                       *ngFor="let serviceCategory of listServiceCategories"
                       [value]="serviceCategory.serviceCategoryId"

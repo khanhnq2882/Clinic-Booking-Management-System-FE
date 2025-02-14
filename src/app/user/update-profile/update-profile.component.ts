@@ -26,13 +26,14 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
   gender : number = 1;
   selectedFiles?: FileList;
   currentFile?: File;
-  message = '';
-  preview = '';
   selectedCity = 0;
   selectedValue = 0;
   isDistrictsDisabled = false;
   isWardsDisabled = false;
   isButtonDisabled = false;
+  avatarSrc: string = 'assets/img/avatar.jpg';
+  allowedFileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+  maxFileSize = 10 * 1024 * 1024;
 
   constructor(
     private httpClient: HttpClient,
@@ -154,18 +155,18 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
       wardId: this.wardId,
     };
     const userProfileJson = JSON.stringify(updateProfileRequest);
-    const userProfileBlob = new Blob([userProfileJson], {type: 'application/json'})
-    formData.append('userprofile', userProfileJson);
+    const userProfileBlob = new Blob([userProfileJson], { type: 'application/json' }); 
+    formData.append('userprofile', userProfileBlob, 'userprofile.json');
     if (this.currentFile) {
       formData.append('avatar', this.currentFile);
     }
     console.log(formData.get('userprofile'));
-
+    console.log(formData.get('avatar'));
     this.userService.updateProfile(formData).subscribe({
       next: (data) => {
         this.isSuccessful = true;
         this.successMessage = data.message;
-        this.reloadPage();
+        // this.reloadPage();
       },
       error: (err) => {
         this.isFailed = true;
@@ -175,22 +176,30 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
   }
 
   selectedFile(event: any){
-    this.message = '';
-    this.preview = '';
-    this.selectedFiles = event.target.files;
-    if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
-      if (file) {
-        this.preview = '';
-        this.currentFile = file;
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          console.log(e.target.result);
-          this.preview = e.target.result;
-        };
-        reader.readAsDataURL(this.currentFile);
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      if (!file.type.startsWith('image/') && !this.allowedFileTypes.includes(file.type)) {
+        alert('Please select image file in PNG, JPG or JPEG format!');
+        return;
       }
+      if (file.size > this.maxFileSize) {
+        this.errorMessage = 'File size exceeds 10MB! Please select a smaller image.';
+        return;
+      }
+      this.errorMessage = '';
+      this.currentFile = file;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.avatarSrc = e.target?.result as string;
+      };
+      reader.readAsDataURL(this.currentFile);
     }
+  }
+
+  triggerFileInput() {
+    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+    fileInput.click();
   }
 
   reloadPage(): void {
