@@ -8509,12 +8509,14 @@ table p {
 }
 @media only screen and (max-width: 991px) {
   .contact-area {
-    padding: 100px 0;
+    padding: 30px 0;
+    height: 750px;
   }
 }
 @media only screen and (max-width: 767px) {
   .contact-area {
-    padding: 80px 0;
+    padding: 0 0;
+    height: 1100px;
   }
 }
 @media only screen and (max-width: 767px) {

@@ -6,13 +6,14 @@ import { NgForm, Validators } from '@angular/forms';
 import { CityResponse } from 'src/app/response/city-response.model';
 import { DistrictResponse } from 'src/app/response/district-response.model';
 import { WardResponse } from 'src/app/response/ward-response.model';
+import { GenderDTO } from 'src/app/dto/gender-dto.model';
 
 @Component({
   selector: 'app-update-profile',
   templateUrl: './update-profile.component.html',
   styleUrls: ['./update-profile.component.css'],
 })
-export class UpdateProfileComponent implements OnInit, AfterViewInit{
+export class UpdateProfileComponent implements OnInit, AfterViewInit {
   @ViewChild('updateProfileForm', { static: false }) updateProfileForm!: NgForm;
 
   isSuccessful = false;
@@ -22,12 +23,21 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
   cities: CityResponse[] = [];
   districts: DistrictResponse[] = [];
   wards: WardResponse[] = [];
-  wardId !: number;
-  gender : number = 1;
+  genders: GenderDTO[] = [
+    {
+      genderId: 1,
+      genderName: 'Male',
+    },
+    {
+      genderId: 0,
+      genderName: 'Female',
+    },
+  ];
+  wardId!: number;
+  genderId!: number;
   selectedFiles?: FileList;
   currentFile?: File;
   selectedCity = 0;
-  selectedValue = 0;
   isDistrictsDisabled = false;
   isWardsDisabled = false;
   isButtonDisabled = false;
@@ -37,7 +47,7 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
 
   constructor(
     private httpClient: HttpClient,
-    private userService: UserService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -52,30 +62,30 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.updateProfileForm.controls["firstName"].addValidators([
+      this.updateProfileForm.controls['firstName'].addValidators([
         Validators.required,
-        Validators.maxLength(20)
-      ]); 
-      this.updateProfileForm.controls["firstName"].updateValueAndValidity;
+        Validators.maxLength(20),
+      ]);
+      this.updateProfileForm.controls['firstName'].updateValueAndValidity;
 
-      this.updateProfileForm.controls["lastName"].addValidators([
+      this.updateProfileForm.controls['lastName'].addValidators([
         Validators.required,
-        Validators.maxLength(20)
-      ]); 
-      this.updateProfileForm.controls["lastName"].updateValueAndValidity;
+        Validators.maxLength(20),
+      ]);
+      this.updateProfileForm.controls['lastName'].updateValueAndValidity;
 
-      this.updateProfileForm.controls["phoneNumber"].addValidators([
+      this.updateProfileForm.controls['phoneNumber'].addValidators([
         Validators.required,
-        Validators.pattern("^0[2|3|5|7|8|9][0-9]{8}$")
-      ]); 
-      this.updateProfileForm.controls["phoneNumber"].updateValueAndValidity;
+        Validators.pattern('^0[2|3|5|7|8|9][0-9]{8}$'),
+      ]);
+      this.updateProfileForm.controls['phoneNumber'].updateValueAndValidity;
 
-      this.updateProfileForm.controls["specificAddress"].addValidators([
+      this.updateProfileForm.controls['specificAddress'].addValidators([
         Validators.required,
-        Validators.maxLength(100)
-      ]); 
-      this.updateProfileForm.controls["specificAddress"].updateValueAndValidity;
-    }, 0); 
+        Validators.maxLength(100),
+      ]);
+      this.updateProfileForm.controls['specificAddress'].updateValueAndValidity;
+    }, 0);
   }
 
   getCities(): Observable<CityResponse[]> {
@@ -107,18 +117,20 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
       .subscribe((result: DistrictResponse[]) => {
         this.districts = result;
       });
-      if (e.target.value == 0) {
-        this.isDistrictsDisabled = true;
-        this.isWardsDisabled = true;
-      } else {
-        this.isDistrictsDisabled = false;
-      }
+    if (e.target.value == 0) {
+      this.isDistrictsDisabled = true;
+      this.isWardsDisabled = true;
+    } else {
+      this.isDistrictsDisabled = false;
+    }
     this.wards = [];
   }
 
   changeDistrict(e: any) {
     this.httpClient
-      .get<WardResponse[]>('http://localhost:8080/address/wards/' + e.target.value)
+      .get<WardResponse[]>(
+        'http://localhost:8080/address/wards/' + e.target.value
+      )
       .pipe(
         map((response) => {
           if (response) {
@@ -130,11 +142,11 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
       .subscribe((result: WardResponse[]) => {
         this.wards = result;
       });
-      if (e.target.value == 0) {
-        this.isWardsDisabled = true;
-      } else {
-        this.isWardsDisabled = false;
-      }
+    if (e.target.value == 0) {
+      this.isWardsDisabled = true;
+    } else {
+      this.isWardsDisabled = false;
+    }
   }
 
   changeWard(e: any) {
@@ -143,30 +155,34 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
     }
   }
 
+  changeGender(e: any) {
+    this.genderId = e.target.value;
+  }
+
   onSubmit() {
     const formData = new FormData();
     const updateProfileRequest = {
       firstName: this.updateProfileForm.value.firstName,
       lastName: this.updateProfileForm.value.lastName,
       dateOfBirth: this.updateProfileForm.value.dateOfBirth,
-      gender: this.gender,
+      gender: this.genderId,
       phoneNumber: this.updateProfileForm.value.phoneNumber,
       specificAddress: this.updateProfileForm.value.specificAddress,
       wardId: this.wardId,
     };
-    const userProfileJson = JSON.stringify(updateProfileRequest);
-    const userProfileBlob = new Blob([userProfileJson], { type: 'application/json' }); 
-    formData.append('userprofile', userProfileBlob, 'userprofile.json');
     if (this.currentFile) {
       formData.append('avatar', this.currentFile);
     }
+    const userProfileBlob = new Blob([JSON.stringify(updateProfileRequest)], {
+      type: 'application/json',
+    });
+    formData.append('userprofile', userProfileBlob);
     console.log(formData.get('userprofile'));
     console.log(formData.get('avatar'));
     this.userService.updateProfile(formData).subscribe({
       next: (data) => {
         this.isSuccessful = true;
         this.successMessage = data.message;
-        // this.reloadPage();
       },
       error: (err) => {
         this.isFailed = true;
@@ -175,16 +191,20 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
     });
   }
 
-  selectedFile(event: any){
+  selectedFile(event: any) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      if (!file.type.startsWith('image/') && !this.allowedFileTypes.includes(file.type)) {
+      if (
+        !file.type.startsWith('image/') &&
+        !this.allowedFileTypes.includes(file.type)
+      ) {
         alert('Please select image file in PNG, JPG or JPEG format!');
         return;
       }
       if (file.size > this.maxFileSize) {
-        this.errorMessage = 'File size exceeds 10MB! Please select a smaller image.';
+        this.errorMessage =
+          'File size exceeds 10MB! Please select a smaller image.';
         return;
       }
       this.errorMessage = '';
@@ -198,7 +218,9 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
   }
 
   triggerFileInput() {
-    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = document.querySelector(
+      'input[type="file"]'
+    ) as HTMLInputElement;
     fileInput.click();
   }
 
@@ -206,20 +228,12 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit{
     window.location.reload();
   }
 
-  onChange(e : any) {
-    if (e.target.value == "1") {
-      this.gender = 1;
-    }       
-    this.gender = 0;
-  }
-
   updateProfileButtonDisabled(): boolean {
-    if(this.updateProfileForm?.invalid || !this.isButtonDisabled){
+    if (this.updateProfileForm?.invalid || !this.isButtonDisabled) {
       this.isButtonDisabled = true;
-    }else{
+    } else {
       this.isButtonDisabled = false;
-    }   
+    }
     return this.isButtonDisabled;
   }
 }
-
