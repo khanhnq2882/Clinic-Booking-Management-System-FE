@@ -18,6 +18,8 @@ export class HeaderComponent {
   username = '';
   roles: string[] = [];
 
+  isResponsive: boolean = false;
+
   constructor(private storageService: StorageService, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
@@ -36,6 +38,10 @@ export class HeaderComponent {
         },
       })           
     }
+  }
+
+  toggleNavbar(): void {
+    this.isResponsive = !this.isResponsive; 
   }
 
   logout() {
